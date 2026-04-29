@@ -39,14 +39,18 @@ const inputClass =
 const textareaClass =
   "min-h-[130px] w-full resize-none bg-transparent pl-11 pr-4 pt-4 text-[0.92rem] text-frost outline-none placeholder:text-white/28";
 
+type SubmitStatus = "idle" | "submitting" | "success" | "error" | "rate-limited";
+
 export function ContactInquiryForm() {
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [selectedInquiryType, setSelectedInquiryType] =
     useState<ContactInquiryType>("Other");
   const [selectedCountryIso, setSelectedCountryIso] = useState("IN");
   const [countrySearch, setCountrySearch] = useState("");
   const [countryMenuOpen, setCountryMenuOpen] = useState(false);
   const countryPickerRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -85,51 +89,55 @@ export function ContactInquiryForm() {
     );
   });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitStatus === "submitting") return;
+
+    setSubmitStatus("submitting");
+    setSubmitMessage(null);
+
     const formData = new FormData(event.currentTarget);
-    const fullName = String(formData.get("fullName") ?? "").trim();
-    const workEmail = String(formData.get("workEmail") ?? "").trim();
-    const institution = String(formData.get("institution") ?? "").trim();
-    const phone = String(formData.get("phone") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
+    const payload = {
+      fullName: String(formData.get("fullName") ?? "").trim(),
+      workEmail: String(formData.get("workEmail") ?? "").trim(),
+      institution: String(formData.get("institution") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      countryCode: selectedCountry.dialCode,
+      message: String(formData.get("message") ?? "").trim(),
+      inquiryType: selectedInquiryType,
+    };
 
-    const subjectParts =
-      selectedInquiryType === "Other"
-        ? ["ASTA inquiry", institution || fullName]
-        : ["ASTA inquiry", selectedInquiryType, institution || fullName];
-    const subject = subjectParts.filter(Boolean).join(" | ");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const detailLines = [
-      selectedInquiryType !== "Other" ? `Inquiry type: ${selectedInquiryType}` : "",
-      `Full name: ${fullName}`,
-      `Work email: ${workEmail}`,
-      `Hospital / institution: ${institution}`,
-      phone ? `Contact number: ${selectedCountry.dialCode} ${phone}` : "",
-    ].filter(Boolean);
+      const data = await res.json().catch(() => ({}));
 
-    const body = [
-      "Hello ASTA team,",
-      "",
-      "I would like to start a conversation with ASTA.",
-      "",
-      ...detailLines,
-      "",
-      "Message:",
-      message,
-      "",
-      "Regards,",
-      fullName,
-    ].join("\n");
-
-    setStatusMessage(`Opening your mail client with a drafted inquiry to ${CONTACT_EMAIL}.`);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (res.ok) {
+        setSubmitStatus("success");
+        setSubmitMessage("Your inquiry has been sent successfully. We'll respond within 24 hours.");
+        formRef.current?.reset();
+      } else if (res.status === 429) {
+        setSubmitStatus("rate-limited");
+        const retryMin = data.retryAfterMs ? Math.ceil(data.retryAfterMs / 60000) : 15;
+        setSubmitMessage(`Too many submissions. Please wait ${retryMin} minute${retryMin > 1 ? "s" : ""} or contact us directly.`);
+      } else {
+        setSubmitStatus("error");
+        setSubmitMessage(data.error || "Something went wrong. Please try again or email us directly.");
+      }
+    } catch {
+      setSubmitStatus("error");
+      setSubmitMessage("Network error. Please check your connection and try again.");
+    }
   }
 
   const activeColor = INQUIRY_COLORS[selectedInquiryType];
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="mt-6">
 
       {/* ── Inquiry type selector ── */}
       <div className="mb-5">
@@ -370,8 +378,21 @@ export function ContactInquiryForm() {
 
       {/* Submit */}
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-5">
-        <Button type="submit" variant="glow" size="lg" trailingIcon>
-          {contactForm.submitLabel}
+        <Button
+          type="submit"
+          variant="glow"
+          size="lg"
+          trailingIcon
+          disabled={submitStatus === "submitting"}
+        >
+          {submitStatus === "submitting" ? (
+            <span className="flex items-center gap-2">
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              Sending…
+            </span>
+          ) : (
+            contactForm.submitLabel
+          )}
         </Button>
         <div className="flex flex-wrap gap-4 text-[0.76rem]">
           <a
@@ -391,10 +412,27 @@ export function ContactInquiryForm() {
         </div>
       </div>
 
-      {statusMessage && (
-        <p aria-live="polite" className="mt-3 text-[0.76rem] leading-relaxed text-cyan-300/70">
-          {statusMessage}
-        </p>
+      {/* Status feedback */}
+      {submitMessage && (
+        <div
+          aria-live="polite"
+          className={cn(
+            "mt-4 flex items-start gap-3 rounded-xl border px-4 py-3.5 text-[0.82rem] leading-relaxed transition-all",
+            submitStatus === "success" &&
+              "border-emerald-400/20 bg-emerald-400/[0.06] text-emerald-300",
+            submitStatus === "rate-limited" &&
+              "border-amber-400/20 bg-amber-400/[0.06] text-amber-300",
+            submitStatus === "error" &&
+              "border-red-400/20 bg-red-400/[0.06] text-red-300",
+          )}
+        >
+          <span className="mt-0.5 text-lg leading-none">
+            {submitStatus === "success" && "✓"}
+            {submitStatus === "rate-limited" && "⏳"}
+            {submitStatus === "error" && "✕"}
+          </span>
+          <span>{submitMessage}</span>
+        </div>
       )}
     </form>
   );
