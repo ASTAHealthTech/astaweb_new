@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://astahealthtech.com";
-export const SITE_NAME = "ASTA Healthtech";
-export const SITE_TITLE = "ASTA Healthtech | Smart wards, built on the hospital you already have.";
+export const SITE_NAME = "ASTA Health Tech";
+export const SITE_TITLE = "ASTA Health Tech | Smart wards, built on the hospital you already have.";
 export const SITE_DESCRIPTION =
   "ASTA turns existing hospital wards into smart wards with device-agnostic AI, real-time vitals, intelligent alerts, and clinical visibility without new monitors.";
 export const DEFAULT_OG_IMAGE = "/logo/logo-asta.png";
 
 const DEFAULT_KEYWORDS = [
-  "ASTA Healthtech",
+  "ASTA Health Tech",
   "smart wards",
   "hospital AI",
   "device-agnostic AI",
@@ -102,7 +102,7 @@ export const rootMetadata: Metadata = {
   applicationName: SITE_NAME,
   title: {
     default: SITE_TITLE,
-    template: "%s | ASTA Healthtech",
+    template: "%s | ASTA Health Tech",
   },
   description: SITE_DESCRIPTION,
   alternates: {
@@ -147,7 +147,7 @@ export const rootMetadata: Metadata = {
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "ASTA Healthtech Private Limited",
+  name: "ASTA Health Tech Corporation",
   alternateName: SITE_NAME,
   url: SITE_URL,
   logo: `${SITE_URL}${DEFAULT_OG_IMAGE}`,
@@ -184,7 +184,7 @@ export const websiteJsonLd = {
   description: SITE_DESCRIPTION,
   publisher: {
     "@type": "Organization",
-    name: "ASTA Healthtech Private Limited",
+    name: "ASTA Health Tech Corporation",
   },
   inLanguage: "en-IN",
 };

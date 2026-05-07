@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Press",
   description:
-    "Media coverage, institutional recognition, and deployment milestones from ASTA Healthtech.",
+    "Media coverage, institutional recognition, and deployment milestones from ASTA Health Tech.",
   path: "/press",
   keywords: [
     "ASTA press",
@@ -71,7 +71,7 @@ export default function PressPage() {
           <div className="mx-auto max-w-2xl text-center">
             <Reveal>
               <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.10] bg-white/[0.05] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                Media &amp; Press · ASTA Healthtech
+                Media &amp; Press · ASTA Health Tech
               </div>
             </Reveal>
 

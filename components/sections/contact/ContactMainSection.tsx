@@ -59,7 +59,7 @@ export function ContactMainSection() {
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 </span>
                 <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/28">
-                  Inquiry Portal · ASTA Healthtech Private Limited
+                  Inquiry Portal · ASTA Health Tech Corporation
                 </span>
               </div>
               <div className="flex flex-wrap items-center gap-2">

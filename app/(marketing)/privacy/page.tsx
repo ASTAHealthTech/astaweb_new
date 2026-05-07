@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
   description:
-    "Privacy policy for ASTA Healthtech Private Limited — how we collect, use, and protect your information.",
+    "Privacy policy for ASTA Health Tech Corporation — how we collect, use, and protect your information.",
   path: "/privacy",
   keywords: [
     "ASTA privacy policy",
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
         <Container className="relative">
           <div className="mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/45">
-              Legal · ASTA Healthtech
+              Legal · ASTA Health Tech
             </div>
             <h1 className="mt-5 text-[2.2rem] font-semibold tracking-[-0.04em] text-frost md:text-[2.8rem]">
               Privacy Policy
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
 
               <SectionHeading>1. Introduction</SectionHeading>
               <Body>
-                ASTA Healthtech Private Limited (&ldquo;ASTA&rdquo;, &ldquo;we&rdquo;,
+                ASTA Health Tech Corporation (&ldquo;ASTA&rdquo;, &ldquo;we&rdquo;,
                 &ldquo;our&rdquo;) is committed to protecting the privacy of individuals
                 who interact with our platform, website, and services. This Privacy Policy
                 explains what information we collect, how we use it, and the rights
@@ -203,7 +203,7 @@ export default function PrivacyPage() {
               </Body>
               <Body>
                 <strong className="font-semibold text-slate-800 dark:text-frost/80">
-                  ASTA Healthtech Private Limited
+                  ASTA Health Tech Corporation
                 </strong>
                 <br />
                 {contactMain.address.body}

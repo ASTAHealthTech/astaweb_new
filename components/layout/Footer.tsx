@@ -92,7 +92,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.05] pt-5">
           <p className="text-[0.67rem] text-white/68">
-            © {new Date().getFullYear()} ASTA Healthtech Private Limited. All rights reserved.
+            © {new Date().getFullYear()} ASTA Health Tech Corporation. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link

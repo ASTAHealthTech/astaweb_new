@@ -86,7 +86,7 @@ function composeEmail(data: ContactPayload, ip: string): { subject: string; html
         New Contact Inquiry
       </h1>
       <p style="margin: 6px 0 0; font-size: 12px; color: rgba(255,255,255,0.55); font-family: monospace; text-transform: uppercase; letter-spacing: 0.1em;">
-        ASTA Healthtech · Inquiry Portal
+        ASTA Health Tech · Inquiry Portal
       </p>
     </div>
 

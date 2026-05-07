@@ -12,7 +12,7 @@ export const metadata: Metadata = buildPageMetadata({
     "contact ASTA",
     "hospital AI demo",
     "healthtech inquiry",
-    "ASTA Healthtech contact",
+    "ASTA Health Tech contact",
   ],
 });
 

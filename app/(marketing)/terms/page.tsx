@@ -7,7 +7,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Terms of Service",
   description:
-    "Terms of service for ASTA Healthtech Private Limited — conditions governing use of our website and platform.",
+    "Terms of service for ASTA Health Tech Corporation — conditions governing use of our website and platform.",
   path: "/terms",
   keywords: [
     "ASTA terms of service",
@@ -65,7 +65,7 @@ export default function TermsPage() {
         <Container className="relative">
           <div className="mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 font-mono text-[0.62rem] uppercase tracking-[0.18em] text-white/45">
-              Legal · ASTA Healthtech
+              Legal · ASTA Health Tech
             </div>
             <h1 className="mt-5 text-[2.2rem] font-semibold tracking-[-0.04em] text-frost md:text-[2.8rem]">
               Terms of Service
@@ -93,7 +93,7 @@ export default function TermsPage() {
 
               <SectionHeading>2. Description of Service</SectionHeading>
               <Body>
-                ASTA Healthtech Private Limited provides a device-agnostic clinical
+                ASTA Health Tech Corporation provides a device-agnostic clinical
                 intelligence platform that reads bedside monitor displays, extracts
                 structured vital signs, and supports clinical alerting workflows in
                 hospital environments. This website is an informational resource; platform
@@ -128,7 +128,7 @@ export default function TermsPage() {
               <SectionHeading>5. Intellectual Property</SectionHeading>
               <Body>
                 All content on this website — including text, design, graphics, data, and
-                software — is the property of ASTA Healthtech Private Limited or its
+                software — is the property of ASTA Health Tech Corporation or its
                 licensors. The ASTA name, logo, and platform are protected under applicable
                 intellectual property laws. Nothing in these Terms grants you any licence
                 to use ASTA&rsquo;s intellectual property except as expressly permitted.
@@ -150,8 +150,8 @@ export default function TermsPage() {
 
               <SectionHeading>8. Limitation of Liability</SectionHeading>
               <Body>
-                To the fullest extent permitted by applicable law, ASTA Healthtech
-                Private Limited shall not be liable for any indirect, incidental, special,
+                To the fullest extent permitted by applicable law, ASTA Health Tech
+                Corporation shall not be liable for any indirect, incidental, special,
                 or consequential damages arising from use of this website or reliance on
                 information contained herein, including but not limited to loss of profits,
                 data, or goodwill.
@@ -176,7 +176,7 @@ export default function TermsPage() {
               <Body>For legal inquiries or questions regarding these Terms:</Body>
               <Body>
                 <strong className="font-semibold text-slate-800 dark:text-frost/80">
-                  ASTA Healthtech Private Limited
+                  ASTA Health Tech Corporation
                 </strong>
                 <br />
                 {contactMain.address.body}

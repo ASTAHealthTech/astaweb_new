@@ -108,7 +108,7 @@ export const contactMain: {
   };
 } = {
   eyebrow: "Contact details",
-  heading: "Reach ASTA Healthtech Private Limited",
+  heading: "Reach ASTA Health Tech Corporation",
   sub: "Use the form or contact us directly.",
   channelsTitle: "Direct contact",
   channels: [
@@ -133,7 +133,7 @@ export const contactMain: {
   },
   address: {
     eyebrow: "Office address",
-    company: "ASTA Healthtech Private Limited",
+    company: "ASTA Health Tech Corporation",
     body:
       "Kaveri Regent Coronet, Aurbis Prime, 11, 80 Feet Rd, 3rd Block, Koramangala, Bengaluru, Karnataka 560034",
   },
