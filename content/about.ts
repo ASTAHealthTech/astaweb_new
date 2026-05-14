@@ -41,7 +41,7 @@ type PedigreeItem = {
 
 const leadershipMembers: Person[] = [
   {
-    name: "Vikram Paramasivan",
+    name: "Dr. Vikram Paramasivan",
     initials: "VP",
     photo: "/team/vikram.jpeg",
     linkedin: "https://www.linkedin.com/in/vikramparamasivan/",
@@ -49,7 +49,7 @@ const leadershipMembers: Person[] = [
     badge: "Enterprise technology",
     headline: "Brings product and engineering discipline from large-scale software systems.",
     body:
-      "Vikram brings 15+ years of enterprise product and engineering experience, including AI-led work across Microsoft environments such as M365 and Azure.",
+      "Dr. Vikram brings 15+ years of enterprise product and engineering experience, including AI-led work across Microsoft environments such as M365 and Azure.",
     contribution:
       "He sets the bar for product rigor, platform thinking, and the operating discipline required for hospital-grade software.",
     accent: "#4F6BFF",
