@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'motion/react';
 import {
   Activity,
@@ -57,10 +57,26 @@ import {
 
 const iconMap = [Monitor, Layers3, HeartPulse, FileCheck2, GitBranch, ShieldCheck];
 
+// Mobile detection for trimming background animation on small screens.
+function useIsMobile(query = '(max-width: 768px)') {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, [query]);
+  return isMobile;
+}
+
 function Shell({ children }) {
+  const isMobile = useIsMobile();
+  // Far fewer particles on mobile, and no scroll-linked scale (saves a per-frame update each).
+  const particleCount = isMobile ? 14 : 52;
   const backgroundParticles = useMemo(
-    () => Array.from({ length: 52 }, (_, i) => ({ id: i, left: (i * 37) % 100, top: (i * 61) % 100, delay: (i % 9) * 0.37 })),
-    []
+    () => Array.from({ length: particleCount }, (_, i) => ({ id: i, left: (i * 37) % 100, top: (i * 61) % 100, delay: (i % 9) * 0.37 })),
+    [particleCount]
   );
   const { scrollYProgress } = useScroll();
   const glowScale = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
@@ -68,12 +84,12 @@ function Shell({ children }) {
   return (
     <>
       <ScrollProgress />
-      <MouseHalo />
+      {!isMobile && <MouseHalo />}
       <div className="ambient-particles" aria-hidden="true">
         {backgroundParticles.map((dot) => (
           <motion.span
             key={dot.id}
-            style={{ left: `${dot.left}%`, top: `${dot.top}%`, scale: glowScale }}
+            style={{ left: `${dot.left}%`, top: `${dot.top}%`, ...(isMobile ? null : { scale: glowScale }) }}
             animate={{ opacity: [0.18, 0.85, 0.18], y: [0, -18, 0] }}
             transition={{ duration: 5 + (dot.id % 5), repeat: Infinity, delay: dot.delay }}
           />

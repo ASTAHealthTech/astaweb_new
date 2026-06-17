@@ -357,6 +357,8 @@ export function EcgLine({ className = '', duration = 3.4, height = 120 }) {
  * it reads as light rather than a chasing dot.
  */
 export function ScrollLight() {
+  // Cursor-follower: useless on touch devices, so skip it on mobile.
+  const [enabled, setEnabled] = useState(true);
   const x = useMotionValue(-600);
   const y = useMotionValue(-600);
   // overdamped => smooth, no overshoot. Halo lags softer than the core.
@@ -367,7 +369,11 @@ export function ScrollLight() {
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return undefined;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    if (reduce || isMobile) {
+      setEnabled(false);
+      return undefined;
+    }
     const move = (e) => {
       x.set(e.clientX);
       y.set(e.clientY);
@@ -375,6 +381,8 @@ export function ScrollLight() {
     window.addEventListener('pointermove', move, { passive: true });
     return () => window.removeEventListener('pointermove', move);
   }, [x, y]);
+
+  if (!enabled) return null;
 
   return (
     <>
@@ -412,6 +420,9 @@ export function NeuralCanvas() {
     if (!canvas) return undefined;
     const ctx = canvas.getContext('2d');
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Mobile: lighten this always-on canvas (cap FPS + DPR, slower pulses).
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const frameInterval = isMobile ? 1000 / 30 : 0;
 
     let w = 0;
     let h = 0;
@@ -435,7 +446,7 @@ export function NeuralCanvas() {
       }));
     };
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = w * dpr;
@@ -543,9 +554,13 @@ export function NeuralCanvas() {
 
     let raf;
     let pulseTimer;
-    const loop = () => {
-      draw();
+    let lastFrame = 0;
+    const loop = (now) => {
       raf = requestAnimationFrame(loop);
+      // Cap to ~30fps on mobile — invisible for a faint mesh, ~half the work.
+      if (frameInterval && now - lastFrame < frameInterval) return;
+      lastFrame = now;
+      draw();
     };
     const onMove = (e) => {
       mouse.x = e.clientX;
@@ -563,7 +578,7 @@ export function NeuralCanvas() {
       draw();
     } else {
       raf = requestAnimationFrame(loop);
-      pulseTimer = setInterval(spawnPulse, 600);
+      pulseTimer = setInterval(spawnPulse, isMobile ? 1100 : 600);
     }
     return () => {
       cancelAnimationFrame(raf);
