@@ -18,7 +18,11 @@ export default function SmoothScroll({ children }) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     // ?nosmooth=1 disables Lenis (used for native-anchor testing / debugging).
     const noSmooth = new URLSearchParams(window.location.search).has('nosmooth');
-    if (reduce || noSmooth) return undefined;
+    // On phones/tablets, Lenis fights the browser's native hardware-accelerated
+    // scrolling and steals frame budget from on-scroll animations, making the
+    // whole page feel laggy. Native scrolling is far smoother there — skip Lenis.
+    const isMobile = window.matchMedia('(max-width: 980px), (pointer: coarse)').matches;
+    if (reduce || noSmooth || isMobile) return undefined;
 
     const lenis = new Lenis({
       duration: 1.15,

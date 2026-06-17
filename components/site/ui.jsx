@@ -13,31 +13,6 @@ import {
 
 const EASE = [0.16, 1, 0.3, 1];
 
-/* ----------------------------------------------------------- mobile hook */
-// Animating CSS `filter: blur()` forces a per-frame repaint (it isn't
-// GPU-composited like transform/opacity), so blur-based text reveals stutter
-// on phone GPUs. We detect mobile and drop the blur there, keeping the motion.
-function getIsMobile() {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(max-width: 768px)').matches;
-}
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(getIsMobile);
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  return isMobile;
-}
-function stripBlur(variant) {
-  if (!variant || !('filter' in variant)) return variant;
-  const { filter, ...rest } = variant;
-  return rest;
-}
-
 /* ---------------------------------------------------------------- Reveal */
 // Variety of entrance animations so the page doesn't feel one-note.
 const REVEAL_VARIANTS = {
@@ -53,22 +28,16 @@ export function Reveal({ children, className = '', delay = 0, y = 28, as = 'div'
   const inViewState = useInView(ref, { once: true, margin: '-12% 0px' });
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const isMobile = useIsMobile();
   const show = immediate ? mounted : inViewState;
   const Tag = motion[as] || motion.div;
   const v = REVEAL_VARIANTS[variant] || REVEAL_VARIANTS.up;
-  let hidden = variant === 'up' && y !== 28 ? { ...v.hidden, y } : v.hidden;
-  let shown = v.shown;
-  if (isMobile) {
-    hidden = stripBlur(hidden);
-    shown = stripBlur(shown);
-  }
+  const hidden = variant === 'up' && y !== 28 ? { ...v.hidden, y } : v.hidden;
   return (
     <Tag
       ref={ref}
       className={className}
       initial={hidden}
-      animate={show ? shown : {}}
+      animate={show ? v.shown : {}}
       transition={{ duration: 0.9, delay, ease: EASE }}
     >
       {children}
@@ -153,13 +122,9 @@ export function CharReveal({ text, as = 'h2', className = '', delay = 0, immedia
   const inViewState = useInView(ref, { once: true, margin: '-10% 0px' });
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const isMobile = useIsMobile();
   const show = immediate ? mounted : inViewState;
   const Tag = motion[as] || motion.h2;
   const words = text.split(' ');
-  // Per-character blur is the heaviest reveal; on mobile keep scale+opacity only.
-  const hiddenChar = isMobile ? { opacity: 0, scale: 1.4 } : { opacity: 0, filter: 'blur(12px)', scale: 1.5 };
-  const shownChar = isMobile ? { opacity: 1, scale: 1 } : { opacity: 1, filter: 'blur(0px)', scale: 1 };
   let idx = -1;
   return (
     <Tag ref={ref} className={`as-charrev ${className}`} aria-label={text}>
@@ -171,8 +136,8 @@ export function CharReveal({ text, as = 'h2', className = '', delay = 0, immedia
               return (
                 <motion.span
                   key={ci}
-                  initial={hiddenChar}
-                  animate={show ? shownChar : {}}
+                  initial={{ opacity: 0, filter: 'blur(12px)', scale: 1.5 }}
+                  animate={show ? { opacity: 1, filter: 'blur(0px)', scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: delay + idx * 0.016, ease: EASE }}
                 >
                   {c}

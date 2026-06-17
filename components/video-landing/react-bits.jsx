@@ -3,22 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react';
 
-// Animating CSS blur repaints every frame and stutters on phone GPUs, so we
-// drop it on mobile and keep the (composited) transform/opacity motion.
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-  );
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-  return isMobile;
-}
-
 export function MouseHalo() {
   const x = useMotionValue(-300);
   const y = useMotionValue(-300);
@@ -40,16 +24,13 @@ export function MouseHalo() {
 export function Reveal({ children, delay = 0, y = 34, className = '', once = true }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once, margin: '-80px' });
-  const isMobile = useIsMobile();
-  const hidden = isMobile ? { opacity: 0, y } : { opacity: 0, y, filter: 'blur(10px)' };
-  const shown = isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, filter: 'blur(0px)' };
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial={hidden}
-      animate={inView ? shown : hidden}
+      initial={{ opacity: 0, y, filter: 'blur(10px)' }}
+      animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y, filter: 'blur(10px)' }}
       transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
@@ -60,7 +41,6 @@ export function Reveal({ children, delay = 0, y = 34, className = '', once = tru
 export function SplitText({ text, as = 'h2', className = '', delay = 0 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const isMobile = useIsMobile();
   const MotionTag = useMemo(() => {
     if (as === 'h1') return motion.h1;
     if (as === 'h3') return motion.h3;
@@ -68,16 +48,14 @@ export function SplitText({ text, as = 'h2', className = '', delay = 0 }) {
     return motion.h2;
   }, [as]);
   const words = text.split(' ');
-  const hiddenWord = isMobile ? { y: '112%', opacity: 0 } : { y: '112%', opacity: 0, filter: 'blur(8px)' };
-  const shownWord = isMobile ? { y: '0%', opacity: 1 } : { y: '0%', opacity: 1, filter: 'blur(0px)' };
 
   return (
     <MotionTag ref={ref} className={`split-text ${className}`} aria-label={text}>
       {words.map((word, index) => (
         <span className="split-word" aria-hidden="true" key={`${word}-${index}`}>
           <motion.span
-            initial={hiddenWord}
-            animate={inView ? shownWord : hiddenWord}
+            initial={{ y: '112%', opacity: 0, filter: 'blur(8px)' }}
+            animate={inView ? { y: '0%', opacity: 1, filter: 'blur(0px)' } : { y: '112%', opacity: 0, filter: 'blur(8px)' }}
             transition={{ duration: 0.72, delay: delay + index * 0.035, ease: [0.16, 1, 0.3, 1] }}
           >
             {word}
