@@ -748,16 +748,22 @@ function VideoReveal() {
   const dark = useTransform(scrollYProgress, [0.1, 0.5], [0.85, 0]);
   const titleY = useTransform(scrollYProgress, [0, 0.5], [40, -10]);
 
-  // play only while in view (saves CPU and feels intentional)
+  // Lazy-load + play only while in view: the source is attached on approach
+  // (not at page load), so the video file isn't fetched until you're near it.
+  // Saves bandwidth/CPU and noticeably lightens initial load — esp. on mobile.
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return undefined;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) v.play().catch(() => {});
-        else v.pause();
+        if (e.isIntersecting) {
+          if (!v.src) v.src = '/Landing_Video.mp4';
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25, rootMargin: '200px 0px' }
     );
     io.observe(v);
     return () => io.disconnect();
@@ -772,11 +778,10 @@ function VideoReveal() {
       <motion.div className="as-film-frame" style={{ scale, borderRadius: radius, clipPath }}>
         <video
           ref={videoRef}
-          src="/Landing_Video.mp4"
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
         />
         <motion.div className="as-film-veil" style={{ opacity: dark }} />
         <div className="as-film-glow" aria-hidden="true" />
