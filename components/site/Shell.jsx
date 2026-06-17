@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import SmoothScroll from './SmoothScroll.jsx';
 import { MagneticButton, ScrollLight, NeuralCanvas, NeuralField, Reveal, SplitText } from './ui.jsx';
 
@@ -16,6 +16,7 @@ export const NAV = [
 /* ================================================================== Nav */
 export function GlassNav() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -24,7 +25,7 @@ export function GlassNav() {
   }, []);
   return (
     <motion.header
-      className={`as-nav ${scrolled ? 'is-scrolled' : ''}`}
+      className={`as-nav ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}
       initial={{ y: -28, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -47,6 +48,39 @@ export function GlassNav() {
           <MagneticButton href="/contact" variant="primary" className="as-nav-cta">
             Request demo <ArrowRight size={15} />
           </MagneticButton>
+        </div>
+        <button
+          type="button"
+          className="as-nav-toggle"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="as-mobile-menu"
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile-only expandable menu */}
+      <div id="as-mobile-menu" className={`as-nav-mobile ${open ? 'is-open' : ''}`}>
+        <div className="as-nav-mobile-inner">
+          {NAV.map((item) => (
+            <a key={item.label} href={item.href} onClick={() => setOpen(false)}>
+              {item.label}
+            </a>
+          ))}
+          <a
+            className="as-nav-mobile-login"
+            href="https://web.astahealthtech.co.in/user/login"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+          >
+            Login
+          </a>
+          <a className="as-nav-mobile-cta" href="/contact" onClick={() => setOpen(false)}>
+            Request demo <ArrowRight size={15} />
+          </a>
         </div>
       </div>
     </motion.header>
