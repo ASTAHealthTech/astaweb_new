@@ -168,6 +168,7 @@ export const team = [
     name: 'Adyanta Dubey',
     role: 'CTO and Co-Founder',
     img: '/team/3.jpeg',
+    imgPosition: 'center 12%',
     text: 'AI, robotics, full-stack, and data-science builder leading the technical development of ASTA.',
     profile: 'https://www.linkedin.com/in/adyanta-dubey-a57895225/'
   },

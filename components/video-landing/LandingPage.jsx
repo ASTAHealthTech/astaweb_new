@@ -664,7 +664,7 @@ function PersonCard({ person }) {
   return (
     <Reveal>
       <motion.article className="person-card" whileHover={{ y: -6 }} transition={{ type: 'spring', stiffness: 230, damping: 22 }}>
-        <img src={person.img} alt={person.name} />
+        <img src={person.img} alt={person.name} style={person.imgPosition ? { objectPosition: person.imgPosition } : undefined} />
         <div>
           <h4>{person.name}</h4>
           <span>{person.role}</span>
