@@ -174,7 +174,7 @@ export const team = [
   },
   {
     name: 'Mr. Varun Singh',
-    role: 'Chief Business Officer',
+    role: 'Chief Business Officer and Co-Founder',
     img: '/team/11.jpeg',
     text: 'Business leader with experience across immigration, project delivery, investment migration, and enterprise growth.',
     profile: 'https://www.linkedin.com/in/varunxiphias/'

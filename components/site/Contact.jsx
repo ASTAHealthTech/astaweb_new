@@ -65,7 +65,11 @@ function ContactBody() {
             </a>
             <div className="as-contact-line as-contact-addr">
               <span className="as-contact-ico"><MapPin size={18} /></span>
-              <span><i>Office</i><b>Kaveri Regent Coronet, Aurbis Prime, 80 Feet Rd, 3rd Block, Koramangala, Bengaluru, Karnataka 560034</b></span>
+              <span><i>India office</i><b>Kaveri Regent Coronet, Aurbis Prime, 80 Feet Rd, 3rd Block, Koramangala, Bengaluru, Karnataka 560034</b></span>
+            </div>
+            <div className="as-contact-line as-contact-addr">
+              <span className="as-contact-ico"><MapPin size={18} /></span>
+              <span><i>Canada office</i><b>161 Bay St, Toronto, Ontario, Canada M5J 2S1</b></span>
             </div>
           </SpotlightCard>
         </Reveal>
