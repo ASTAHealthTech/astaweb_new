@@ -1,46 +1,66 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import "./globals.css"
-import "./site.css"
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif } from "next/font/google";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import {
+  organizationJsonLd,
+  rootMetadata,
+  websiteJsonLd,
+} from "@/lib/seo";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
-export const metadata: Metadata = {
-  title: "ASTA Health Tech | Source-Grounded Clinical Intelligence for Hospital Wards",
-  description:
-    "ASTA reads live monitor context, builds patient packets, ranks clinical lanes, attaches source evidence, and gives clinicians reviewable handoffs.",
-  keywords:
-    "ASTA Health Tech, source-grounded clinical intelligence, hospital wards, patient monitoring, AI clinical reasoning, monitor vision, clinician review, health tech India",
-  authors: [{ name: "ASTA Health Tech" }],
-  openGraph: {
-    title: "ASTA Health Tech | Source-Grounded Clinical Intelligence for Hospital Wards",
-    description:
-      "Clinical intelligence from monitor noise: ranked lanes, source cards, missing checks, and audit-ready reasoning.",
-    url: "https://astahealthtech.com",
-    siteName: "ASTA Health Tech",
-    images: [{ url: "/logo-asta.png", width: 1200, height: 630, alt: "ASTA Health Tech" }],
-    locale: "en_US",
-    type: "website"
-  },
-  robots: { index: true, follow: true }
-}
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-display",
+  display: "swap",
+});
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = rootMetadata;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "dark light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#060816" },
+  ],
+};
+
+const themeScript =
+  '!function(){try{var t="light"===localStorage.getItem("asta-theme")?"light":"dark";document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(t)}catch(t){document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add("dark")}}();';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${inter.variable} ${display.variable} dark`}
+      suppressHydrationWarning
+    >
       <head>
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={inter.className}>
-        {children}
-        <SpeedInsights />
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

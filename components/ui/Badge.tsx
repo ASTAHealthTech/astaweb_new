@@ -1,36 +1,47 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
-import { cn } from "@/lib/utils"
+type Tone = "neutral" | "brand" | "success" | "live" | "piloting" | "onboarding";
 
-const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-  {
-    variants: {
-      variant: {
-        default:
-          "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
-        secondary:
-          "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        destructive:
-          "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
-        outline: "text-foreground",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+const tones: Record<Tone, string> = {
+  neutral: "bg-mist text-ink-muted ring-1 ring-line dark:bg-white/[0.06] dark:text-frost-muted dark:ring-white/[0.08]",
+  brand: "bg-brand-50 text-brand-600 ring-1 ring-brand-100 dark:bg-brand-500/15 dark:text-brand-200 dark:ring-brand-400/20",
+  success: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-500/12 dark:text-emerald-200 dark:ring-emerald-400/20",
+  live: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-500/12 dark:text-emerald-200 dark:ring-emerald-400/20",
+  piloting: "bg-brand-50 text-brand-600 ring-1 ring-brand-100 dark:bg-brand-500/15 dark:text-brand-200 dark:ring-brand-400/20",
+  onboarding: "bg-amber-50 text-amber-700 ring-1 ring-amber-100 dark:bg-amber-500/12 dark:text-amber-200 dark:ring-amber-400/20",
+};
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+const dots: Record<Tone, string> = {
+  neutral: "bg-ink-subtle",
+  brand: "bg-brand-500",
+  success: "bg-emerald-500",
+  live: "bg-emerald-500",
+  piloting: "bg-brand-500",
+  onboarding: "bg-amber-500",
+};
 
-function Badge({ className, variant, ...props }: BadgeProps) {
+export function Badge({
+  tone = "neutral",
+  dot,
+  children,
+  className,
+}: {
+  tone?: Tone;
+  dot?: boolean;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
-  )
+    <span className={cn(
+      "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
+      tones[tone],
+      className
+    )}>
+      {dot && (
+        <span className={cn("h-1.5 w-1.5 rounded-full flex-none", dots[tone])} />
+      )}
+      {children}
+    </span>
+  );
 }
-
-export { Badge, badgeVariants }
