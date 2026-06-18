@@ -27,6 +27,7 @@ import {
   Quote
 } from 'lucide-react';
 import { SiteShell } from './Shell.jsx';
+import PoweredBy from './PoweredBy.jsx';
 import {
   Reveal,
   SplitText,
@@ -822,6 +823,7 @@ export default function Home() {
   return (
     <SiteShell>
       <Hero />
+      <PoweredBy />
       <Partners />
       <HorizontalPipeline />
       <StoryStack />
