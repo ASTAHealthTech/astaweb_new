@@ -135,7 +135,7 @@ export const contactMain: {
     eyebrow: "Office address",
     company: "ASTA Health Tech Corporation",
     body:
-      "Kaveri Regent Coronet, Aurbis Prime, 11, 80 Feet Rd, 3rd Block, Koramangala, Bengaluru, Karnataka 560034",
+      "1st Floor, JK Nirmala Arcade, Plot no. 780, 80 Feet Rd, 4th Block, Koramangala, Bengaluru, Karnataka 560034",
   },
 };
 

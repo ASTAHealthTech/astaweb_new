@@ -159,7 +159,7 @@ export const organizationJsonLd = {
   address: {
     "@type": "PostalAddress",
     streetAddress:
-      "Kaveri Regent Coronet, Aurbis Prime, 11, 80 Feet Rd, 3rd Block, Koramangala",
+      "1st Floor, JK Nirmala Arcade, Plot no. 780, 80 Feet Rd, 4th Block, Koramangala",
     addressLocality: "Bengaluru",
     addressRegion: "Karnataka",
     postalCode: "560034",
