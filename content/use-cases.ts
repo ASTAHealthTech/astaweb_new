@@ -103,7 +103,7 @@ const liveHospitalContext: Record<
     careContext: "Ward monitoring deployment",
     deploymentFit: "Clinical and operations fit",
     note:
-      "Active ward deployment delivered with hospital clinical and operations teams in a live patient-care setting.",
+      "Active clinical deployment delivered with hospital clinical and operations teams in a live patient-care setting.",
   },
 };
 
@@ -117,16 +117,16 @@ export const useCasesHero: {
   microProof: string[];
   proofRow: HeroProof[];
 } = {
-  eyebrow: "Use Cases - Real Hospital Environments",
+  eyebrow: "Deployments - Real Hospital Environments",
   headline: "One intelligence layer across",
   headlineAccent: "the environments hospitals actually run.",
   sub:
     "ASTA fits general wards, step-down beds, ICU/HCU oversight, peripheral centers, hospital-at-home pathways, and academic programs by reading the monitors already in place and adding continuous clinical visibility without a new monitor fleet.",
-  primaryCta: { label: "Review ASTA for your ward type", href: ROUTES.demo },
+  primaryCta: { label: "Review ASTA for your clinical environment", href: ROUTES.demo },
   secondaryCta: { label: "Talk to the ASTA team", href: ROUTES.contact },
   microProof: [
     "Built for existing hospital infrastructure",
-    "Starts on the monitors already on the ward",
+    "Starts on the hardware already in the unit",
     "Extends from live monitoring into teaching and research",
   ],
   proofRow: [
@@ -144,9 +144,9 @@ export const useCaseClusters: {
   clusters: UseCaseCluster[];
 } = {
   eyebrow: "Deployment contexts",
-  heading: "Where ASTA creates value in real hospital settings.",
+  heading: "Where our hospital AI solutions create value in real clinical environments.",
   sub:
-    "ASTA is not a ward-specific product. It is a device-agnostic intelligence layer that adapts to each care environment's staffing reality, escalation pattern, and deployment posture.",
+    "ASTA is the best healthcare AI solution for flexible deployments. It is a device-agnostic clinical AI platform that brings clinical intelligence to general floors, ICUs, and distributed facilities.",
   clusters: [
     {
       icon: "hospital",
@@ -159,14 +159,14 @@ export const useCaseClusters: {
       layout: "wide",
       cases: [
         {
-          title: "Smart wards in general hospitals",
-          context: "General wards and monitored inpatient beds on mixed monitor fleets.",
+          title: "Clinical intelligence in general hospitals",
+          context: "General units and monitored inpatient beds on mixed hardware fleets.",
           pressure:
             "Periodic observation and threshold-only alarms can miss deterioration between checks.",
           fit:
             "ASTA reads the monitors already at each bed and centralizes watchlists, trends, and escalation across the unit.",
           outcome:
-            "Broader ward visibility, earlier deterioration cues, and no monitor replacement program.",
+            "Broader clinical visibility, earlier deterioration cues, and no monitor replacement program.",
         },
         {
           title: "ICU & HCU optimization",
@@ -229,7 +229,7 @@ export const useCaseClusters: {
     {
       icon: "layers",
       label: "Academic and institutional intelligence",
-      title: "A monitored ward layer that also strengthens teaching and research.",
+      title: "A continuous data layer that also strengthens teaching and research.",
       sub:
         "For medical college hospitals and academic centers, ASTA supports live monitoring while creating structured material for teaching rounds, protocol work, and publication-oriented research.",
       color: "#7C5CFF",
@@ -258,7 +258,7 @@ export const useCaseClusters: {
         },
       ],
       footer:
-        "The academic value compounds after go-live: live monitoring first, then teaching material, protocol improvement, and research output on top.",
+        "The academic value compounds after go-live: continuous data streams first, then teaching material, protocol improvement, and research output on top.",
     },
     {
       icon: "shield",
@@ -293,7 +293,7 @@ export const useCaseClusters: {
         },
       ],
       footer:
-        "ASTA can begin on live wards and expand into specialized monitored environments once the operating model is proven.",
+        "ASTA can begin on general floors and expand into specialized monitored environments once the operating model is proven.",
     },
   ],
 };
@@ -403,9 +403,9 @@ export const useCasesOutcomes: {
   items: OutcomeTheme[];
 } = {
   eyebrow: "Outcome framing",
-  heading: "Why these deployment contexts matter to hospital buyers.",
+  heading: "Why leading hospitals search for our healthcare AI solutions.",
   sub:
-    "The value of ASTA changes with the environment. What stays constant is earlier visibility, broader monitored coverage, and a better operating model on the infrastructure hospitals already have.",
+    "The value of ASTA's clinical AI platform changes with the environment. Whether for predictive analytics in healthcare or ICU monitoring software, we improve your operating model on the infrastructure you already own.",
   items: [
     {
       icon: "activity",
@@ -417,10 +417,10 @@ export const useCasesOutcomes: {
     },
     {
       icon: "hospital",
-      context: "General wards",
-      title: "Broader monitored coverage",
+      context: "General care units",
+      title: "Broader data coverage",
       body:
-        "Hospitals can extend smart-ward style oversight across more beds without a monitor refresh or a second hardware estate.",
+        "Hospitals can extend continuous clinical oversight across more beds without a hardware refresh or a second hardware estate.",
       color: "#28D7B5",
     },
     {
@@ -428,7 +428,7 @@ export const useCasesOutcomes: {
       context: "Shift changes and distributed staffing",
       title: "Reduced staffing blind spots",
       body:
-        "Continuous visibility helps teams stay ahead of the gaps that appear on larger wards, night shifts, and peripheral sites.",
+        "Continuous visibility helps teams stay ahead of the gaps that appear across larger units, night shifts, and peripheral sites.",
       color: "#7C5CFF",
     },
     {
@@ -468,7 +468,7 @@ export const useCasesCta: {
   eyebrow: "Deployment review",
   heading: "Discuss ASTA for your hospital setting.",
   sub:
-    "Review the ward types, escalation model, and deployment path that matter most for your hospital - from inpatient monitoring to teaching-hospital use.",
-  primaryCta: { label: "Review ASTA for your ward type", href: ROUTES.demo },
+    "Review the clinical environments, escalation model, and deployment path that matter most for your hospital - from inpatient intelligence to teaching-hospital use.",
+  primaryCta: { label: "Review ASTA for your environment", href: ROUTES.demo },
   secondaryCta: { label: "Talk to the ASTA team", href: ROUTES.contact },
 };

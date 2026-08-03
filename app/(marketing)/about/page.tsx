@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutFoundingThesis } from "@/components/sections/about/AboutFoundingThesis";
 import { AboutLeadership } from "@/components/sections/about/AboutLeadership";
 import { AboutAdvisoryBoard } from "@/components/sections/about/AboutAdvisoryBoard";
 import { AboutInstitutionalPedigree } from "@/components/sections/about/AboutInstitutionalPedigree";
-import { AboutCTA } from "@/components/sections/about/AboutCTA";
-import { buildPageMetadata } from "@/lib/seo";
+import { StripeGridWrapper, GridRow, CrossLine } from "@/components/layout/StripeGridWrapper";
+
+import { buildPageMetadata, generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "About",
@@ -21,14 +21,35 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function AboutPage() {
+  const breadcrumbs = generateBreadcrumbJsonLd([
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about" },
+  ]);
+
   return (
-    <>
-      <AboutHero />
+    <div className="pt-20 md:pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <AboutFoundingThesis />
-      <AboutLeadership />
-      <AboutAdvisoryBoard />
-      <AboutInstitutionalPedigree />
-      <AboutCTA />
-    </>
+      <StripeGridWrapper>
+        <GridRow striped>
+          <CrossLine dashed />
+          <AboutLeadership />
+        </GridRow>
+        
+        <GridRow striped={false}>
+          <CrossLine />
+          <AboutAdvisoryBoard />
+        </GridRow>
+        
+        <GridRow striped>
+          <CrossLine dashed />
+          <AboutInstitutionalPedigree />
+        </GridRow>
+      </StripeGridWrapper>
+
+    </div>
   );
 }

@@ -1,14 +1,27 @@
 import { cn } from "@/lib/cn";
-import type { ReactNode } from "react";
 
 export function Container({
   children,
   className,
-  as: As = "div",
+  size = "default",
+  ...rest
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
-  as?: React.ElementType;
-}) {
-  return <As className={cn("container mx-auto", className)}>{children}</As>;
+  size?: "default" | "narrow" | "wide";
+} & React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full px-5 sm:px-6 md:px-8",
+        size === "default" && "max-w-[1200px]",
+        size === "narrow" && "max-w-[860px]",
+        size === "wide" && "max-w-[1400px]",
+        className
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 }

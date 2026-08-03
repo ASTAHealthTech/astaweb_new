@@ -49,7 +49,9 @@ export type Capability = {
 export type HowStep = {
   step: string;
   title: string;
+  subtitle?: string;
   body: string;
+  highlights?: string[];
   icon: IconName;
 };
 

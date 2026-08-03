@@ -3,24 +3,46 @@
 import { useState, type FormEvent } from "react";
 
 export function NewsletterForm() {
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const inputId = "newsletter-email";
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("success");
+    if (status === "submitting") return;
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setStatus("error");
+        setErrorMessage(data.error || "Failed to subscribe. Please try again.");
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    }
   }
 
   if (status === "success") {
     return (
-      <p aria-live="polite" className="text-[0.74rem] text-emerald-400/80">
+      <p aria-live="polite" className="text-[0.74rem] text-brand-400/80">
         Subscribed. We'll be in touch with updates.
       </p>
     );
   }
 
   return (
+    <div>
     <form onSubmit={handleSubmit} className="flex gap-2">
       <label htmlFor={inputId} className="sr-only">
         Email address
@@ -35,18 +57,23 @@ export function NewsletterForm() {
         autoComplete="email"
         inputMode="email"
         aria-describedby={`${inputId}-hint`}
-        className="h-9 min-w-0 flex-1 rounded-lg border border-white/[0.08] bg-white/[0.04] px-3 text-[0.78rem] text-frost outline-none placeholder:text-white/22 transition focus:border-brand-400/40 focus:bg-white/[0.06] focus:shadow-[0_0_0_3px_rgba(79,107,255,0.08)]"
+        className="h-9 min-w-0 flex-1 rounded-lg border border-border bg-bg/50 px-3 text-[0.78rem] text-fg outline-none placeholder:text-fg-subtle transition focus:ring-2 focus:ring-accent/30 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-frost dark:placeholder:text-white/22 dark:focus:border-brand-400/40 dark:focus:bg-white/[0.06]"
       />
       <span id={`${inputId}-hint`} className="sr-only">
         Enter your work email to subscribe to ASTA updates.
       </span>
       <button
         type="submit"
+        disabled={status === "submitting"}
         aria-label="Subscribe to ASTA updates"
-        className="h-9 rounded-lg bg-brand-500/70 px-3.5 text-[0.78rem] font-semibold text-white/90 transition hover:bg-brand-500/90 active:scale-95"
+        className="h-9 rounded-lg bg-accent px-3.5 text-[0.78rem] font-semibold text-white transition hover:bg-accent/90 active:scale-95 disabled:opacity-50"
       >
-        →
+        {status === "submitting" ? "..." : "→"}
       </button>
     </form>
+    {status === "error" && (
+      <p className="mt-2 text-[0.74rem] text-red-500">{errorMessage}</p>
+    )}
+    </div>
   );
 }

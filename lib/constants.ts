@@ -8,8 +8,8 @@ export const BRAND = {
 export const ROUTES = {
   home: "/",
   solutions: "/solutions",
-  platform: "/platform",
-  useCases: "/use-cases",
+  platform: "/product",
+  useCases: "/deployments",
   about: "/about",
   contact: "/contact",
   demo: "/contact?intent=demo",

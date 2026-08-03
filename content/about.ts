@@ -64,7 +64,7 @@ const leadershipMembers: Person[] = [
     badge: "Clinical leadership",
     headline: "Keeps the company anchored in the bedside problem, not an abstract AI thesis.",
     body:
-      "A practicing ENT surgeon and health-tech innovator with 20+ years of clinical experience, Dr. Kumaresh brings the realities of ward workflows, missed deterioration, and clinician burden directly into product decisions.",
+      "A practicing ENT surgeon and health-tech innovator with 20+ years of clinical experience, Dr. Kumaresh brings the realities of clinical workflows, missed deterioration, and clinician burden directly into product decisions.",
     contribution:
       "He defines the clinical relevance of what ASTA builds and keeps patient safety, adoption, and real hospital fit at the center.",
     accent: "#28D7B5",
@@ -221,13 +221,13 @@ export const aboutHero: {
 } = {
   eyebrow: "Mission, leadership, and trust",
   headline: "Building the intelligence layer for",
-  headlineAccent: "real hospital wards.",
+  headlineAccent: "real hospital environments.",
   sub:
-    "ASTA is building device-agnostic smart wards with practical, affordable, clinical-grade intelligence, led by a team spanning medicine, AI, enterprise technology, and hospital operations.",
+    "ASTA is building device-agnostic clinical intelligence with practical, affordable, clinical-grade precision, led by a team spanning medicine, AI, enterprise technology, and hospital operations.",
   primaryCta: { label: "Talk to the ASTA team", href: ROUTES.contact },
   secondaryCta: { label: "See institutional backing", href: "#institutional-pedigree" },
   microProof: [
-    "Device-agnostic smart wards on existing monitors",
+    "Device-agnostic clinical intelligence on existing monitors",
     "AI at every bedside. Evidence at every decision.",
     "Built for real hospital, teaching, and institutional care environments",
   ],
@@ -249,9 +249,9 @@ export const aboutFoundingThesis: {
   response: string;
 } = {
   eyebrow: "Why ASTA exists",
-  heading: "The problem was never a lack of monitors. It was a lack of usable intelligence.",
+  heading: "Hospitals don't need more monitors. They need the best healthcare AI solutions.",
   sub:
-    "ASTA began with a clinician-led realization: real wards already had vital signals at the bedside, but those signals were still too often trapped inside fragmented screens, noisy alarm logic, and overstretched workflows.",
+    "ASTA began with a clinician-led realization: real clinical environments already have vital signals at the bedside, but those signals are trapped inside fragmented screens. We built a clinical AI platform to solve this without hardware replacement.",
   narrative: [
     "Alarm fatigue makes it harder to distinguish the signal that matters. Mixed monitor brands make it harder to standardize visibility across a hospital. And between intermittent observation windows, meaningful deterioration can still be missed.",
     "Dr. Kumaresh's experience helped shape a sharper founding thesis: hospitals needed a practical system that could work on the monitor fleet already in place, surface deterioration earlier, and stay affordable enough for broad institutional adoption, including teaching hospitals and public-health environments.",
@@ -269,7 +269,7 @@ export const aboutFoundingThesis: {
       icon: "hospital",
       title: "Fragmented monitor estates",
       body:
-        "Hospitals cannot modernize care by replacing every bedside monitor just to standardize visibility across wards.",
+        "Hospitals cannot modernize care by replacing every bedside monitor just to standardize visibility across the institution.",
       color: "#28D7B5",
       colorTo: "#49C6FF",
     },

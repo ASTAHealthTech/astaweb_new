@@ -2,22 +2,28 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://astahealthtech.com";
 export const SITE_NAME = "ASTA Health Tech";
-export const SITE_TITLE = "ASTA Health Tech | Smart wards, built on the hospital you already have.";
+export const SITE_TITLE = "ASTA Health Tech | Continuous AI Healthcare Solutions for Hospitals";
 export const SITE_DESCRIPTION =
-  "ASTA turns existing hospital wards into smart wards with device-agnostic AI, real-time vitals, intelligent alerts, and clinical visibility without new monitors.";
+  "ASTA Health Tech delivers continuous AI healthcare solutions. Our computer vision and physiological AI stack reads existing displays and powers real-time clinical intelligence across hospital care systems.";
 export const DEFAULT_OG_IMAGE = "/logo/logo-asta.png";
 
 const DEFAULT_KEYWORDS = [
   "ASTA Health Tech",
-  "smart wards",
-  "hospital AI",
-  "device-agnostic AI",
+  "AI healthcare solutions",
+  "clinical AI platform",
+  "physiological AI reasoning",
+  "hospital AI solutions",
   "clinical intelligence",
-  "patient monitoring",
-  "vital sign monitoring",
-  "ward monitoring",
+  "computer vision healthcare",
+  "device-agnostic AI",
   "hospital operations",
   "healthcare technology",
+  "predictive analytics in healthcare",
+  "patient deterioration early warning",
+  "ICU monitoring software",
+  "interoperability in healthcare",
+  "automated vital signs monitoring",
+  "smart ward technology",
 ] as const;
 
 function buildRobots(index = true): NonNullable<Metadata["robots"]> {
@@ -146,7 +152,8 @@ export const rootMetadata: Metadata = {
 
 export const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "MedicalOrganization"],
+  "@id": `${SITE_URL}/#organization`,
   name: "ASTA Health Tech Corporation",
   alternateName: SITE_NAME,
   url: SITE_URL,
@@ -165,6 +172,11 @@ export const organizationJsonLd = {
     postalCode: "560034",
     addressCountry: "IN",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "12.9344",
+    longitude: "77.6262",
+  },
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -176,18 +188,44 @@ export const organizationJsonLd = {
   ],
 };
 
+export const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ASTA Clinical Intelligence Platform",
+  operatingSystem: "Cloud-based, Web-based, Cross-platform",
+  applicationCategory: "HealthApplication",
+  url: `${SITE_URL}/product`,
+  provider: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+  description: SITE_DESCRIPTION,
+};
+
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
   name: SITE_NAME,
   url: SITE_URL,
   description: SITE_DESCRIPTION,
   publisher: {
-    "@type": "Organization",
-    name: "ASTA Health Tech Corporation",
+    "@id": `${SITE_URL}/#organization`,
   },
   inLanguage: "en-IN",
 };
+
+export function generateBreadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.url}`,
+    })),
+  };
+}
 
 export const sitemapRoutes = [
   "/",
@@ -195,10 +233,10 @@ export const sitemapRoutes = [
   "/blog",
   "/careers",
   "/contact",
-  "/platform",
+  "/product",
   "/press",
   "/privacy",
   "/solutions",
   "/terms",
-  "/use-cases",
+  "/deployments",
 ] as const;

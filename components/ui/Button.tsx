@@ -1,98 +1,63 @@
 import Link from "next/link";
-import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { Icon } from "./Icon";
 
-type Variant =
-  | "primary"
-  | "secondary"
-  | "outline-white"
-  | "ghost"
-  | "ghost-white"
-  | "glow"
-  | "dark-solid";
+type Variant = "primary" | "glow" | "outline" | "ghost";
+type Size = "sm" | "md" | "lg";
 
-type Size = "sm" | "md" | "lg" | "xl";
-
-type BaseProps = {
+type Props = {
+  children: React.ReactNode;
+  href?: string;
   variant?: Variant;
   size?: Size;
   trailingIcon?: boolean;
-  children: ReactNode;
   className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit";
+  disabled?: boolean;
 };
 
-type AsLink = BaseProps & { href: string } & Omit<ComponentPropsWithoutRef<typeof Link>, "href" | "className" | "children">;
-type AsButton = BaseProps & { href?: undefined } & Omit<ComponentPropsWithoutRef<"button">, "className" | "children">;
-type Props = AsLink | AsButton;
+export function Button({
+  children,
+  href,
+  variant = "primary",
+  size = "md",
+  trailingIcon,
+  className,
+  onClick,
+  type = "button",
+  disabled,
+}: Props) {
+  const base =
+    "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
-const base =
-  "inline-flex items-center justify-center gap-2 font-medium leading-none select-none whitespace-nowrap " +
-  "transition-all duration-200 ease-premium " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-500 " +
-  "disabled:opacity-40 disabled:pointer-events-none";
+  const sizes: Record<Size, string> = {
+    sm: "h-9 px-4 text-[0.8125rem] rounded-[10px] gap-1.5",
+    md: "h-10 px-5 text-[0.875rem] rounded-[10px] gap-2",
+    lg: "h-11 px-6 text-[0.9375rem] rounded-[10px] gap-2",
+  };
 
-const variants: Record<Variant, string> = {
-  primary:
-    "bg-brand-500 text-white hover:bg-brand-600 focus-visible:ring-offset-white dark:focus-visible:ring-offset-night-deep",
+  const variants: Record<Variant, string> = {
+    primary: "bg-fg text-white hover:bg-fg/85 dark:bg-frost dark:text-night dark:hover:bg-frost/90",
+    glow: "bg-accent text-white hover:bg-accent/90 shadow-sm",
+    outline: "border border-border bg-transparent text-fg hover:bg-white dark:border-night-edge dark:text-frost dark:hover:bg-night-panel",
+    ghost: "text-fg-muted hover:text-fg hover:bg-white/60 dark:text-frost-muted dark:hover:text-frost",
+  };
 
-  secondary:
-    "border border-line bg-white text-ink hover:border-brand-200 hover:shadow-sm dark:border-line-dark dark:bg-white/[0.05] dark:text-frost dark:hover:border-line-dark-md dark:hover:bg-white/[0.08]",
+  const cls = cn(base, sizes[size], variants[variant], className);
 
-  "outline-white":
-    "border border-line bg-white/70 text-ink hover:border-brand-200 hover:bg-white dark:border-line-dark dark:bg-transparent dark:text-frost dark:hover:border-line-dark-md dark:hover:bg-white/5",
+  const arrow = trailingIcon ? (
+    <svg className="h-3.5 w-3.5" viewBox="0 0 14 14" fill="none" aria-hidden>
+      <path d="M2.5 7h9m-3.5-3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ) : null;
 
-  ghost:
-    "bg-transparent text-ink-muted hover:bg-ink/5 hover:text-ink dark:text-frost-muted dark:hover:bg-white/[0.06] dark:hover:text-frost",
-
-  "ghost-white":
-    "bg-transparent text-ink-muted hover:bg-ink/5 hover:text-ink dark:text-frost-muted dark:hover:bg-white/[0.06] dark:hover:text-frost",
-
-  glow:
-    "bg-brand-500 text-white hover:bg-brand-600 shadow-glow-brand hover:shadow-[0_0_80px_12px_rgba(79,107,255,0.4)]",
-
-  "dark-solid":
-    "border border-ink/10 bg-ink text-white hover:bg-ink/90 dark:border-line-dark dark:bg-night-mid dark:text-frost dark:hover:border-line-dark-md",
-};
-
-const sizes: Record<Size, string> = {
-  sm: "h-8  px-4  text-[0.8125rem] rounded-md",
-  md: "h-10 px-5  text-[0.9rem]    rounded-lg",
-  lg: "h-12 px-6  text-[0.975rem]  rounded-lg",
-  xl: "h-14 px-8  text-[1.0625rem] rounded-xl",
-};
-
-export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>(
-  function Button(
-    { variant = "primary", size = "md", trailingIcon, className, children, ...props },
-    ref
-  ) {
-    const classes = cn(base, variants[variant], sizes[size], className);
-    const inner = (
-      <>
-        <span>{children}</span>
-        {trailingIcon && (
-          <Icon
-            name="arrow-right"
-            className="h-[15px] w-[15px] transition-transform duration-200 ease-premium group-hover:translate-x-0.5"
-          />
-        )}
-      </>
-    );
-
-    if ("href" in props && props.href) {
-      const { href, ...rest } = props as AsLink;
-      return (
-        <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={cn(classes, "group")} {...rest}>
-          {inner}
-        </Link>
-      );
+  if (href) {
+    const isExternal = href.startsWith("http");
+    if (isExternal) {
+      return <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>{children}{arrow}</a>;
     }
-
-    return (
-      <button ref={ref as React.Ref<HTMLButtonElement>} className={cn(classes, "group")} {...(props as AsButton)}>
-        {inner}
-      </button>
-    );
+    return <Link href={href} className={cls}>{children}{arrow}</Link>;
   }
-);
+
+  return <button type={type} onClick={onClick} disabled={disabled} className={cls}>{children}{arrow}</button>;
+}

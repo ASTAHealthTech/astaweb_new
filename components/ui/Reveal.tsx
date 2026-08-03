@@ -1,4 +1,6 @@
-import type { HTMLAttributes, ReactNode } from "react";
+"use client";
+
+import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
@@ -7,10 +9,6 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   y?: number;
 };
 
-/**
- * Lightweight load-in reveal used across sections.
- * Keeps the wrapper server-renderable and avoids client animation overhead.
- */
 export function Reveal({
   children,
   delay = 0,
@@ -19,13 +17,33 @@ export function Reveal({
   style,
   ...rest
 }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: "-10px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      className={cn("reveal", className)}
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        inView ? "opacity-100" : "opacity-0",
+        className
+      )}
       style={{
         ...style,
-        ["--reveal-delay" as string]: `${delay}s`,
-        ["--reveal-distance" as string]: `${y}px`,
+        transform: inView ? "translateY(0)" : `translateY(${y}px)`,
+        transitionDelay: inView ? `${delay}s` : "0s",
       }}
       {...rest}
     >

@@ -1,34 +1,50 @@
 import type { Metadata } from "next";
-import { SolutionsHero } from "@/components/sections/solutions/SolutionsHero";
 import { CapabilitySuite } from "@/components/sections/solutions/CapabilitySuite";
-import { DashboardWalkthrough } from "@/components/sections/solutions/DashboardWalkthrough";
 import { InteropGovernance } from "@/components/sections/solutions/InteropGovernance";
 import { MonitoringInPractice } from "@/components/sections/solutions/MonitoringInPractice";
-import { SolutionsCTA } from "@/components/sections/solutions/SolutionsCTA";
-import { buildPageMetadata } from "@/lib/seo";
+import { StripeGridWrapper, GridRow, CrossLine } from "@/components/layout/StripeGridWrapper";
+
+import { buildPageMetadata, generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Solutions",
+  title: "AI Healthcare Solutions & Clinical Intelligence",
   description:
-    "ASTA reads existing bedside monitors, structures vitals in real time, and drives role-aware escalation without a new monitor fleet.",
+    "ASTA Health Tech delivers continuous AI healthcare solutions: converting raw monitor displays into real-time structured vitals and role-aware clinical escalation without hardware fleet replacement.",
   path: "/solutions",
   keywords: [
-    "hospital monitoring solutions",
-    "device agnostic monitoring",
-    "clinical workflow software",
+    "AI healthcare solutions",
+    "clinical AI platform",
+    "device agnostic AI",
+    "physiological reasoning AI",
     "role aware escalation",
   ],
 });
 
 export default function SolutionsPage() {
+  const breadcrumbs = generateBreadcrumbJsonLd([
+    { name: "Home", url: "/" },
+    { name: "Solutions", url: "/solutions" },
+  ]);
+
   return (
-    <>
-      <SolutionsHero />
-      <CapabilitySuite />
-      <DashboardWalkthrough />
-      <InteropGovernance />
+    <div className="pt-20 md:pt-24 space-y-0">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <MonitoringInPractice />
-      <SolutionsCTA />
-    </>
+      <StripeGridWrapper>
+        <GridRow striped>
+          <CrossLine dashed />
+          <CapabilitySuite />
+        </GridRow>
+        
+        <GridRow striped={false}>
+          <CrossLine />
+          <InteropGovernance />
+        </GridRow>
+      </StripeGridWrapper>
+
+    </div>
   );
 }

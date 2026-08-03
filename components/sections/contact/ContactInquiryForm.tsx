@@ -22,22 +22,14 @@ import {
   type ContactInquiryType,
 } from "@/content/contact";
 
-const INQUIRY_COLORS: Record<ContactInquiryType, string> = {
-  "Product walkthrough": "#4F6BFF",
-  "Deployment review": "#28D7B5",
-  "Teaching hospital / research": "#7C5CFF",
-  "Partnership": "#49C6FF",
-  "Other": "#64748B",
-};
-
 const fieldShellClass =
-  "group relative overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.04] transition-all duration-200 focus-within:border-brand-400/50 focus-within:bg-white/[0.06] focus-within:shadow-[0_0_0_3px_rgba(79,107,255,0.10)]";
+  "group relative overflow-hidden rounded-xl border border-border bg-bg transition-all duration-200 focus-within:border-accent focus-within:bg-white focus-within:ring-2 focus-within:ring-accent/10 dark:border-night-edge dark:bg-night dark:focus-within:border-accent dark:focus-within:bg-night-panel";
 
 const inputClass =
-  "h-12 w-full bg-transparent pl-11 pr-4 text-[0.92rem] text-frost outline-none placeholder:text-white/28";
+  "h-11 w-full bg-transparent pl-10 pr-4 text-[0.875rem] text-fg outline-none placeholder:text-fg-subtle dark:text-frost dark:placeholder:text-frost-muted";
 
 const textareaClass =
-  "min-h-[130px] w-full resize-none bg-transparent pl-11 pr-4 pt-4 text-[0.92rem] text-frost outline-none placeholder:text-white/28";
+  "min-h-[120px] w-full resize-none bg-transparent pl-10 pr-4 pt-3 text-[0.875rem] text-fg outline-none placeholder:text-fg-subtle dark:text-frost dark:placeholder:text-frost-muted";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error" | "rate-limited";
 
@@ -134,19 +126,15 @@ export function ContactInquiryForm() {
     }
   }
 
-  const activeColor = INQUIRY_COLORS[selectedInquiryType];
-
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="mt-6">
-
-      {/* ── Inquiry type selector ── */}
+    <form ref={formRef} onSubmit={handleSubmit} className="mt-4">
+      {/* Inquiry type selector - Neutral + Forest Green Single Accent */}
       <div className="mb-5">
-        <div className="mb-2.5 font-mono text-[8.5px] uppercase tracking-[0.20em] text-white/22">
-          Inquiry type
-        </div>
+        <span className="mb-2 block text-[0.72rem] font-semibold text-fg-subtle dark:text-frost-muted">
+          Inquiry Type
+        </span>
         <div className="flex flex-wrap gap-2">
           {contactInquiryTypes.map((type) => {
-            const color = INQUIRY_COLORS[type];
             const isActive = selectedInquiryType === type;
             return (
               <button
@@ -154,20 +142,12 @@ export function ContactInquiryForm() {
                 type="button"
                 onClick={() => setSelectedInquiryType(type)}
                 aria-pressed={isActive}
-                className="rounded-full border px-3 py-1.5 text-[0.72rem] font-medium transition-all duration-150"
-                style={
+                className={cn(
+                  "rounded-md border px-3 py-1.5 text-[0.78rem] font-medium transition-all duration-150",
                   isActive
-                    ? {
-                        background: color + "22",
-                        borderColor: color + "55",
-                        color: color,
-                      }
-                    : {
-                        background: "rgba(255,255,255,0.03)",
-                        borderColor: "rgba(255,255,255,0.08)",
-                        color: "rgba(255,255,255,0.40)",
-                      }
-                }
+                    ? "border-accent bg-accent/10 text-accent font-semibold"
+                    : "border-border bg-bg text-fg-muted hover:border-fg-subtle dark:border-night-edge dark:bg-night dark:text-frost-muted"
+                )}
               >
                 {type}
               </button>
@@ -176,34 +156,8 @@ export function ContactInquiryForm() {
         </div>
       </div>
 
-      {/* ── Active type indicator strip ── */}
-      <div
-        className="mb-5 flex items-center gap-2.5 rounded-xl border px-4 py-2.5"
-        style={{
-          borderColor: activeColor + "28",
-          background: activeColor + "0C",
-        }}
-      >
-        <span
-          className="h-1.5 w-1.5 rounded-full"
-          style={{ background: activeColor }}
-        />
-        <span className="font-mono text-[0.65rem] text-white/38">
-          Routing as
-        </span>
-        <span
-          className="font-mono text-[0.68rem] font-semibold"
-          style={{ color: activeColor }}
-        >
-          {selectedInquiryType}
-        </span>
-        <span className="ml-auto font-mono text-[0.62rem] text-white/28">
-          via {CONTACT_EMAIL}
-        </span>
-      </div>
-
-      {/* ── Fields ── */}
-      <div className="grid gap-3.5 md:grid-cols-2">
+      {/* Fields */}
+      <div className="grid gap-4 md:grid-cols-2">
         <TextField
           icon="user"
           label={contactForm.labels.fullName}
@@ -235,8 +189,8 @@ export function ContactInquiryForm() {
         />
 
         <div className="block">
-          <FieldLabel icon="phone" label={contactForm.labels.phone} />
-          <div className="mt-2 grid grid-cols-[172px_1fr] gap-3">
+          <FieldLabel label={contactForm.labels.phone} />
+          <div className="mt-1.5 grid grid-cols-[140px_1fr] gap-2">
             <div ref={countryPickerRef} className="relative">
               <input type="hidden" name="countryCode" value={selectedCountry.dialCode} />
               <button
@@ -244,101 +198,67 @@ export function ContactInquiryForm() {
                 onClick={() => setCountryMenuOpen((open) => !open)}
                 className={cn(
                   fieldShellClass,
-                  "flex h-12 w-full items-center justify-between px-3.5 text-left"
+                  "flex h-11 w-full items-center justify-between px-3 text-left"
                 )}
                 aria-label="Select country calling code"
                 aria-haspopup="listbox"
                 aria-expanded={countryMenuOpen}
               >
-                <span className="flex min-w-0 items-center gap-2.5">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-500/[0.12] text-brand-400">
-                    <Icon name="globe" className="h-3.5 w-3.5" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-[0.84rem] font-semibold text-frost">
-                      {selectedCountry.dialCode}
-                    </span>
-                    <span className="block truncate font-mono text-[0.60rem] uppercase tracking-[0.14em] text-white/30">
-                      {selectedCountry.iso2}
-                    </span>
+                <span className="flex items-center gap-1.5 min-w-0">
+                  <Icon name="globe" className="h-3.5 w-3.5 flex-none text-fg-subtle dark:text-frost-muted" />
+                  <span className="text-[0.8125rem] font-semibold text-fg dark:text-frost">
+                    {selectedCountry.dialCode}
                   </span>
                 </span>
                 <Icon
                   name="chevron-down"
                   className={cn(
-                    "h-4 w-4 text-white/30 transition-transform duration-200",
+                    "h-3.5 w-3.5 text-fg-subtle transition-transform duration-200 dark:text-frost-muted",
                     countryMenuOpen && "rotate-180"
                   )}
                 />
               </button>
 
               {countryMenuOpen && (
-                <div className="absolute left-0 top-[calc(100%+0.5rem)] z-30 w-[min(340px,calc(100vw-3rem))] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#081020] shadow-[0_20px_60px_-20px_rgba(0,0,0,0.72)]">
-                  <div className="border-b border-white/[0.07] p-3">
-                    <div className={fieldShellClass}>
-                      <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/28 transition-colors duration-200 group-focus-within:text-brand-400">
-                        <Icon name="search" className="h-4 w-4" />
-                      </div>
-                      <input
-                        type="text"
-                        autoFocus
-                        value={countrySearch}
-                        onChange={(e) => setCountrySearch(e.target.value)}
-                        placeholder="Search country or code"
-                        aria-label="Search country calling code"
-                        className={cn(inputClass, "h-11 text-[0.86rem]")}
-                      />
-                    </div>
+                <div className="absolute left-0 top-[calc(100%+0.5rem)] z-30 w-[260px] overflow-hidden rounded-xl border border-border bg-white shadow-lg dark:border-night-edge dark:bg-night-panel">
+                  <div className="border-b border-border p-2 dark:border-night-edge">
+                    <input
+                      type="text"
+                      autoFocus
+                      value={countrySearch}
+                      onChange={(e) => setCountrySearch(e.target.value)}
+                      placeholder="Search country..."
+                      className="w-full rounded-md border border-border bg-bg px-2.5 py-1.5 text-[0.8rem] text-fg outline-none dark:border-night-edge dark:bg-night dark:text-frost"
+                    />
                   </div>
-                  <div
-                    className="max-h-64 overflow-y-auto py-2"
-                    role="listbox"
-                    aria-label="Country calling codes"
-                  >
-                    {filteredCountries.length > 0 ? (
-                      filteredCountries.map((country) => (
-                        <button
-                          key={`${country.iso2}-${country.dialCode}`}
-                          type="button"
-                          onClick={() => {
-                            setSelectedCountryIso(country.iso2);
-                            setCountryMenuOpen(false);
-                            setCountrySearch("");
-                          }}
-                          role="option"
-                          aria-selected={selectedCountryIso === country.iso2}
-                          className={cn(
-                            "flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors duration-150",
-                            selectedCountryIso === country.iso2
-                              ? "bg-brand-500/[0.12] text-cyan-300"
-                              : "hover:bg-white/[0.04]"
-                          )}
-                        >
-                          <span className="min-w-0">
-                            <span className="block truncate text-[0.88rem] font-medium text-frost">
-                              {country.name}
-                            </span>
-                            <span className="block font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white/30">
-                              {country.iso2}
-                            </span>
-                          </span>
-                          <span className="shrink-0 rounded-full border border-white/[0.08] bg-white/[0.04] px-2.5 py-0.5 font-mono text-[0.72rem] font-semibold text-white/50">
-                            {country.dialCode}
-                          </span>
-                        </button>
-                      ))
-                    ) : (
-                      <div className="px-4 py-6 text-center text-[0.82rem] text-white/38">
-                        No countries found.
-                      </div>
-                    )}
+                  <div className="max-h-52 overflow-y-auto py-1" role="listbox">
+                    {filteredCountries.map((country) => (
+                      <button
+                        key={`${country.iso2}-${country.dialCode}`}
+                        type="button"
+                        onClick={() => {
+                          setSelectedCountryIso(country.iso2);
+                          setCountryMenuOpen(false);
+                          setCountrySearch("");
+                        }}
+                        className={cn(
+                          "flex w-full items-center justify-between px-3 py-2 text-left text-[0.8rem] transition-colors",
+                          selectedCountryIso === country.iso2
+                            ? "bg-accent/10 font-semibold text-accent"
+                            : "hover:bg-bg dark:hover:bg-night"
+                        )}
+                      >
+                        <span className="truncate text-fg dark:text-frost">{country.name}</span>
+                        <span className="font-mono text-[0.75rem] text-fg-subtle dark:text-frost-muted">{country.dialCode}</span>
+                      </button>
+                    ))}
                   </div>
                 </div>
               )}
             </div>
 
             <div className={fieldShellClass}>
-              <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/28 transition-colors duration-200 group-focus-within:text-brand-400">
+              <div className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-subtle transition-colors group-focus-within:text-accent dark:text-frost-muted">
                 <Icon name="phone" className="h-4 w-4" />
               </div>
               <input
@@ -364,40 +284,33 @@ export function ContactInquiryForm() {
       </div>
 
       {/* Consent */}
-      <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3.5 transition hover:bg-white/[0.04]">
+      <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-bg p-3.5 transition hover:border-fg-subtle dark:border-night-edge dark:bg-night">
         <input
           name="consent"
           type="checkbox"
           required
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/[0.20] bg-transparent accent-brand-500"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-accent"
         />
-        <span className="text-[0.75rem] leading-relaxed text-white/45">
+        <span className="text-[0.78rem] leading-relaxed text-fg-muted dark:text-frost-muted">
           {contactForm.consentLabel}
         </span>
       </label>
 
-      {/* Submit */}
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] pt-5">
+      {/* Submit Action */}
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5 dark:border-night-edge">
         <Button
           type="submit"
-          variant="glow"
+          variant="primary"
           size="lg"
-          trailingIcon
           disabled={submitStatus === "submitting"}
+          className="w-full sm:w-auto"
         >
-          {submitStatus === "submitting" ? (
-            <span className="flex items-center gap-2">
-              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-              Sending…
-            </span>
-          ) : (
-            contactForm.submitLabel
-          )}
+          {submitStatus === "submitting" ? "Sending..." : contactForm.submitLabel}
         </Button>
-        <div className="flex flex-wrap gap-4 text-[0.76rem]">
+        <div className="flex gap-4 text-[0.78rem]">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="text-white/40 underline-offset-4 transition hover:text-white/65 hover:underline"
+            className="text-fg-subtle transition-colors hover:text-accent dark:text-frost-muted"
           >
             Email directly
           </a>
@@ -405,42 +318,33 @@ export function ContactInquiryForm() {
             href={CONTACT_WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
-            className="text-emerald-400/60 underline-offset-4 transition hover:text-emerald-400 hover:underline"
+            className="font-semibold text-accent hover:underline"
           >
-            Continue on WhatsApp
+            Continue on WhatsApp →
           </a>
         </div>
       </div>
 
-      {/* Status feedback */}
+      {/* Feedback message */}
       {submitMessage && (
         <div
-          aria-live="polite"
           className={cn(
-            "mt-4 flex items-start gap-3 rounded-xl border px-4 py-3.5 text-[0.82rem] leading-relaxed transition-all",
-            submitStatus === "success" &&
-              "border-emerald-400/20 bg-emerald-400/[0.06] text-emerald-300",
-            submitStatus === "rate-limited" &&
-              "border-amber-400/20 bg-amber-400/[0.06] text-amber-300",
-            submitStatus === "error" &&
-              "border-red-400/20 bg-red-400/[0.06] text-red-300",
+            "mt-4 rounded-lg border p-3.5 text-[0.82rem] leading-relaxed",
+            submitStatus === "success" && "border-brand-300 bg-brand-50 text-brand-900 dark:border-brand-800 dark:bg-brand-950/40 dark:text-brand-300",
+            submitStatus === "rate-limited" && "border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-300",
+            submitStatus === "error" && "border-red-300 bg-red-50 text-red-900 dark:border-red-800 dark:bg-red-950/40 dark:text-red-300"
           )}
         >
-          <span className="mt-0.5 text-lg leading-none">
-            {submitStatus === "success" && "✓"}
-            {submitStatus === "rate-limited" && "⏳"}
-            {submitStatus === "error" && "✕"}
-          </span>
-          <span>{submitMessage}</span>
+          {submitMessage}
         </div>
       )}
     </form>
   );
 }
 
-function FieldLabel({ label }: { icon?: IconName; label: string }) {
+function FieldLabel({ label }: { label: string }) {
   return (
-    <span className="text-[0.74rem] font-medium text-white/48">{label}</span>
+    <span className="text-[0.78rem] font-medium text-fg dark:text-frost">{label}</span>
   );
 }
 
@@ -455,9 +359,9 @@ function TextField({
 }) {
   return (
     <label className={cn("block", className)}>
-      <FieldLabel icon={icon} label={label} />
-      <div className={cn(fieldShellClass, "mt-2")}>
-        <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/28 transition-colors duration-200 group-focus-within:text-brand-400">
+      <FieldLabel label={label} />
+      <div className={cn(fieldShellClass, "mt-1.5")}>
+        <div className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-subtle transition-colors group-focus-within:text-accent dark:text-frost-muted">
           <Icon name={icon} className="h-4 w-4" />
         </div>
         <input {...props} className={inputClass} />
@@ -477,9 +381,9 @@ function TextAreaField({
 }) {
   return (
     <label className={cn("block", className)}>
-      <FieldLabel icon={icon} label={label} />
-      <div className={cn(fieldShellClass, "mt-2")}>
-        <div className="pointer-events-none absolute left-4 top-4 text-white/28 transition-colors duration-200 group-focus-within:text-brand-400">
+      <FieldLabel label={label} />
+      <div className={cn(fieldShellClass, "mt-1.5")}>
+        <div className="pointer-events-none absolute left-3.5 top-3 text-fg-subtle transition-colors group-focus-within:text-accent dark:text-frost-muted">
           <Icon name={icon} className="h-4 w-4" />
         </div>
         <textarea {...props} className={textareaClass} />

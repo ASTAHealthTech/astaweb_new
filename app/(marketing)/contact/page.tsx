@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ContactHero } from "@/components/sections/contact/ContactHero";
 import { ContactMainSection } from "@/components/sections/contact/ContactMainSection";
+import { StripeGridWrapper } from "@/components/layout/StripeGridWrapper";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -18,9 +18,10 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function ContactPage() {
   return (
-    <>
-      <ContactHero />
-      <ContactMainSection />
-    </>
+    <div className="pt-20 md:pt-24 space-y-0">
+      <StripeGridWrapper>
+        <ContactMainSection />
+      </StripeGridWrapper>
+    </div>
   );
 }

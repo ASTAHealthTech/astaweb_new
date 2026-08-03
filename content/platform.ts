@@ -4,9 +4,9 @@ import { ROUTES } from "@/lib/constants";
 export const platformHero = {
   eyebrow: "Platform",
   headline: "The intelligence layer behind",
-  headlineAccent: "smart wards.",
-  sub: "A device-agnostic clinical intelligence stack that reads any bedside monitor, structures vitals in real time, reasons over physiology, and turns those signals into evidence-linked clinical action.",
-  primaryCta: { label: "Request a platform walkthrough", href: ROUTES.demo },
+  headlineAccent: "clinical intelligence.",
+  sub: "A device-agnostic clinical intelligence stack that extracts data from any bedside monitor, structures vitals in real time, reasons over physiology, and turns those signals into evidence-linked clinical action.",
+  primaryCta: { label: "Request a product walkthrough", href: ROUTES.demo },
   secondaryCta: { label: "Explore solutions", href: ROUTES.solutions },
   proofRow: [
     { value: "15+", label: "OEM monitor brands" },
@@ -32,8 +32,8 @@ export const platformStack: {
   footer: string;
 } = {
   eyebrow: "Clinical Intelligence Stack",
-  heading: "Three productized layers. One clinical intelligence system.",
-  sub: "ASTA combines monitor reading, physiological reasoning, and clinical output in one continuous path from signal to bedside action.",
+  heading: "Three productized layers. One powerful clinical AI platform.",
+  sub: "ASTA combines data extraction, physiological reasoning, and clinical output in one continuous path from signal to bedside action, recognized as the best healthcare AI solution for modern data-driven hospitals.",
   layers: [
     {
       icon: "camera",
@@ -78,7 +78,7 @@ export const platformStack: {
       colorTo: "#4F6BFF",
     },
   ],
-  footer: "From monitor reading to reasoning to action, ASTA operates as one clinical intelligence loop.",
+  footer: "From data extraction to reasoning to action, ASTA operates as one clinical intelligence loop.",
 };
 
 export const platformSignalFlow: {
@@ -151,8 +151,8 @@ export const platformVisionLayer: {
   footer: string;
 } = {
   eyebrow: "Computer Vision Layer",
-  heading: "The monitor-reading layer that unlocks deployment.",
-  sub: "ASTA begins on the hospital's existing bedside monitors, so deployment does not wait on proprietary integrations, hardware taps, or a monitor refresh cycle.",
+  heading: "The data-extraction layer that unlocks deployment.",
+  sub: "ASTA extracts from the hospital's existing bedside monitors, so deployment does not wait on proprietary integrations, hardware taps, or a monitor refresh cycle.",
   points: [
     {
       title: "Reads existing bedside monitors",
@@ -172,10 +172,10 @@ export const platformVisionLayer: {
     },
   ],
   metrics: [
-    { value: "15+",   label: "OEM brands",      note: "Device-agnostic monitor coverage",         color: "#4F6BFF" },
-    { value: "98%",   label: "CV accuracy",     note: "Monitor-reading extraction accuracy",       color: "#28D7B5" },
-    { value: "5s",    label: "Capture cadence", note: "Continuous vital capture every 5 seconds",  color: "#49C6FF" },
-    { value: "0",     label: "API dependency",  note: "No API required for monitor reading",        color: "#7C5CFF" },
+    { value: "15+", label: "OEM brands", note: "Device-agnostic monitor coverage", color: "#4F6BFF" },
+    { value: "98%", label: "CV accuracy", note: "Data extraction accuracy", color: "#28D7B5" },
+    { value: "5s", label: "Capture cadence", note: "Continuous vital capture every 5 seconds", color: "#49C6FF" },
+    { value: "0", label: "API dependency", note: "No API required for monitor reading", color: "#7C5CFF" },
   ],
   pipeline: [
     {
@@ -195,7 +195,7 @@ export const platformVisionLayer: {
       body: "Time-stamp and standardize values for downstream reasoning.",
     },
   ],
-  footer: "Vendor-agnostic monitor reading makes ASTA additive to the infrastructure already in place.",
+  footer: "Vendor-agnostic data extraction makes ASTA additive to the infrastructure already in place.",
 };
 
 export const platformReasoningLayer: {
@@ -207,8 +207,8 @@ export const platformReasoningLayer: {
   footer: string;
 } = {
   eyebrow: "PPLM Reasoning Layer",
-  heading: "Physiological reasoning beyond threshold-only monitoring.",
-  sub: "PPLM is what turns monitor reading into clinical intelligence. A 10–20B parameter physiological language model reasons over continuous trajectories and pattern shifts so output reflects deterioration context, not just a line crossing or a static score. Live deployment integration is coming soon.",
+  heading: "Predictive analytics in healthcare beyond threshold-only alerts.",
+  sub: "Our predictive analytics engine is what turns monitor reading into clinical intelligence. A 10–20B parameter physiological language model reasons over continuous trajectories and pattern shifts to prevent patient deterioration early. Live deployment integration is coming soon.",
   pillars: [
     {
       title: "Continuous trajectories",
@@ -250,7 +250,7 @@ export const platformReasoningLayer: {
       highlight: true,
     },
   ],
-  footer: "This is where ASTA moves beyond monitor reading into clinically useful reasoning.",
+  footer: "This is where ASTA moves beyond raw data extraction into clinically useful reasoning.",
 };
 
 export const platformDeploymentArchitecture: {
@@ -268,8 +268,8 @@ export const platformDeploymentArchitecture: {
   footer: string;
 } = {
   eyebrow: "Deployment Architecture",
-  heading: "Designed to fit hospital environments, not rebuild them.",
-  sub: "ASTA fits hospital environments with monitor-facing bedside capture, a controlled processing posture, and interoperable outputs across on-prem, hybrid, or managed cloud deployment.",
+  heading: "Interoperability in healthcare designed to fit your existing monitors.",
+  sub: "ASTA fits hospital environments seamlessly. By operating as a device-agnostic AI layer, we enable continuous clinical intelligence and hospital AI solutions without requiring an expensive monitor fleet replacement.",
   stages: [
     {
       icon: "camera",
@@ -322,7 +322,7 @@ export const platformDeploymentArchitecture: {
       body: "Monitor reading starts without hospital IT integration. Downstream workflow connectivity can be added when the site is ready.",
     },
   ],
-  footer: "Monitor reading starts without hospital IT integration. Workflow and EMR connectivity can be added as later layers, not day-one prerequisites.",
+  footer: "Data extraction starts without hospital IT integration. Workflow and EMR connectivity can be added as later layers, not day-one prerequisites.",
 };
 
 export const platformValidation: {
@@ -335,12 +335,12 @@ export const platformValidation: {
 } = {
   eyebrow: "Validation & Benchmarks",
   heading: "Proof points that stand up to technical review.",
-  sub: "ASTA's public proof stays focused on what serious buyers need to evaluate: monitor-reading accuracy, cross-OEM coverage, training scale, field deployment, and end-to-end latency.",
+  sub: "ASTA's public proof stays focused on what serious buyers need to evaluate: data extraction accuracy, cross-OEM coverage, training scale, field deployment, and end-to-end latency.",
   metrics: [
     {
       value: "98%",
       label: "CV accuracy",
-      note: "Monitor-reading extraction accuracy",
+      note: "Data extraction accuracy",
       color: "#4F6BFF",
     },
     {
@@ -376,9 +376,9 @@ export const platformValidation: {
   ],
   rows: [
     {
-      dimension: "Monitor reading",
+      dimension: "Data extraction",
       proof: "98% CV accuracy across 15+ OEM monitor brands",
-      implication: "Shows cross-device monitor reading rather than one-vendor optimization.",
+      implication: "Shows cross-device data extraction rather than one-vendor optimization.",
     },
     {
       dimension: "Training scale",
@@ -391,13 +391,13 @@ export const platformValidation: {
       implication: "Shows field usage in hospital environments, not just lab validation.",
     },
   ],
-  footer: "For platform evaluation, ASTA leads with monitor-reading accuracy, device breadth, real hospital operation, and low-latency output.",
+  footer: "For platform evaluation, ASTA leads with extraction accuracy, device breadth, real hospital operation, and low-latency output.",
 };
 
 export const platformCta = {
-  eyebrow: "Platform walkthrough",
-  heading: "Review ASTA's platform architecture and deployment fit.",
-  sub: "A focused session with the ASTA platform team covering monitor compatibility, reasoning architecture, deployment posture, and technical fit for your hospital.",
-  primaryCta: { label: "Request a platform walkthrough", href: ROUTES.demo },
+  eyebrow: "Product walkthrough",
+  heading: "Review ASTA's product architecture and deployment fit.",
+  sub: "A focused session with the ASTA product team covering monitor compatibility, reasoning architecture, deployment posture, and technical fit for your hospital.",
+  primaryCta: { label: "Request a product walkthrough", href: ROUTES.demo },
   secondaryCta: { label: "Talk to the ASTA team", href: ROUTES.contact },
 };

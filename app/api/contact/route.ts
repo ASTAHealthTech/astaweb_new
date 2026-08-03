@@ -53,9 +53,18 @@ function validatePayload(body: unknown): { ok: true; data: ContactPayload } | { 
   const inquiryType = String(b.inquiryType ?? "Other").trim();
 
   if (!fullName) return { ok: false, error: "Full name is required." };
+  if (fullName.length > 100) return { ok: false, error: "Full name is too long (max 100 chars)." };
+
   if (!workEmail || !EMAIL_RE.test(workEmail)) return { ok: false, error: "A valid work email is required." };
+  if (workEmail.length > 255) return { ok: false, error: "Email is too long." };
+
   if (!institution) return { ok: false, error: "Hospital / institution is required." };
+  if (institution.length > 150) return { ok: false, error: "Institution name is too long." };
+
+  if (phone && phone.length > 20) return { ok: false, error: "Phone number is too long." };
+
   if (!message) return { ok: false, error: "Message is required." };
+  if (message.length > 5000) return { ok: false, error: "Message is too long (max 5000 chars)." };
 
   return { ok: true, data: { fullName, workEmail, institution, phone, countryCode, message, inquiryType } };
 }
@@ -136,7 +145,7 @@ function composeEmail(data: ContactPayload, ip: string): { subject: string; html
   </div>`;
 
   const text = [
-    `New Contact Inquiry — ${data.inquiryType}`,
+    `New Contact Inquiry: ${data.inquiryType}`,
     ``,
     `Full Name: ${data.fullName}`,
     `Work Email: ${data.workEmail}`,

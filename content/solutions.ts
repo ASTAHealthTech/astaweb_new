@@ -4,8 +4,8 @@ import { ROUTES } from "@/lib/constants";
 export const solutionsHero = {
   eyebrow: "Clinical AI Platform",
   headline: "Clinical intelligence for",
-  headlineAccent: "active wards.",
-  sub: "ASTA reads existing bedside monitors, structures vitals in real time, and drives role-aware escalation across active wards - without a new monitor fleet or monitor-side IT integration.",
+  headlineAccent: "active clinical environments.",
+  sub: "ASTA extracts data from existing bedside monitors, structures vitals in real time, and drives role-aware escalation across active clinical environments - without a new monitor fleet or monitor-side IT integration.",
   primaryCta: { label: "Request a walkthrough", href: ROUTES.demo },
   secondaryCta: { label: "Talk to the team", href: ROUTES.contact },
   proofRow: [
@@ -33,8 +33,8 @@ export const capabilitySuite: {
   comingSoon: { label: string; note: string };
 } = {
   eyebrow: "SAMD Capability Suite",
-  heading: "Three productized modules. One clinical intelligence platform.",
-  sub: "Deploy monitor reading, physiological reasoning, and escalation as one continuous product flow. ASTA starts on the hospital's existing monitor estate, then layers clinical reasoning and escalation on top.",
+  heading: "The best healthcare AI solutions built into three modular products.",
+  sub: "Deploy our clinical AI platform for data extraction, predictive analytics, and automated clinical data streams. ASTA builds on your existing hardware to power true hospital AI solutions.",
   modules: [
     {
       icon: "camera",
@@ -102,8 +102,8 @@ export const dashboardWalkthrough: {
   auditEntries: { time: string; type: "ok" | "info"; msg: string }[];
 } = {
   eyebrow: "Product Experience",
-  heading: "The live ward view for nursing, clinical leadership, and operations.",
-  sub: "One shared product surface for the whole unit: monitored beds, structured vitals, escalation queue, and audit trail in a single ward view.",
+  heading: "The live intelligence view for nursing, clinical leadership, and operations.",
+  sub: "One shared product surface for the whole unit: monitored beds, structured vitals, escalation queue, and audit trail in a single clinical view.",
   wardStats: [
     { label: "Beds monitored", value: "24", color: "#4F6BFF" },
     { label: "Beds on watch", value: "3", color: "#FBBF24" },
@@ -147,12 +147,12 @@ export const dashboardWalkthrough: {
     {
       time: "09:44:12",
       type: "info",
-      msg: "PPLM escalation logged - SpO2 deterioration pattern - B-04 - Ward 3",
+      msg: "PPLM escalation logged - SpO2 deterioration pattern - B-04 - Unit 3",
     },
     {
       time: "09:41:07",
       type: "info",
-      msg: "Ward watchlist updated - B-02 - no escalation triggered",
+      msg: "Unit watchlist updated - B-02 - no escalation triggered",
     },
   ],
 };
@@ -164,8 +164,8 @@ export const interopGovernance: {
   items: { icon: IconName; title: string; body: string; badge: string; color: string }[];
 } = {
   eyebrow: "Interoperability & Governance",
-  heading: "Hospital-ready governance without slowing deployment.",
-  sub: "ASTA is designed for regulated clinical environments with interoperability-ready outputs, hospital-defined controls, and auditable operations from first deployment.",
+  heading: "Seamless interoperability in healthcare without slowing deployment.",
+  sub: "ASTA is designed for regulated clinical environments with FHIR-ready outputs, hospital-defined controls, and secure healthcare technology architecture from your first ward deployment.",
   items: [
     {
       icon: "route",
@@ -225,8 +225,8 @@ export const monitoringInPractice: {
   }[];
 } = {
   eyebrow: "Monitoring in Practice",
-  heading: "How ASTA behaves across ward contexts.",
-  sub: "The same monitor-reading and physiological reasoning stack adapts to the observation pattern, escalation path, and staffing reality of each ward.",
+  heading: "How ASTA behaves across clinical contexts.",
+  sub: "The same data-extraction and physiological reasoning stack adapts to the observation pattern, escalation path, and staffing reality of each clinical unit.",
   scenarios: [
     {
       label: "ICU",
@@ -240,9 +240,9 @@ export const monitoringInPractice: {
       color: "#4F6BFF",
     },
     {
-      label: "General Ward",
-      title: "General ward: broader coverage on the monitors already in place.",
-      body: "ASTA reads the bedside monitors already on the ward, helping nursing teams maintain broader visibility and spot drift earlier without deploying a second monitor system.",
+      label: "General Unit",
+      title: "General unit: broader coverage on the monitors already in place.",
+      body: "ASTA extracts from the bedside monitors already on the unit, helping nursing teams maintain broader visibility and spot drift earlier without deploying a second monitor system.",
       metrics: [
         { label: "Beds per unit", value: "Up to 30+" },
         { label: "Coverage", value: "100% monitored" },
@@ -277,7 +277,7 @@ export const monitoringInPractice: {
 
 export const solutionsCta = {
   eyebrow: "Review deployment fit",
-  heading: "Request a walkthrough of ASTA on your ward setup.",
+  heading: "Request a walkthrough of ASTA in your clinical environment.",
   sub: "Review monitor compatibility, workflow fit, escalation logic, and deployment options with ASTA's clinical and engineering team.",
   primaryCta: { label: "Request a walkthrough", href: ROUTES.demo },
   secondaryCta: { label: "Talk to the team", href: ROUTES.contact },
