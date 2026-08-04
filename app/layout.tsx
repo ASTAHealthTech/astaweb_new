@@ -21,15 +21,9 @@ export const metadata: Metadata = rootMetadata;
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  colorScheme: "dark light",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#FFFFFF" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090B" },
-  ],
+  colorScheme: "light",
+  themeColor: "#FFFFFF",
 };
-
-const themeScript =
-  '!function(){try{var t=localStorage.getItem("asta-theme");t=t==="dark"?"dark":"light";document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add(t)}catch(t){document.documentElement.classList.remove("light","dark"),document.documentElement.classList.add("light")}}();';
 
 export default function RootLayout({
   children,
@@ -43,7 +37,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <script

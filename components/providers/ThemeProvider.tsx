@@ -23,39 +23,23 @@ const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
-
+  // Hardcoded to light mode only
+  const theme: Theme = "light";
+  
   useEffect(() => {
-    const stored = localStorage.getItem("asta-theme") as Theme | null;
-    const initial: Theme = stored === "dark" ? "dark" : "light";
-    applyTheme(initial);
-    setTheme(initial);
+    document.documentElement.classList.remove("dark");
+    document.documentElement.classList.add("light");
   }, []);
 
   const toggle = () => {
-    setTheme((prev) => {
-      const next: Theme = prev === "dark" ? "light" : "dark";
-      applyTheme(next);
-      localStorage.setItem("asta-theme", next);
-      return next;
-    });
+    // No-op to disable dark mode
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggle, isDark: theme === "dark" }}>
+    <ThemeContext.Provider value={{ theme, toggle, isDark: false }}>
       {children}
     </ThemeContext.Provider>
   );
-}
-
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  root.classList.remove("dark", "light");
-  if (theme === "dark") {
-    root.classList.add("dark");
-  } else {
-    root.classList.add("light");
-  }
 }
 
 export const useTheme = () => useContext(ThemeContext);
