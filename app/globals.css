@@ -19,7 +19,6 @@
     background: #F7F6F3;
   }
   .dark body { background: #0F0F0F; color: #F5F5F5; }
-  ::selection { background: rgba(200,43,94,0.15); }
 }
 
 @layer utilities {

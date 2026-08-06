@@ -89,7 +89,7 @@ function VideoSection() {
    ════════════════════════════════════════════════════════════ */
 function MetricsBand() {
   return (
-    <section className="relative py-0">
+    <section className="relative py-0 border-y border-border/60 dark:border-night-edge/60">
       <Container className="py-0">
         <div className="grid grid-cols-1 overflow-hidden sm:grid-cols-3">
           {clinicalAiInAction.metrics.map((m, i) => (
@@ -620,7 +620,7 @@ function OperatingModelSection() {
 function ComplianceStrip() {
   const { heading, quickMetrics } = security;
   return (
-    <section className="relative">
+    <section className="relative border-y border-border/60 dark:border-night-edge/60">
       <Container className="py-0">
         <div className="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between md:py-12">
           <h3 className="max-w-[400px] text-[1.125rem] font-semibold leading-snug text-fg dark:text-frost md:text-[1.375rem]">
@@ -697,7 +697,7 @@ function FounderNote() {
 function TrustBand() {
   const partners = institutionalTrust.items;
   return (
-    <section className="relative">
+    <section className="relative border-y border-border/60 dark:border-night-edge/60">
       <Container className="py-0">
         <div className="relative py-3 text-center">
           <DrawLines horizontal className="bottom-0" />

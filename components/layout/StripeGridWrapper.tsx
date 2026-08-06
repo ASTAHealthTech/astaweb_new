@@ -8,18 +8,18 @@ export function StripeGridWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function GridRow({ children, striped = false }: { children: React.ReactNode; striped?: boolean }) {
+export function GridRow({ children, striped = false, showGrid = false }: { children: React.ReactNode; striped?: boolean; showGrid?: boolean }) {
   return (
-    <div className={`relative w-full ${striped ? 'md:bg-diagonal-stripes' : 'bg-bg dark:bg-night md:bg-transparent'}`}>
-      <div className="mx-auto flex w-full flex-col bg-bg dark:bg-night 
-                      md:w-[calc(100%-2.5rem)] md:max-w-[1280px] md:border-x md:border-border/80 dark:md:border-night-edge/80 md:shadow-sm">
+    <div className={`relative w-full ${striped && showGrid ? 'md:bg-diagonal-stripes' : 'bg-bg dark:bg-night md:bg-transparent'}`}>
+      <div className={`mx-auto flex w-full flex-col bg-bg dark:bg-night md:w-[calc(100%-2.5rem)] md:max-w-[1280px] ${showGrid ? 'md:border-x md:border-border/80 dark:md:border-night-edge/80 md:shadow-sm' : ''}`}>
         {children}
       </div>
     </div>
   );
 }
 
-export function CrossLine({ dashed = false }: { dashed?: boolean }) {
+export function CrossLine({ dashed = false, showGrid = false }: { dashed?: boolean; showGrid?: boolean }) {
+  if (!showGrid) return null;
   return (
     <div className="relative w-full z-0 hidden md:block">
       <div
