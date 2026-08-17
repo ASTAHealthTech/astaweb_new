@@ -259,7 +259,7 @@ export function PartnerForm() {
         </div>
 
         <TextField
-          icon="map"
+          icon="map-pin"
           label={partnerForm.labels.state}
           name="state"
           type="text"
