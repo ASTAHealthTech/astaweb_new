@@ -12,10 +12,10 @@ export function AboutLeadership() {
       <Container>
         <Reveal>
           <div className="text-center">
-            <h2 className="mx-auto max-w-[640px] text-[1.8rem] font-semibold tracking-[-0.03em] text-fg dark:text-frost md:text-[2.375rem]">
+            <h2 className="mx-auto max-w-[700px] text-[1.8rem] font-semibold tracking-[-0.03em] text-fg dark:text-frost md:text-[2.375rem]">
               Leadership designed across medicine, AI, and <span className="text-accent">enterprise execution</span>.
             </h2>
-            <p className="mx-auto mt-3 max-w-[480px] text-[0.9375rem] leading-relaxed text-fg-muted dark:text-frost-muted">
+            <p className="mx-auto mt-3 max-w-[600px] text-[0.9375rem] leading-relaxed text-fg-muted dark:text-frost-muted">
               ASTA is led by a multidisciplinary team combining clinical practice, computer vision engineering, and hospital scaling.
             </p>
           </div>

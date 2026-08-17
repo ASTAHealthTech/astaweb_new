@@ -25,7 +25,7 @@ type ContactChannel = {
   email: string;
 };
 
-export const CONTACT_EMAIL = "info@astahealthtech.com";
+export const CONTACT_EMAIL = "adyanta@astahealthtech.com";
 const CONTACT_PHONE_RAW = "918779404951";
 export const CONTACT_PHONE_DISPLAY = "+91 87794 04951";
 export const CONTACT_PHONE_LINK = `tel:+${CONTACT_PHONE_RAW}`;
@@ -116,7 +116,7 @@ export const contactMain: {
       icon: "mail",
       label: "Email",
       value: CONTACT_EMAIL,
-      href: `mailto:${CONTACT_EMAIL}`,
+      href: `mailto:${CONTACT_EMAIL}?subject=ASTA%20Platform%20Inquiry`,
     },
     {
       icon: "phone",

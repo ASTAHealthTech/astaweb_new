@@ -484,96 +484,27 @@ function FeaturesSection() {
 }
 
 /* ════════════════════════════════════════════════════════════
-   9. INTERACTIVE WARD ROI CALCULATOR
+   9. CHANNEL PARTNER CTA SECTION
    ════════════════════════════════════════════════════════════ */
-function WardRoiSection() {
-  const [beds, setBeds] = useState(25);
-  const [wardType, setWardType] = useState<"general" | "hcu" | "peripheral">("general");
-
-  const hoursMultiplier = wardType === "hcu" ? 18 : wardType === "peripheral" ? 14 : 16;
-  const timeSaved = Math.round(beds * hoursMultiplier);
-  const falseAlarmReduction = wardType === "hcu" ? 74 : 68;
-  const costSavings = (beds * 4200).toLocaleString("en-US");
-
+function ChannelPartnerCtaSection() {
   return (
-    <section className="relative py-20 md:py-28">
-      <Container>
-        <Reveal>
-          <h2 className="mx-auto max-w-[500px] text-center text-[1.75rem] font-semibold leading-[1.15] tracking-[-0.025em] text-fg dark:text-frost md:text-[2.375rem]">
-            Calculate the impact for <span className="text-accent">your ward</span>.
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="mx-auto mt-10 max-w-xl rounded-2xl border border-border bg-white p-6 dark:border-night-edge dark:bg-night-panel md:p-8">
-            <div className="space-y-5">
-              <div>
-                <label className="text-[0.75rem] font-medium text-fg-subtle dark:text-frost-muted">Ward type</label>
-                <div className="mt-2 flex gap-2">
-                  {[
-                    { id: "general" as const, label: "General Ward" },
-                    { id: "hcu" as const, label: "Step-Down / HCU" },
-                    { id: "peripheral" as const, label: "Peripheral" },
-                  ].map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => setWardType(item.id)}
-                      className={`flex-1 rounded-[10px] px-3 py-2 text-[0.8125rem] font-medium transition-all ${wardType === item.id
-                        ? "bg-fg text-white dark:bg-frost dark:text-night"
-                        : "bg-bg text-fg-muted hover:text-fg dark:bg-night-edge dark:text-frost-muted"
-                        }`}
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between">
-                  <label className="text-[0.75rem] font-medium text-fg-subtle dark:text-frost-muted">Monitored beds</label>
-                  <span className="text-[0.9375rem] font-semibold text-fg dark:text-frost">{beds} beds</span>
-                </div>
-                <input
-                  type="range"
-                  min={5}
-                  max={100}
-                  step={5}
-                  value={beds}
-                  onChange={(e) => setBeds(Number(e.target.value))}
-                  className="mt-2 h-1.5 w-full cursor-pointer appearance-none rounded bg-border accent-accent dark:bg-night-edge"
-                />
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-border pt-6 dark:border-night-edge">
-              <div>
-                <div className="text-[1.375rem] font-semibold text-fg dark:text-frost md:text-[1.625rem]">
-                  {timeSaved}<span className="text-[0.72rem] font-normal text-fg-muted"> hrs/mo</span>
-                </div>
-                <div className="text-[0.72rem] text-fg-subtle dark:text-frost-muted">Nursing time saved</div>
-              </div>
-              <div>
-                <div className="text-[1.375rem] font-semibold text-fg dark:text-frost md:text-[1.625rem]">
-                  -{falseAlarmReduction}%
-                </div>
-                <div className="text-[0.72rem] text-fg-subtle dark:text-frost-muted">False alarm drop</div>
-              </div>
-              <div>
-                <div className="text-[1.375rem] font-semibold text-fg dark:text-frost md:text-[1.625rem]">
-                  ${costSavings}
-                </div>
-                <div className="text-[0.72rem] text-fg-subtle dark:text-frost-muted">Fleet capex saved</div>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <Button href="/contact?intent=demo" variant="primary" trailingIcon className="w-full justify-center">
-                Request ward assessment
-              </Button>
-            </div>
+    <section className="relative border-y border-border/60 dark:border-night-edge/60">
+      <Container className="py-0">
+        <div className="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between md:py-12">
+          <div className="max-w-[700px]">
+            <h2 className="text-[1.375rem] font-semibold leading-[1.15] tracking-[-0.025em] text-fg dark:text-frost md:text-[1.75rem]">
+              Become a <span className="text-accent">Channel Partner</span>
+            </h2>
+            <p className="mt-2 text-[0.9375rem] leading-[1.65] text-fg-muted dark:text-frost-muted">
+              We partner with established distributors, system integrators, and healthcare consultants to bring ASTA's clinical AI to new regions and networks.
+            </p>
           </div>
-        </Reveal>
+          <div className="flex-shrink-0">
+            <Button href="/channel-partner" variant="primary" size="lg" trailingIcon>
+              Submit Partnership Proposal
+            </Button>
+          </div>
+        </div>
       </Container>
     </section>
   );
@@ -801,7 +732,7 @@ export default function HomePage() {
 
         <GridRow striped={false}>
           <CrossLine />
-          <WardRoiSection />
+          <ChannelPartnerCtaSection />
         </GridRow>
 
         <GridRow striped>

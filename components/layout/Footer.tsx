@@ -19,6 +19,7 @@ const RESOURCES_LINKS = [
 const COMPANY_LINKS = [
   { label: "About Us", href: ROUTES.about },
   { label: "Careers", href: "/careers" },
+  { label: "Channel Partners", href: "/channel-partner" },
   { label: "Press", href: "/press" },
 ];
 

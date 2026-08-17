@@ -13,14 +13,8 @@ import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 import { countryCallingCodes } from "@/lib/countryCodes";
 import type { IconName } from "@/lib/types";
-import {
-  CONTACT_EMAIL,
-  CONTACT_WHATSAPP_URL,
-  contactForm,
-  contactInquiryTypes,
-  resolveContactInquiryType,
-  type ContactInquiryType,
-} from "@/content/contact";
+import { partnerForm } from "@/content/channel-partner";
+import { CONTACT_EMAIL } from "@/content/contact";
 
 const fieldShellClass =
   "group relative overflow-hidden rounded-xl border border-border bg-bg transition-all duration-200 focus-within:border-accent focus-within:bg-white focus-within:ring-2 focus-within:ring-accent/10 dark:border-night-edge dark:bg-night dark:focus-within:border-accent dark:focus-within:bg-night-panel";
@@ -33,21 +27,14 @@ const textareaClass =
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error" | "rate-limited";
 
-export function ContactInquiryForm() {
+export function PartnerForm() {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
-  const [selectedInquiryType, setSelectedInquiryType] =
-    useState<ContactInquiryType>("Other");
   const [selectedCountryIso, setSelectedCountryIso] = useState("IN");
   const [countrySearch, setCountrySearch] = useState("");
   const [countryMenuOpen, setCountryMenuOpen] = useState(false);
   const countryPickerRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setSelectedInquiryType(resolveContactInquiryType(params.get("intent") ?? undefined));
-  }, []);
 
   useEffect(() => {
     function handlePointerDown(event: MouseEvent) {
@@ -95,12 +82,13 @@ export function ContactInquiryForm() {
       institution: String(formData.get("institution") ?? "").trim(),
       phone: String(formData.get("phone") ?? "").trim(),
       countryCode: selectedCountry.dialCode,
+      country: String(formData.get("country") ?? "").trim(),
+      state: String(formData.get("state") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
-      inquiryType: selectedInquiryType,
     };
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/channel-partner", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -110,7 +98,7 @@ export function ContactInquiryForm() {
 
       if (res.ok) {
         setSubmitStatus("success");
-        setSubmitMessage("Your inquiry has been sent successfully. We'll respond within 24 hours.");
+        setSubmitMessage("Your proposal has been submitted successfully. We'll be in touch soon.");
         formRef.current?.reset();
       } else if (res.status === 429) {
         setSubmitStatus("rate-limited");
@@ -128,68 +116,40 @@ export function ContactInquiryForm() {
 
   return (
     <form ref={formRef} onSubmit={handleSubmit} className="mt-4">
-      {/* Inquiry type selector - Neutral + Forest Green Single Accent */}
-      <div className="mb-5">
-        <span className="mb-2 block text-[0.72rem] font-semibold text-fg-subtle dark:text-frost-muted">
-          Inquiry Type
-        </span>
-        <div className="flex flex-wrap gap-2">
-          {contactInquiryTypes.map((type) => {
-            const isActive = selectedInquiryType === type;
-            return (
-              <button
-                key={type}
-                type="button"
-                onClick={() => setSelectedInquiryType(type)}
-                aria-pressed={isActive}
-                className={cn(
-                  "rounded-md border px-3 py-1.5 text-[0.78rem] font-medium transition-all duration-150",
-                  isActive
-                    ? "border-accent bg-accent/10 text-accent font-semibold"
-                    : "border-border bg-bg text-fg-muted hover:border-fg-subtle dark:border-night-edge dark:bg-night dark:text-frost-muted"
-                )}
-              >
-                {type}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
       {/* Fields */}
       <div className="grid gap-4 md:grid-cols-2">
         <TextField
           icon="user"
-          label={contactForm.labels.fullName}
+          label={partnerForm.labels.fullName}
           name="fullName"
           type="text"
           required
           autoComplete="name"
-          placeholder={contactForm.placeholders.fullName}
+          placeholder={partnerForm.placeholders.fullName}
         />
 
         <TextField
           icon="mail"
-          label={contactForm.labels.workEmail}
+          label={partnerForm.labels.workEmail}
           name="workEmail"
           type="email"
           required
           autoComplete="email"
-          placeholder={contactForm.placeholders.workEmail}
+          placeholder={partnerForm.placeholders.workEmail}
         />
 
         <TextField
           icon="building"
-          label={contactForm.labels.institution}
+          label={partnerForm.labels.institution}
           name="institution"
           type="text"
           required
           autoComplete="organization"
-          placeholder={contactForm.placeholders.institution}
+          placeholder={partnerForm.placeholders.institution}
         />
 
         <div className="block">
-          <FieldLabel label={contactForm.labels.phone} />
+          <FieldLabel label={partnerForm.labels.phone} />
           <div className="mt-1.5 grid grid-cols-[100px_1fr] gap-2">
             <div ref={countryPickerRef} className="relative">
               <input type="hidden" name="countryCode" value={selectedCountry.dialCode} />
@@ -265,20 +225,54 @@ export function ContactInquiryForm() {
                 name="phone"
                 type="tel"
                 autoComplete="tel"
-                aria-label={contactForm.labels.phone}
-                placeholder={contactForm.placeholders.phone}
+                aria-label={partnerForm.labels.phone}
+                placeholder={partnerForm.placeholders.phone}
                 className={inputClass}
               />
             </div>
           </div>
         </div>
 
+        <div className="block">
+          <FieldLabel label={partnerForm.labels.country} />
+          <div className={cn(fieldShellClass, "mt-1.5")}>
+            <div className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-fg-subtle transition-colors group-focus-within:text-accent dark:text-frost-muted">
+              <Icon name="map-pin" className="h-4 w-4" />
+            </div>
+            <select
+              name="country"
+              required
+              className={cn(inputClass, "appearance-none cursor-pointer")}
+              defaultValue=""
+            >
+              <option value="" disabled>{partnerForm.placeholders.country}</option>
+              {countryCallingCodes.map((c) => (
+                <option key={c.iso2} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-fg-subtle">
+              <Icon name="chevron-down" className="h-4 w-4" />
+            </div>
+          </div>
+        </div>
+
+        <TextField
+          icon="map"
+          label={partnerForm.labels.state}
+          name="state"
+          type="text"
+          required
+          placeholder={partnerForm.placeholders.state}
+        />
+
         <TextAreaField
           icon="message-circle"
-          label={contactForm.labels.message}
+          label={partnerForm.labels.message}
           name="message"
           required
-          placeholder={contactForm.placeholders.message}
+          placeholder={partnerForm.placeholders.message}
           className="md:col-span-2"
         />
       </div>
@@ -292,7 +286,7 @@ export function ContactInquiryForm() {
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-accent"
         />
         <span className="text-[0.78rem] leading-relaxed text-fg-muted dark:text-frost-muted">
-          {contactForm.consentLabel}
+          {partnerForm.consentLabel}
         </span>
       </label>
 
@@ -305,22 +299,14 @@ export function ContactInquiryForm() {
           disabled={submitStatus === "submitting"}
           className="w-full sm:w-auto"
         >
-          {submitStatus === "submitting" ? "Sending..." : contactForm.submitLabel}
+          {submitStatus === "submitting" ? "Sending..." : partnerForm.submitLabel}
         </Button>
         <div className="flex gap-4 text-[0.78rem]">
           <a
-            href={`mailto:${CONTACT_EMAIL}?subject=ASTA%20Platform%20Inquiry`}
+            href={`mailto:${CONTACT_EMAIL}?subject=Channel%20Partner%20Inquiry`}
             className="text-fg-subtle transition-colors hover:text-accent dark:text-frost-muted"
           >
             Email directly
-          </a>
-          <a
-            href={CONTACT_WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="font-semibold text-accent hover:underline"
-          >
-            Continue on WhatsApp →
           </a>
         </div>
       </div>
