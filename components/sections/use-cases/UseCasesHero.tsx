@@ -1,132 +1,97 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
-import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
+import { LedgerRow } from "@/components/ui/LedgerRow";
+import { Reveal } from "@/components/ui/Reveal";
 import { useCasesHero } from "@/content/use-cases";
+import { sentenceCase } from "@/lib/motion";
+import { ProductGlass } from "@/components/visual/ProductGlass";
 
 export function UseCasesHero() {
+  const c = useCasesHero;
+
   return (
-    <section
-      data-hero-root
-      className="relative overflow-hidden bg-[#060816] pb-24 pt-36 text-white md:pb-32 md:pt-44"
-    >
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-grid-fine bg-[length:44px_44px] opacity-50" />
-        <div className="absolute left-1/2 top-1/3 h-[620px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/[0.11] blur-[170px]" />
-        <div className="absolute right-[10%] top-1/4 h-[360px] w-[360px] rounded-full bg-violet-500/[0.08] blur-[130px]" />
-        <div className="absolute left-[8%] bottom-1/4 h-[320px] w-[320px] rounded-full bg-cyan-400/[0.06] blur-[110px]" />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 18%, rgba(6,8,22,0.74) 100%)",
-          }}
-        />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-      </div>
-
+    <section className="relative pt-28 md:pt-36">
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-brand-gradient-soft" />
       <Container className="relative">
-        <div className="mx-auto max-w-4xl text-center">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.06] px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-              <Icon name="hospital" className="h-3 w-3 text-cyan-400" />
-              {useCasesHero.eyebrow}
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="block h-px w-6 bg-hairline-strong" />
+              <span className="font-display text-label tnum text-ink-3">01</span>
+              <span className="font-body text-label text-ink-2">{sentenceCase(c.eyebrow)}</span>
             </div>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <h1 className="mt-6 text-balance text-h1 font-semibold leading-[1.06] tracking-[-0.045em] md:text-display">
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(135deg,#F0F4FF 0%,rgba(240,244,255,0.62) 100%)",
-                }}
-              >
-                {useCasesHero.headline}{" "}
-              </span>
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage: "linear-gradient(135deg,#4F6BFF,#7C5CFF 42%,#49C6FF)",
-                }}
-              >
-                {useCasesHero.headlineAccent}
-              </span>
+            <h1 className="mt-5 max-w-[16ch] font-display text-display-1 text-balance text-ink">
+              {c.headline}{" "}
+              <span className="text-gradient-brand animate-gradient-pan">{c.headlineAccent}</span>
             </h1>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <p className="mx-auto mt-5 max-w-3xl text-body-lg leading-relaxed text-frost-muted">
-              {useCasesHero.sub}
+            <p className="mt-5 max-w-measure font-body text-body-lg text-pretty text-ink-2">
+              {c.sub}
             </p>
-          </Reveal>
-
-          <Reveal delay={0.18}>
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Button href={useCasesHero.primaryCta.href} variant="glow" size="xl" trailingIcon>
-                {useCasesHero.primaryCta.label}
-              </Button>
-              <Button href={useCasesHero.secondaryCta.href} variant="outline-white" size="xl">
-                {useCasesHero.secondaryCta.label}
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Button href={c.primaryCta.href}>{c.primaryCta.label}</Button>
+              <Button href={c.secondaryCta.href} variant="secondary">
+                {c.secondaryCta.label}
               </Button>
             </div>
-          </Reveal>
-
-          <Reveal delay={0.22}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2.5">
-              {useCasesHero.microProof.map((item) => (
-                <span
-                  key={item}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-[0.68rem] font-medium text-frost/65"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  {item}
-                </span>
+            {/* microProof — sentence rows, no values */}
+            <div className="mt-10 max-w-measure border-t border-hairline">
+              {c.microProof.map((line) => (
+                <div key={line} className="flex items-center gap-3 border-b border-hairline py-3">
+                  <span aria-hidden className="h-px w-1 shrink-0 bg-ink" />
+                  <span className="font-body text-body text-ink-2">{line}</span>
+                </div>
               ))}
             </div>
-          </Reveal>
-
-          <Reveal delay={0.28}>
-            <div className="relative mt-14 overflow-hidden rounded-2xl border border-white/[0.07]">
-              <div
-                aria-hidden
-                className="absolute inset-x-0 top-0 h-px"
-                style={{
-                  background:
-                    "linear-gradient(to right,transparent,rgba(79,107,255,0.55),rgba(73,198,255,0.35),transparent)",
+          </div>
+          <div className="lg:col-span-5">
+            <div className="mx-auto w-full max-w-[520px]">
+              <ProductGlass
+                priority
+                chip="Live · 7 hospitals"
+                front={{
+                  src: "/product/uc-hospital-graph.webp",
+                  width: 1920,
+                  height: 1663,
+                  alt: "ASTA hospital brain graph: ward nodes orbiting a central hospital node with connection lines to active patients, and tiles reading 2 wards, 25 beds, 16 active patients",
+                  label: "asta workspace — hospital graph",
+                  timestamp: "2 wards · 25 beds",
+                }}
+                back={{
+                  src: "/product/uc-council-brain.webp",
+                  width: 1920,
+                  height: 1708,
+                  label: "council brain",
+                  timestamp: "5 model nodes",
                 }}
               />
-              <div className="grid grid-cols-2 divide-x divide-white/[0.06] sm:grid-cols-4">
-                {useCasesHero.proofRow.map((item, index) => (
-                  <div key={item.label} className="flex flex-col items-center gap-1 px-4 py-6">
-                    <span
-                      className="font-mono text-[1.75rem] font-bold leading-none tracking-[-0.04em]"
-                      style={{
-                        background:
-                          index === 0
-                            ? "linear-gradient(135deg,#4F6BFF,#7C5CFF)"
-                            : index === 1
-                              ? "linear-gradient(135deg,#28D7B5,#49C6FF)"
-                              : index === 2
-                                ? "linear-gradient(135deg,#49C6FF,#4F6BFF)"
-                                : "linear-gradient(135deg,#7C5CFF,#28D7B5)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
-                      }}
-                    >
-                      {item.value}
-                    </span>
-                    <span className="max-w-[11rem] text-center text-[0.72rem] text-white/40">
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
-          </Reveal>
+          </div>
         </div>
+
+        {/* proof row — hairline-topped ledger band */}
+        <Reveal className="mt-16">
+          <div className="grid grid-cols-2 border-t border-hairline md:grid-cols-4 md:divide-x md:divide-hairline">
+            {c.proofRow.map((item, i) => (
+              <div
+                key={item.label}
+                className={
+                  "py-6 md:px-8 md:first:pl-0 md:last:pr-0 " +
+                  (i < 2 ? "max-md:border-b max-md:border-hairline " : "") +
+                  (i % 2 === 1 ? "max-md:pl-6" : "max-md:pr-6")
+                }
+              >
+                <LedgerRow
+                  size="lg"
+                  label={item.label}
+                  value={item.value}
+                  tick={item.value !== "0"}
+                />
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

@@ -16,8 +16,8 @@ import { ROUTES } from "@/lib/constants";
 
 export const hero = {
   eyebrow: "Health Data Intelligence · Any Monitor, Any Ward",
-  headline: "Turn any existing ward into",
-  headlineAccent: "a smart ward.",
+  headline: "Turning vital signs into",
+  headlineAccent: "life-saving intelligence.",
   sub:
     "ASTA reads any bedside monitor, extracts structured vitals continuously, and turns physiological signals into role-aware clinical action, without a new monitor fleet.",
   primaryCta: { label: "Request a demo", href: ROUTES.demo },
@@ -354,16 +354,16 @@ export const security: {
     "ASTA reads LCD display numerics, not patients. No patient imagery is captured or transmitted. Standard monitoring consent applies. DPDP-aligned architecture, ISO 13485-certified quality management, HL7/FHIR-aligned interoperability, role-based access, and full audit trail, with deployment posture under hospital control.",
   quickMetrics: [
     { val: "ISO 13485", label: "Certified", color: "#28D7B5" },
-    { val: "DPDP",      label: "Aligned",   color: "#4F6BFF" },
-    { val: "E2E",       label: "Encryption", color: "#7C5CFF" },
+    { val: "DPDP",      label: "Aligned",   color: "#DE2588" },
+    { val: "E2E",       label: "Encryption", color: "#8A4FE0" },
   ],
   scorecard: [
     { label: "ISO 13485 (Medical device QMS)", score: 100, color: "#28D7B5", statusLabel: "Certified"              },
-    { label: "Consent tracking",               score: 100, color: "#4F6BFF", statusLabel: "Active"                 },
-    { label: "Legal audit trail",              score: 100, color: "#4F6BFF", statusLabel: "Complete"               },
-    { label: "DPDP alignment",                 score:  96, color: "#49C6FF", statusLabel: "Aligned"                },
-    { label: "Data residency control",         score:  94, color: "#7C5CFF", statusLabel: "Institution-controlled" },
-    { label: "HL7/FHIR interoperability",      score:  88, color: "#4F6BFF", statusLabel: "Supported"             },
+    { label: "Consent tracking",               score: 100, color: "#DE2588", statusLabel: "Active"                 },
+    { label: "Legal audit trail",              score: 100, color: "#DE2588", statusLabel: "Complete"               },
+    { label: "DPDP alignment",                 score:  96, color: "#FFAE3F", statusLabel: "Aligned"                },
+    { label: "Data residency control",         score:  94, color: "#8A4FE0", statusLabel: "Institution-controlled" },
+    { label: "HL7/FHIR interoperability",      score:  88, color: "#DE2588", statusLabel: "Supported"             },
     { label: "CDSCO (SaMD registration)",      score:  45, color: "#F59E0B", statusLabel: "In progress"           },
   ],
   proofItems: [

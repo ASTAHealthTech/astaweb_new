@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { ContactHero } from "@/components/sections/contact/ContactHero";
-import { ContactMainSection } from "@/components/sections/contact/ContactMainSection";
+import { ContactSpread } from "@/components/sections/contact/ContactSpread";
+import { ContactProofStrip } from "@/components/sections/contact/ContactProofStrip";
+import { ContactNextSteps } from "@/components/sections/contact/ContactNextSteps";
+import { ContactDetails } from "@/components/sections/contact/ContactDetails";
+import { resolveContactInquiryType } from "@/content/contact";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -16,11 +20,21 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 });
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ intent?: string }>;
+}) {
+  const { intent } = await searchParams;
+  const defaultInquiryType = resolveContactInquiryType(intent);
+
   return (
     <>
       <ContactHero />
-      <ContactMainSection />
+      <ContactSpread defaultInquiryType={defaultInquiryType} />
+      <ContactProofStrip />
+      <ContactNextSteps />
+      <ContactDetails />
     </>
   );
 }

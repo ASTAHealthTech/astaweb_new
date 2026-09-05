@@ -1,135 +1,97 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./Container";
-import { BRAND, ROUTES } from "@/lib/constants";
-import { Icon } from "@/components/ui/Icon";
-import { NewsletterForm } from "@/components/ui/NewsletterForm";
+import { EvidenceChip } from "@/components/ui/Pill";
+import { footerNav } from "@/content/nav";
+import { ROUTES } from "@/lib/constants";
 
-const QUICK_LINKS = [
-  { label: "Solutions",  href: ROUTES.solutions },
-  { label: "Platform",   href: ROUTES.platform },
-  { label: "Use Cases",  href: ROUTES.useCases },
-  { label: "Blog",       href: "/blog" },
-  { label: "About",      href: ROUTES.about },
-  { label: "Careers",    href: "/careers" },
-  { label: "Press",      href: "/press" },
-  { label: "Contact",    href: ROUTES.contact },
-];
-
+/**
+ * Light footer — the dark budget is spent inside pages. Carries the micro
+ * ECG blip (the one perpetual motion in the shared chrome) and the protocol
+ * document's closing note.
+ */
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-black/[0.10] bg-[#040810] text-white dark:border-white/[0.06]">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            "linear-gradient(to right,transparent,rgba(79,107,255,0.28),rgba(40,215,181,0.18),transparent)",
-        }}
-      />
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-20 bottom-0 h-[260px] w-[260px] rounded-full bg-brand-500/[0.05] blur-[100px]" />
-        <div className="absolute -right-10 top-0 h-[200px] w-[200px] rounded-full bg-cyan-400/[0.04] blur-[90px]" />
-      </div>
-
-      <Container className="relative py-10 md:py-12">
-        <div className="grid gap-8 md:grid-cols-[200px_1fr_280px] md:gap-12">
-
-          {/* Brand */}
-          <div className="flex flex-col">
-            <Link href={ROUTES.home} aria-label="ASTA home">
+    <footer className="border-t border-hairline bg-paper">
+      <Container className="py-20 md:py-24">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-12">
+          <div className="col-span-12 md:col-span-4">
+            <Link href={ROUTES.home} aria-label="ASTA Health Tech home" className="inline-block">
               <Image
                 src="/logo/logo-asta.png"
-                alt={BRAND.name}
+                alt="ASTA Health Tech"
                 width={1280}
                 height={723}
-                sizes="108px"
-                className="h-auto w-[108px] brightness-0 invert"
+                sizes="120px"
+                className="h-auto w-[120px] brightness-0 invert"
               />
             </Link>
-            <p className="mt-3 max-w-[178px] text-[0.74rem] leading-relaxed text-white/80">
-              Smart wards on the hospital you already have.
+            <EcgBlip />
+            <p className="mt-4 font-body text-label text-ink-3">
+              Clinical intelligence for active wards.
             </p>
-            <div className="mt-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-emerald-400/15 bg-emerald-400/[0.06] px-2.5 py-1 font-mono text-[0.59rem] uppercase tracking-[0.14em] text-emerald-400/80">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              Platform live · 24/7
-            </div>
+            <p className="mt-1 font-body text-label text-ink-3">
+              © 2026 ASTA Health Tech Corporation
+            </p>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <p className="mb-3.5 font-mono text-[0.58rem] uppercase tracking-[0.20em] text-white/62">
-              Navigate
-            </p>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2.5 sm:grid-cols-4">
-              {QUICK_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[0.78rem] text-white/70 transition-colors duration-150 hover:text-white/92"
-                >
-                  {link.label}
-                </Link>
-              ))}
+          {footerNav.map((group) => (
+            <div key={group.title} className="col-span-6 md:col-span-2">
+              <div className="mb-4 font-body text-label text-ink-3">{group.title}</div>
+              <ul>
+                {group.items.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="block py-1 font-body text-body text-ink-2 decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
 
-          {/* Newsletter */}
-          <div>
-            <p className="mb-3.5 font-mono text-[0.58rem] uppercase tracking-[0.20em] text-white/62">
-              Stay updated
-            </p>
-            <p className="mb-3 text-[0.74rem] leading-snug text-white/80">
-              Clinical AI insights and ASTA deployment updates.
-            </p>
-            <NewsletterForm />
+          <div className="col-span-6 md:col-span-2">
+            <div className="mb-4 font-body text-label text-ink-3">Assurance</div>
+            <div className="flex flex-col items-start gap-2">
+              <EvidenceChip>ISO 13485</EvidenceChip>
+              <EvidenceChip>DPDP-aligned</EvidenceChip>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.05] pt-5">
-          <p className="text-[0.67rem] text-white/68">
-            © {new Date().getFullYear()} ASTA Health Tech Corporation. All rights reserved.
+        <div className="mt-16 flex flex-col gap-3 border-t border-hairline pt-6 md:flex-row md:items-center md:justify-between">
+          <p className="font-body text-label text-ink-3">
+            info@astahealthtech.com · +91 87794 04951 · Koramangala, Bengaluru
           </p>
-          <div className="flex items-center gap-5">
-            <Link
-              href="/privacy"
-              className="text-[0.67rem] text-white/72 transition-colors hover:text-white/92"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-[0.67rem] text-white/72 transition-colors hover:text-white/92"
-            >
-              Terms
-            </Link>
-            <div className="flex items-center gap-2">
-              <a
-                href="https://www.linkedin.com/company/astahealthtech"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="ASTA on LinkedIn"
-                className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/[0.18] bg-white/[0.08] text-white/75 transition-all hover:border-white/[0.28] hover:bg-white/[0.12] hover:text-white"
-              >
-                <Icon name="linkedin" className="h-3.5 w-3.5" />
-              </a>
-              <a
-                href="https://twitter.com/astahealthtech"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="ASTA on X"
-                className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/[0.18] bg-white/[0.08] text-white/75 transition-all hover:border-white/[0.28] hover:bg-white/[0.12] hover:text-white"
-              >
-                <Icon name="twitter" className="h-3.5 w-3.5" />
-              </a>
-            </div>
-          </div>
+          <p className="font-display text-label tnum text-ink-3">— End of document</p>
         </div>
       </Container>
     </footer>
+  );
+}
+
+/** 24×12 single-path ECG blip, drawn then paused — static under reduced motion. */
+function EcgBlip() {
+  return (
+    <svg
+      viewBox="0 0 48 16"
+      className="mt-4 h-4 w-12"
+      fill="none"
+      aria-hidden
+    >
+      <path
+        d="M0 10 H14 L17 7 L19 10 H24 L26 13 L28 2 L30 14 L32 10 H48"
+        stroke="#8B8894"
+        strokeWidth="1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        pathLength={64}
+        strokeDasharray={64}
+        className="animate-ecg-draw"
+      />
+    </svg>
   );
 }

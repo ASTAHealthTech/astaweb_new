@@ -1,223 +1,127 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * "The Clinical Ledger" token sheet.
+ * One accent (ASTA Magenta, sampled from the logo cross), one border color,
+ * paper-white ground, one dark instrument-panel palette. No other color
+ * utilities are sanctioned — lint greps for raw hex in components.
+ */
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./content/**/*.{ts,tsx}",
   ],
-  darkMode: "class",
   theme: {
-    container: {
-      center: true,
-      padding: { DEFAULT: "1.25rem", sm: "1.5rem", md: "2.5rem", lg: "3.5rem" },
-      screens: { "2xl": "1280px" },
-    },
     extend: {
       colors: {
-        canvas: "#F4F7FF",
-        surface: "#FFFFFF",
-        mist: "#EDF2FF",
+        // Dark brand theme — the ground is deep warm aubergine (the logo's
+        // violet taken to near-black); light comes from the brand gradient.
+        paper: "#0C0812",
+        surface: "#150F1E",
+        ink: "#F6F2F8",
+        "ink-2": "#ABA1B8",
+        "ink-3": "#7C7189",
+        hairline: "rgba(246,242,248,0.09)",
+        "hairline-strong": "rgba(246,242,248,0.2)",
+        well: "#1D1528",
 
-        night: {
-          deep: "#060816",
-          mid: "#080E1E",
-          edge: "#0D1425",
-          panel: "#101728",
-        },
+        // The logo trio — amber / magenta / violet
+        amber: "#F09030",
+        accent: "#DE2588",
+        "accent-hover": "#F03A9C",
+        "accent-ink": "#FFFFFF",
+        violet: "#8A4FE0",
 
-        ink: {
-          DEFAULT: "#0A1628",
-          muted: "#4E6080",
-          subtle: "#7A92B0",
-        },
-        frost: {
-          DEFAULT: "#F0F4FF",
-          muted: "rgba(240,244,255,0.62)",
-          subtle: "rgba(240,244,255,0.35)",
-          faint: "rgba(240,244,255,0.18)",
-        },
+        // deepest bands (former instrument panels — now near-black contrast)
+        panel: "#060409",
+        "panel-surface": "#100A17",
+        "panel-surface-hover": "#170F21",
+        "panel-ink": "#F2F1ED",
+        "panel-ink-2": "rgba(242,241,237,0.62)",
+        "panel-ink-3": "rgba(242,241,237,0.42)",
+        "panel-hairline": "rgba(242,241,237,0.12)",
+        "panel-hairline-strong": "rgba(242,241,237,0.24)",
 
-        brand: {
-          50: "#EEF2FF",
-          100: "#E0E7FF",
-          200: "#C7D2FE",
-          300: "#A5B4FC",
-          400: "#818CF8",
-          500: "#4F6BFF",
-          600: "#3D54E8",
-          700: "#2D3FD4",
-          800: "#1E2EB0",
-          900: "#111E8A",
-        },
-
-        violet: {
-          300: "#C4B5FD",
-          400: "#A78BFA",
-          500: "#7C5CFF",
-          600: "#6D3AE8",
-        },
-        cyan: {
-          200: "#A5F3FC",
-          300: "#67E8F9",
-          400: "#49C6FF",
-          500: "#06B6D4",
-        },
-        teal: {
-          300: "#5EEAD4",
-          400: "#28D7B5",
-          500: "#14B8A6",
-        },
-
-        success: "#12B981",
-        warning: "#F59E0B",
-        critical: "#EF4444",
-
-        line: {
-          DEFAULT: "#E2E9F8",
-          soft: "#EEF3FF",
-          dark: "rgba(255,255,255,0.07)",
-          "dark-md": "rgba(255,255,255,0.12)",
-          "dark-lg": "rgba(255,255,255,0.18)",
-        },
-      },
-
-      fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "serif"],
-        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
-      },
-
-      fontSize: {
-        eyebrow: ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0.16em", fontWeight: "600" }],
-        label: ["0.8125rem", { lineHeight: "1.25rem", fontWeight: "500" }],
-        body: ["0.9375rem", { lineHeight: "1.7rem" }],
-        "body-lg": ["1.0625rem", { lineHeight: "1.8rem" }],
-        h4: ["1.125rem", { lineHeight: "1.5rem", fontWeight: "600", letterSpacing: "-0.018em" }],
-        h3: ["1.3125rem", { lineHeight: "1.75rem", fontWeight: "600", letterSpacing: "-0.02em" }],
-        h2: ["2rem", { lineHeight: "2.4rem", fontWeight: "600", letterSpacing: "-0.03em" }],
-        "h2-lg": ["2.625rem", { lineHeight: "3.1rem", fontWeight: "600", letterSpacing: "-0.035em" }],
-        h1: ["3.25rem", { lineHeight: "3.5rem", fontWeight: "600", letterSpacing: "-0.04em" }],
-        display: ["4.25rem", { lineHeight: "4.5rem", fontWeight: "600", letterSpacing: "-0.045em" }],
-        "display-xl": ["5.75rem", { lineHeight: "6rem", fontWeight: "600", letterSpacing: "-0.05em" }],
-      },
-
-      borderRadius: {
-        sm: "6px",
-        md: "10px",
-        lg: "14px",
-        xl: "20px",
-        "2xl": "28px",
-        "3xl": "40px",
-      },
-
-      boxShadow: {
-        xs: "0 1px 2px rgba(10,22,40,0.04), 0 0 0 1px rgba(10,22,40,0.04)",
-        sm: "0 2px 8px rgba(10,22,40,0.06), 0 0 0 1px rgba(10,22,40,0.05)",
-        md: "0 8px 28px -6px rgba(10,22,40,0.12), 0 0 0 1px rgba(10,22,40,0.06)",
-        lg: "0 24px 56px -16px rgba(10,22,40,0.20)",
-        xl: "0 40px 80px -24px rgba(10,22,40,0.28)",
-        "glass-sm": "0 4px 16px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2)",
-        "glass-md": "0 12px 40px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3)",
-        "glass-lg": "0 32px 80px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.35)",
-        "glow-brand": "0 0 48px rgba(79,107,255,0.4), 0 0 120px rgba(79,107,255,0.18)",
-        "glow-violet": "0 0 48px rgba(124,92,255,0.4), 0 0 120px rgba(124,92,255,0.18)",
-        "glow-cyan": "0 0 40px rgba(73,198,255,0.35), 0 0 100px rgba(73,198,255,0.14)",
-        "glow-teal": "0 0 32px rgba(40,215,181,0.35), 0 0 80px rgba(40,215,181,0.14)",
+        // status — inside simulated dashboards / audit logs ONLY
+        ok: "#34D399",
+        watch: "#F0B429",
+        alarm: "#F0564A",
       },
 
       backgroundImage: {
-        "hero-glow":
-          "radial-gradient(ellipse 80% 70% at 20% 30%, rgba(124,92,255,0.20) 0%, rgba(79,107,255,0.14) 35%, transparent 65%), radial-gradient(ellipse 60% 60% at 75% 65%, rgba(73,198,255,0.12) 0%, transparent 60%)",
-        "section-glow-violet":
-          "radial-gradient(ellipse 60% 60% at 30% 30%, rgba(124,92,255,0.14) 0%, transparent 65%), radial-gradient(ellipse 40% 50% at 80% 70%, rgba(79,107,255,0.10) 0%, transparent 60%)",
-        "section-glow-teal":
-          "radial-gradient(ellipse 55% 55% at 70% 30%, rgba(73,198,255,0.10) 0%, transparent 60%), radial-gradient(ellipse 45% 45% at 20% 70%, rgba(40,215,181,0.08) 0%, transparent 60%)",
-        "cta-glow":
-          "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(79,107,255,0.20) 0%, rgba(124,92,255,0.15) 30%, transparent 70%)",
-        "grid-fine":
-          "linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px), linear-gradient(to right, rgba(255,255,255,0.028) 1px, transparent 1px)",
-        "grid-light":
-          "linear-gradient(rgba(10,22,40,0.04) 1px, transparent 1px), linear-gradient(to right, rgba(10,22,40,0.04) 1px, transparent 1px)",
-        "ai-halo":
-          "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,107,255,0.10) 0%, rgba(124,92,255,0.06) 45%, transparent 70%)",
-        "brand-gradient":
-          "linear-gradient(135deg, #4F6BFF 0%, #7C5CFF 55%, #49C6FF 100%)",
-        "electric-gradient":
-          "linear-gradient(125deg, #4F6BFF 0%, #7C5CFF 100%)",
-        "teal-gradient":
-          "linear-gradient(90deg, #28D7B5 0%, #49C6FF 100%)",
-        "cap-gradient-1":
-          "radial-gradient(ellipse 80% 80% at 100% 0%, rgba(79,107,255,0.15) 0%, transparent 60%)",
-        "cap-gradient-2":
-          "radial-gradient(ellipse 80% 80% at 0% 100%, rgba(40,215,181,0.12) 0%, transparent 60%)",
-        "cap-gradient-3":
-          "radial-gradient(ellipse 70% 70% at 50% 0%, rgba(124,92,255,0.12) 0%, transparent 60%)",
+        "brand-gradient": "linear-gradient(110deg, #F09030 0%, #DE2588 48%, #8A4FE0 100%)",
+        "brand-gradient-soft":
+          "radial-gradient(ellipse 70% 60% at 50% 40%, rgba(222,37,136,0.16) 0%, rgba(138,79,224,0.10) 45%, transparent 70%)",
+      },
+
+      fontFamily: {
+        display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
+        body: ["var(--font-body)", "ui-sans-serif", "system-ui"],
+        machine: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+      },
+
+      fontSize: {
+        "display-1": ["clamp(3rem, 7.5vw, 6.5rem)", { lineHeight: "1.02", letterSpacing: "-0.03em", fontWeight: "500" }],
+        "display-2": ["clamp(2.25rem, 4.5vw, 3.75rem)", { lineHeight: "1.08", letterSpacing: "-0.025em", fontWeight: "500" }],
+        title: ["1.5rem", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "500" }],
+        "title-sm": ["1.25rem", { lineHeight: "1.35", letterSpacing: "-0.01em", fontWeight: "500" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.65" }],
+        body: ["1rem", { lineHeight: "1.6" }],
+        label: ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.01em", fontWeight: "500" }],
+        "stat-lg": ["clamp(2.5rem, 4vw, 4.5rem)", { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "500" }],
+        stat: ["1rem", { lineHeight: "1.4", fontWeight: "500" }],
+        machine: ["0.75rem", { lineHeight: "1.7" }],
+      },
+
+      borderRadius: {
+        card: "4px",
+        pill: "999px",
+      },
+
+      boxShadow: {
+        "card-hover": "0 16px 48px rgba(222,37,136,0.10), 0 6px 20px rgba(0,0,0,0.55)",
+        "glow-brand": "0 0 44px rgba(222,37,136,0.35), 0 0 110px rgba(138,79,224,0.18)",
+      },
+
+      spacing: {
+        section: "clamp(5rem, 12vw, 10rem)",
+        "section-sm": "clamp(4rem, 8vw, 8rem)",
+      },
+
+      maxWidth: {
+        measure: "62ch",
+        "measure-hero": "14ch",
       },
 
       transitionTimingFunction: {
-        premium: "cubic-bezier(0.22, 1, 0.36, 1)",
-        snap: "cubic-bezier(0.4, 0.0, 0.2, 1)",
-      },
-
-      animation: {
-        "orb-cw": "orb-rotate-cw 32s linear infinite",
-        "orb-ccw": "orb-rotate-ccw 22s linear infinite",
-        "orb-ccw-slow": "orb-rotate-ccw 48s linear infinite",
-        "pulse-ring-1": "pulse-ring 2.5s cubic-bezier(0,0,0.2,1) infinite",
-        "pulse-ring-2": "pulse-ring 2.5s cubic-bezier(0,0,0.2,1) 0.85s infinite",
-        "sphere-breathe": "sphere-breathe 5s ease-in-out infinite",
-        "float-1": "float-gentle 7s ease-in-out infinite",
-        "float-2": "float-gentle 7s ease-in-out 1.8s infinite",
-        "float-3": "float-gentle-2 9s ease-in-out 0.9s infinite",
-        "scan-sweep": "scan-sweep 8s linear infinite",
-        "ecg-draw": "ecg-trace 1.4s ease-out forwards",
-        "data-pulse": "data-pulse 3s ease-in-out infinite",
-        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
-        shimmer: "shimmer 2.5s ease-in-out infinite",
+        rule: "cubic-bezier(0.22, 1, 0.36, 1)",
       },
 
       keyframes: {
-        "orb-rotate-cw": { to: { transform: "rotate(360deg)" } },
-        "orb-rotate-ccw": { to: { transform: "rotate(-360deg)" } },
-        "pulse-ring": {
-          "0%": { transform: "scale(1)", opacity: "0.7" },
-          "100%": { transform: "scale(2.4)", opacity: "0" },
+        "live-ping": {
+          "0%": { opacity: "0.8", transform: "scale(1)" },
+          "100%": { opacity: "0", transform: "scale(2.5)" },
         },
-        "sphere-breathe": {
-          "0%,100%": { transform: "scale(1)", filter: "brightness(1)" },
-          "50%": { transform: "scale(1.02)", filter: "brightness(1.06)" },
+        "ecg-draw": {
+          "0%": { strokeDashoffset: "64" },
+          "44%": { strokeDashoffset: "0" },
+          "100%": { strokeDashoffset: "0" },
         },
-        "float-gentle": {
-          "0%,100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-8px)" },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
-        "float-gentle-2": {
-          "0%,100%": { transform: "translateY(0) translateX(0)" },
-          "33%": { transform: "translateY(-7px) translateX(4px)" },
-          "66%": { transform: "translateY(4px) translateX(-3px)" },
+        "gradient-pan": {
+          "0%,100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
         },
-        "scan-sweep": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
-        },
-        "ecg-trace": {
-          "0%": { strokeDashoffset: "700", opacity: "0" },
-          "5%": { opacity: "1" },
-          "100%": { strokeDashoffset: "0", opacity: "1" },
-        },
-        "data-pulse": {
-          "0%,100%": { opacity: "0.5", transform: "scale(1)" },
-          "50%": { opacity: "1", transform: "scale(1.07)" },
-        },
-        "glow-pulse": {
-          "0%,100%": { opacity: "0.6" },
-          "50%": { opacity: "1" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: " 200% 0" },
-        },
+      },
+      animation: {
+        "live-ping": "live-ping 2.5s cubic-bezier(0, 0, 0.2, 1) infinite",
+        "ecg-draw": "ecg-draw 5.4s linear infinite",
+        marquee: "marquee 42s linear infinite",
+        "gradient-pan": "gradient-pan 8s ease-in-out infinite",
       },
     },
   },

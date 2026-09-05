@@ -52,8 +52,8 @@ const leadershipMembers: Person[] = [
       "Dr. Vikram brings 15+ years of enterprise product and engineering experience, including AI-led work across Microsoft environments such as M365 and Azure.",
     contribution:
       "He sets the bar for product rigor, platform thinking, and the operating discipline required for hospital-grade software.",
-    accent: "#4F6BFF",
-    accentTo: "#7C5CFF",
+    accent: "#DE2588",
+    accentTo: "#8A4FE0",
   },
   {
     name: "Dr. Kumaresh Krishnamoorthy",
@@ -68,7 +68,7 @@ const leadershipMembers: Person[] = [
     contribution:
       "He defines the clinical relevance of what ASTA builds and keeps patient safety, adoption, and real hospital fit at the center.",
     accent: "#28D7B5",
-    accentTo: "#49C6FF",
+    accentTo: "#FFAE3F",
   },
   {
     name: "Adyanta Dubey",
@@ -82,8 +82,8 @@ const leadershipMembers: Person[] = [
       "An AI and robotics builder from NIT Andhra Pradesh, Adyanta brings full-stack, machine-learning, and data-science depth to the hard problem of reading heterogeneous monitor output reliably at scale.",
     contribution:
       "He bridges research-grade modeling with day-to-day execution across vision, data, infrastructure, and clinical product surfaces.",
-    accent: "#7C5CFF",
-    accentTo: "#4F6BFF",
+    accent: "#8A4FE0",
+    accentTo: "#DE2588",
   },
   {
     name: "Varun Singh",
@@ -97,7 +97,7 @@ const leadershipMembers: Person[] = [
       "Varun brings business and operating experience from building ventures across the XIPHIAS ecosystem, with a focus on partnerships, market access, and disciplined execution.",
     contribution:
       "He helps position ASTA for hospital buyers, partner conversations, and the commercial structure required for responsible scale.",
-    accent: "#49C6FF",
+    accent: "#FFAE3F",
     accentTo: "#28D7B5",
   },
 ];
@@ -115,8 +115,8 @@ const advisoryMembers: Person[] = [
       "Assistant Professor at NIT Andhra Pradesh and AI researcher with a PhD in distributed machine learning, focused on deep learning systems that have to perform beyond clean benchmark conditions.",
     contribution:
       "Strengthens model scalability, experimentation discipline, and the technical depth needed for robust deployment.",
-    accent: "#4F6BFF",
-    accentTo: "#49C6FF",
+    accent: "#DE2588",
+    accentTo: "#FFAE3F",
   },
   {
     name: "Dr. Balaraman Ravindran",
@@ -131,8 +131,8 @@ const advisoryMembers: Person[] = [
       "Founding Head of the Wadhwani School of Data Science & AI at IIT Madras, with decades of work across AI, machine learning, and robotics.",
     contribution:
       "Strengthens scientific rigor, long-horizon AI direction, and the research credibility behind ASTA's intelligence layer.",
-    accent: "#7C5CFF",
-    accentTo: "#4F6BFF",
+    accent: "#8A4FE0",
+    accentTo: "#DE2588",
   },
   {
     name: "Krishnakumar Srinivasan",
@@ -147,7 +147,7 @@ const advisoryMembers: Person[] = [
     contribution:
       "Helps ASTA think beyond product alone toward the governance, credibility, and commercial maturity buyers expect.",
     accent: "#28D7B5",
-    accentTo: "#49C6FF",
+    accentTo: "#FFAE3F",
   },
   {
     name: "Dr. Sandeep Murali",
@@ -161,7 +161,7 @@ const advisoryMembers: Person[] = [
       "Surgeon, healthcare professional, and administrator with a strong orientation toward medicine, education, research, and innovation in institutional settings.",
     contribution:
       "Helps ASTA stay grounded in how hospital decisions are actually made across clinical, educational, and administrative environments.",
-    accent: "#49C6FF",
+    accent: "#FFAE3F",
     accentTo: "#28D7B5",
   },
 ];
@@ -174,8 +174,8 @@ const pedigreeItems: PedigreeItem[] = [
     logo: "/partners/AIC-SEED.jpg",
     note:
       "Supports ASTA's translational medtech journey through incubation and accelerator backing tied to real-world healthcare innovation.",
-    color: "#4F6BFF",
-    colorTo: "#7C5CFF",
+    color: "#DE2588",
+    colorTo: "#8A4FE0",
   },
   {
     name: "MeitY Startup Hub",
@@ -185,7 +185,7 @@ const pedigreeItems: PedigreeItem[] = [
     note:
       "Provides national-level innovation support and public-sector credibility around ASTA's long-term role in digital health infrastructure.",
     color: "#28D7B5",
-    colorTo: "#49C6FF",
+    colorTo: "#FFAE3F",
   },
   {
     name: "IISER Pune",
@@ -194,8 +194,8 @@ const pedigreeItems: PedigreeItem[] = [
     logo: "/partners/IISER.png",
     note:
       "Anchors ASTA in scientific rigor and translational validation, reinforcing that the company is being shaped with research seriousness.",
-    color: "#7C5CFF",
-    colorTo: "#4F6BFF",
+    color: "#8A4FE0",
+    colorTo: "#DE2588",
   },
   {
     name: "NIT Andhra Pradesh",
@@ -204,7 +204,7 @@ const pedigreeItems: PedigreeItem[] = [
     logo: "/partners/NIT.png",
     note:
       "Represents the institute-linked engineering depth behind ASTA's technical build and the student-founder journey at the heart of its early growth.",
-    color: "#49C6FF",
+    color: "#FFAE3F",
     colorTo: "#28D7B5",
   },
 ];
@@ -262,8 +262,8 @@ export const aboutFoundingThesis: {
       title: "Alarm fatigue",
       body:
         "Too many raw alerts, too little usable context, and too much burden on already stretched clinical teams.",
-      color: "#4F6BFF",
-      colorTo: "#7C5CFF",
+      color: "#DE2588",
+      colorTo: "#8A4FE0",
     },
     {
       icon: "hospital",
@@ -271,15 +271,15 @@ export const aboutFoundingThesis: {
       body:
         "Hospitals cannot modernize care by replacing every bedside monitor just to standardize visibility across wards.",
       color: "#28D7B5",
-      colorTo: "#49C6FF",
+      colorTo: "#FFAE3F",
     },
     {
       icon: "activity",
       title: "Missed deterioration",
       body:
         "The clinically important change often happens before a threshold breach and between observation cycles.",
-      color: "#7C5CFF",
-      colorTo: "#4F6BFF",
+      color: "#8A4FE0",
+      colorTo: "#DE2588",
     },
   ],
   principles: [

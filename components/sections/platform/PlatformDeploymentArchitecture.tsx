@@ -1,166 +1,80 @@
+"use client";
+
 import { Container } from "@/components/layout/Container";
-import { Reveal } from "@/components/ui/Reveal";
+import { Card, CardBody, CardMeta, CardTitle } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
+import { Reveal, RevealItem } from "@/components/ui/Reveal";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { platformDeploymentArchitecture } from "@/content/platform";
+import { DrawnRule } from "./DrawnRule";
 
+/**
+ * §6 — "— 06 Deployment architecture". Horizontal-spine stage row (the
+ * sanctioned 20px ink line icons sit on the drawn hairline; desktop only),
+ * then four text-first principle cards (no icons), then the load-bearing
+ * footer sentence as a full-width callout ledger row. No accent.
+ *
+ * Eyebrow is hardcoded in sentence case: lib/motion's sentenceCase would
+ * corrupt "architecture" via its protected "IT" token.
+ */
 export function PlatformDeploymentArchitecture() {
+  const c = platformDeploymentArchitecture;
   return (
-    <section className="relative overflow-hidden bg-canvas py-24 md:py-32 dark:bg-[#060816]">
-      {/* ── BG ── */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute inset-0 dark:hidden"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(10,22,40,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(10,22,40,0.03) 1px,transparent 1px)",
-            backgroundSize: "52px 52px",
-          }}
+    <section className="py-section-sm">
+      <Container>
+        <SectionHeader
+          number="06"
+          label="Deployment architecture"
+          headline={c.heading}
+          lede={c.sub}
         />
-        <div className="absolute inset-0 hidden bg-grid-fine bg-[length:44px_44px] opacity-60 dark:block" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-300/40 to-transparent dark:via-brand-400/25" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-slate-200/50 to-transparent dark:via-white/[0.04]" />
-        <div className="absolute left-1/2 top-1/3 h-[500px] w-[680px] -translate-x-1/2 rounded-full bg-brand-500/[0.03] blur-[150px] dark:bg-brand-500/[0.05]" />
-      </div>
 
-      <Container className="relative">
-
-        {/* ══ HEADER ══ */}
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-700 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-cyan-300/80">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-500 dark:bg-cyan-400" />
-              {platformDeploymentArchitecture.eyebrow}
-            </div>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="mt-5 text-balance text-h2 font-semibold tracking-[-0.04em] text-ink dark:text-frost md:text-h2-lg">
-              {platformDeploymentArchitecture.heading}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-4 text-pretty text-body-lg text-ink-muted dark:text-frost-muted">
-              {platformDeploymentArchitecture.sub}
-            </p>
+        {/* 6a — stages on a horizontal spine */}
+        <div className="relative mt-14">
+          <DrawnRule className="absolute inset-x-0 top-2.5 hidden h-px bg-hairline lg:block" />
+          <Reveal stagger className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {c.stages.map((s, i) => (
+              <RevealItem key={s.title}>
+                <div className="relative">
+                  <div className="flex items-center">
+                    <span className="relative z-10 inline-flex bg-paper pr-2 text-ink-2">
+                      <Icon name={s.icon} />
+                    </span>
+                    <span
+                      aria-hidden
+                      className="hidden h-2 w-px bg-hairline-strong lg:inline-block"
+                    />
+                  </div>
+                  <div className="mt-5 font-display text-label tnum text-ink-3">{`0${i + 1}`}</div>
+                  <h3 className="mt-2 font-display text-title-sm text-ink">{s.title}</h3>
+                  <p className="mt-3 font-body text-body text-ink-2">{s.body}</p>
+                </div>
+              </RevealItem>
+            ))}
           </Reveal>
         </div>
 
-        {/* ══ SINGLE PANEL ══ */}
-        <Reveal delay={0.14}>
-          <div className="relative mt-14 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#040810] text-white">
-
-            {/* Glow */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -left-10 top-0 h-52 w-52 rounded-full bg-brand-500/[0.09] blur-[80px]" />
-              <div className="absolute bottom-0 right-0 h-44 w-44 rounded-full bg-teal-400/[0.05] blur-[70px]" />
-            </div>
-
-            {/* Top shine */}
-            <div
-              aria-hidden
-              className="absolute inset-x-[5%] top-0 h-px"
-              style={{
-                background:
-                  "linear-gradient(to right,transparent,rgba(79,107,255,0.45),rgba(40,215,181,0.28),transparent)",
-              }}
-            />
-
-            <div className="relative grid lg:grid-cols-[1fr_1px_1fr]">
-
-              {/* Left — deployment pipeline (stages as vertical flow) */}
-              <div className="flex flex-col justify-center gap-0 p-8 lg:p-10">
-                <div className="mb-6 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.20em] text-white/28">
-                    Deployment stages
-                  </span>
-                </div>
-
-                {platformDeploymentArchitecture.stages.map((stage, i) => {
-                  const next = platformDeploymentArchitecture.stages[i + 1];
-                  return (
-                    <div key={stage.title} className="flex gap-4">
-                      {/* Icon + connector */}
-                      <div className="flex flex-col items-center">
-                         <div
-                      className="flex h-12 w-12 items-center justify-center rounded-xl text-white"
-                      style={{
-                        background: `linear-gradient(135deg,${stage.color},${stage.colorTo})`,
-                        boxShadow: `0 4px 20px ${stage.color}32`,
-                      }}
-                    >
-                      <Icon name={stage.icon} className="h-5 w-5" />
-                    </div>
-                        {next && (
-                          <div
-                            className="my-1.5 w-px"
-                            style={{
-                              height: 28,
-                              background: `linear-gradient(to bottom,${stage.color}40,${next.color}20)`,
-                            }}
-                          />
-                        )}
-                      </div>
-
-                      {/* Text */}
-                      <div className={next ? "pb-5" : ""}>
-                        <h3 className="text-[0.96rem] font-semibold tracking-[-0.02em] text-frost">
-                          {stage.title}
-                        </h3>
-                        <p className="mt-1 text-[0.78rem] leading-relaxed text-white/42">
-                          {stage.body}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Divider */}
-              <div className="hidden bg-white/[0.05] lg:block" />
-
-              {/* Right — 4 governance principles 2×2 */}
-              <div className="border-t border-white/[0.05] p-8 lg:border-t-0 lg:p-10">
-                <div className="mb-6 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.20em] text-white/28">
-                    Governance principles
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {platformDeploymentArchitecture.principles.map((principle) => (
-                    <div
-                      key={principle.title}
-                      className="flex flex-col gap-3.5 rounded-xl border border-white/[0.06] bg-white/[0.025] p-4"
-                    >
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-frost">
-                        <Icon name={principle.icon} className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <h3 className="text-[0.84rem] font-semibold leading-snug tracking-[-0.01em] text-frost">
-                          {principle.title}
-                        </h3>
-                        <p className="mt-1.5 text-[0.72rem] leading-relaxed text-white/38">
-                          {principle.body}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Footer note */}
-            <div className="relative border-t border-white/[0.05] px-8 py-4 lg:px-10">
-              <p className="text-[0.74rem] leading-relaxed text-white/35">
-                {platformDeploymentArchitecture.footer}
-              </p>
-            </div>
-
-          </div>
+        {/* 6b — principles (text-first, no icons) */}
+        <Reveal stagger className="mt-20 grid auto-rows-fr items-stretch gap-6 md:grid-cols-2">
+          {c.principles.map((p, i) => (
+            <RevealItem key={p.title} className="h-full">
+              <Card>
+                <CardMeta number={`0${i + 1}`} />
+                <CardTitle>{p.title}</CardTitle>
+                <CardBody>{p.body}</CardBody>
+              </Card>
+            </RevealItem>
+          ))}
         </Reveal>
 
+        {/* Footer callout — load-bearing sentence */}
+        <Reveal className="mt-20">
+          <div className="border-y border-hairline px-6 py-10 text-center">
+            <p className="mx-auto max-w-measure font-body text-body-lg text-pretty text-ink">
+              {c.footer}
+            </p>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

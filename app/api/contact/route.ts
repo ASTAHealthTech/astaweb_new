@@ -92,7 +92,7 @@ function composeEmail(data: ContactPayload, ip: string): { subject: string; html
 
     <!-- Inquiry type badge -->
     <div style="padding: 20px 32px 0;">
-      <span style="display: inline-block; padding: 5px 14px; font-size: 12px; font-weight: 600; color: #4F6BFF; background: rgba(79,107,255,0.08); border: 1px solid rgba(79,107,255,0.20); border-radius: 20px;">
+      <span style="display: inline-block; padding: 5px 14px; font-size: 12px; font-weight: 600; color: #DE2588; background: rgba(222,37,136,0.08); border: 1px solid rgba(222,37,136,0.20); border-radius: 20px;">
         ${data.inquiryType}
       </span>
     </div>
@@ -107,7 +107,7 @@ function composeEmail(data: ContactPayload, ip: string): { subject: string; html
         <tr style="border-bottom: 1px solid #f1f5f9;">
           <td style="padding: 12px 0; color: #64748b; font-weight: 500; vertical-align: top;">Work Email</td>
           <td style="padding: 12px 0; color: #0f172a;">
-            <a href="mailto:${escapeHtml(data.workEmail)}" style="color: #4F6BFF; text-decoration: none;">${escapeHtml(data.workEmail)}</a>
+            <a href="mailto:${escapeHtml(data.workEmail)}" style="color: #DE2588; text-decoration: none;">${escapeHtml(data.workEmail)}</a>
           </td>
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">

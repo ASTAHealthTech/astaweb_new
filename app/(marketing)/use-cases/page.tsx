@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { UseCasesHero } from "@/components/sections/use-cases/UseCasesHero";
 import { UseCaseClusters } from "@/components/sections/use-cases/UseCaseClusters";
-import { UseCasesAcademicValue } from "@/components/sections/use-cases/UseCasesAcademicValue";
+import { TeachingHospitalValue } from "@/components/sections/use-cases/TeachingHospitalValue";
+import { UseCasesLiveProof } from "@/components/sections/use-cases/UseCasesLiveProof";
 import { UseCasesOutcomes } from "@/components/sections/use-cases/UseCasesOutcomes";
 import { UseCasesCTA } from "@/components/sections/use-cases/UseCasesCTA";
 import { buildPageMetadata } from "@/lib/seo";
@@ -24,7 +25,8 @@ export default function UseCasesPage() {
     <>
       <UseCasesHero />
       <UseCaseClusters />
-      <UseCasesAcademicValue />
+      <TeachingHospitalValue />
+      <UseCasesLiveProof />
       <UseCasesOutcomes />
       <UseCasesCTA />
     </>

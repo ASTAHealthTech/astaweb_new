@@ -47,8 +47,8 @@ export const capabilitySuite: {
         "15+ OEM monitor brands supported",
         "No API, hardware tap, or IT integration",
       ],
-      color: "#4F6BFF",
-      colorTo: "#7C5CFF",
+      color: "#DE2588",
+      colorTo: "#8A4FE0",
       featured: true,
     },
     {
@@ -63,7 +63,7 @@ export const capabilitySuite: {
         "Continuous per-bed evaluation",
       ],
       color: "#28D7B5",
-      colorTo: "#49C6FF",
+      colorTo: "#FFAE3F",
     },
     {
       icon: "bell",
@@ -76,8 +76,8 @@ export const capabilitySuite: {
         "Recommended next-step framing",
         "Governance logging in the same flow",
       ],
-      color: "#7C5CFF",
-      colorTo: "#4F6BFF",
+      color: "#8A4FE0",
+      colorTo: "#DE2588",
     },
   ],
   comingSoon: {
@@ -105,7 +105,7 @@ export const dashboardWalkthrough: {
   heading: "The live ward view for nursing, clinical leadership, and operations.",
   sub: "One shared product surface for the whole unit: monitored beds, structured vitals, escalation queue, and audit trail in a single ward view.",
   wardStats: [
-    { label: "Beds monitored", value: "24", color: "#4F6BFF" },
+    { label: "Beds monitored", value: "24", color: "#DE2588" },
     { label: "Beds on watch", value: "3", color: "#FBBF24" },
     { label: "Escalations", value: "1", color: "#EF4444" },
     { label: "Ward coverage", value: "100%", color: "#28D7B5" },
@@ -172,7 +172,7 @@ export const interopGovernance: {
       title: "HL7/FHIR aligned",
       body: "Structured vital outputs can be mapped into HL7/FHIR-aligned downstream workflows for EMR, analytics, or command-center integration. Monitor reading itself does not depend on hospital IT connectivity.",
       badge: "Aligned",
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
     {
       icon: "shield",
@@ -186,14 +186,14 @@ export const interopGovernance: {
       title: "Role-based access control",
       body: "Access is controlled by hospital-defined roles across nursing, clinicians, leadership, and operations. The deployment model limits who can view, acknowledge, and review each layer of data.",
       badge: "Enforced",
-      color: "#7C5CFF",
+      color: "#8A4FE0",
     },
     {
       icon: "check",
       title: "Legal audit trail",
       body: "Every access, alert, acknowledgement, and review action is time-stamped into a legal audit trail suitable for governance review and deployment-specific retention policy.",
       badge: "Auditable",
-      color: "#49C6FF",
+      color: "#FFAE3F",
     },
     {
       icon: "server",
@@ -207,7 +207,7 @@ export const interopGovernance: {
       title: "No patient imagery",
       body: "The camera is monitor-facing and reads the screen, not the patient. ASTA is designed to operate without patient imagery, biometric capture, or patient video in the monitoring workflow.",
       badge: "Monitor-facing",
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
   ],
 };
@@ -237,7 +237,7 @@ export const monitoringInPractice: {
         { label: "Signal latency", value: "<2s" },
         { label: "Escalation path", value: "ICU team" },
       ],
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
     {
       label: "General Ward",
@@ -259,7 +259,7 @@ export const monitoringInPractice: {
         { label: "Escalation context", value: "PPLM-linked" },
         { label: "Audit capture", value: "Automatic" },
       ],
-      color: "#7C5CFF",
+      color: "#8A4FE0",
     },
     {
       label: "High-dependency",
@@ -270,7 +270,7 @@ export const monitoringInPractice: {
         { label: "Reasoning", value: "Continuous" },
         { label: "Review trail", value: "Auditable" },
       ],
-      color: "#49C6FF",
+      color: "#FFAE3F",
     },
   ],
 };

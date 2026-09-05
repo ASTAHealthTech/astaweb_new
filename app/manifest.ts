@@ -9,8 +9,8 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     scope: "/",
     display: "standalone",
-    background_color: "#060816",
-    theme_color: "#060816",
+    background_color: "#0C0812",
+    theme_color: "#0C0812",
     icons: [
       {
         src: "/logo/logo-asta.png",

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/home/Hero";
 import { ClinicalAiInAction } from "@/components/sections/home/ClinicalAiInAction";
 import { InstitutionalTrust } from "@/components/sections/home/InstitutionalTrust";
+import { TrustPostures } from "@/components/sections/home/TrustPostures";
 import { HowItWorks } from "@/components/sections/home/HowItWorks";
 import { Capabilities } from "@/components/sections/home/Capabilities";
+import { Deployments } from "@/components/sections/home/Deployments";
 import { Outcomes } from "@/components/sections/home/Outcomes";
 import { SecurityBand } from "@/components/sections/home/SecurityBand";
 import { FinalCTA } from "@/components/sections/home/FinalCTA";
@@ -52,8 +54,10 @@ export default function HomePage() {
       <Hero />
       <ClinicalAiInAction />
       <InstitutionalTrust />
+      <TrustPostures />
       <HowItWorks />
       <Capabilities />
+      <Deployments />
       <Outcomes />
       <SecurityBand />
       <FinalCTA />

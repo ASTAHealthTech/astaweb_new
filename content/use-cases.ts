@@ -154,8 +154,8 @@ export const useCaseClusters: {
       title: "Continuous oversight for the beds hospitals manage all day.",
       sub:
         "Operational gain often starts outside the ICU, where teams need broader visibility across mixed-acuity beds without replacing the monitors already installed.",
-      color: "#4F6BFF",
-      colorTo: "#7C5CFF",
+      color: "#DE2588",
+      colorTo: "#8A4FE0",
       layout: "wide",
       cases: [
         {
@@ -199,7 +199,7 @@ export const useCaseClusters: {
       sub:
         "ASTA extends monitored oversight into smaller centers and supervised home pathways without splitting into separate technology stacks.",
       color: "#28D7B5",
-      colorTo: "#49C6FF",
+      colorTo: "#FFAE3F",
       layout: "half",
       cases: [
         {
@@ -232,8 +232,8 @@ export const useCaseClusters: {
       title: "A monitored ward layer that also strengthens teaching and research.",
       sub:
         "For medical college hospitals and academic centers, ASTA supports live monitoring while creating structured material for teaching rounds, protocol work, and publication-oriented research.",
-      color: "#7C5CFF",
-      colorTo: "#4F6BFF",
+      color: "#8A4FE0",
+      colorTo: "#DE2588",
       layout: "half",
       cases: [
         {
@@ -266,7 +266,7 @@ export const useCaseClusters: {
       title: "Operational confidence in regulated and non-acute programs.",
       sub:
         "Some ASTA deployments are less about bedside acuity and more about traceable monitoring, exception handling, and long-horizon visibility in specialized environments.",
-      color: "#49C6FF",
+      color: "#FFAE3F",
       colorTo: "#28D7B5",
       layout: "wide",
       cases: [
@@ -322,7 +322,7 @@ export const teachingHospitalValue: {
       body:
         "Use alert timelines, deterioration trajectories, and review history as material for bedside teaching, case conferences, and escalation drills.",
       stat: "Teaching rounds",
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
     {
       title: "Research & publications",
@@ -336,14 +336,14 @@ export const teachingHospitalValue: {
       body:
         "Teams can review deterioration patterns, escalation quality, and protocol adherence using monitored evidence instead of anecdotal reconstruction.",
       stat: "Protocol review",
-      color: "#7C5CFF",
+      color: "#8A4FE0",
     },
     {
       title: "Institutional differentiation",
       body:
         "Hospitals can show a credible AI-enabled monitoring program operating inside real wards while building academic output and reputation on top.",
       stat: "Academic positioning",
-      color: "#49C6FF",
+      color: "#FFAE3F",
     },
   ],
   pathway: [
@@ -413,7 +413,7 @@ export const useCasesOutcomes: {
       title: "Earlier deterioration visibility",
       body:
         "ASTA helps teams see meaningful change sooner on wards where periodic observation and threshold-only alarms can leave too much time between signal and action.",
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
     {
       icon: "hospital",
@@ -429,7 +429,7 @@ export const useCasesOutcomes: {
       title: "Reduced staffing blind spots",
       body:
         "Continuous visibility helps teams stay ahead of the gaps that appear on larger wards, night shifts, and peripheral sites.",
-      color: "#7C5CFF",
+      color: "#8A4FE0",
     },
     {
       icon: "bell",
@@ -437,7 +437,7 @@ export const useCasesOutcomes: {
       title: "Stronger escalation quality",
       body:
         "Alerts arrive with trend context, routing logic, and clinical framing, improving how urgency is interpreted.",
-      color: "#49C6FF",
+      color: "#FFAE3F",
     },
     {
       icon: "layers",
@@ -445,7 +445,7 @@ export const useCasesOutcomes: {
       title: "Teaching and research value",
       body:
         "The same deployment that improves live monitoring can also support academic rounds, protocol work, validation studies, and publication-oriented research.",
-      color: "#4F6BFF",
+      color: "#DE2588",
     },
     {
       icon: "shield",

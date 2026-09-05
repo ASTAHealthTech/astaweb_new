@@ -1,61 +1,115 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ruleEase, spring, viewportOnce } from "@/lib/motion";
 import { contactNextSteps } from "@/content/contact";
 
+/** Spine x-position — shared by the line, the numbers, and the cursor dot. */
+const SPINE_X = "left-4 lg:left-[20%]";
+
+/**
+ * — 05 What happens next. The hairline spine with a DISCRETE parking
+ * cursor: an IntersectionObserver selects the step nearest viewport
+ * center and the magenta dot springs to that step's anchor. Never
+ * scroll-scrubbed. Reduced motion: parked at step 01, static.
+ */
 export function ContactNextSteps() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const stepRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const [tops, setTops] = useState<number[]>([]);
+  const reduce = useReducedMotion();
+
+  // Measure each step's anchor (just below its number square) on the spine.
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const measure = () => {
+      setTops(stepRefs.current.map((el) => (el ? el.offsetTop + 40 : 0)));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(rail);
+    return () => ro.disconnect();
+  }, []);
+
+  // Discrete parking: the step intersecting the viewport-center band wins.
+  useEffect(() => {
+    if (reduce) return;
+    const els = stepRefs.current.filter((el): el is HTMLLIElement => el !== null);
+    if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const index = els.indexOf(entry.target as HTMLLIElement);
+            if (index !== -1) setActive(index);
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [reduce]);
+
+  const dotY = tops[reduce ? 0 : active] ?? 0;
+
   return (
-    <section className="relative overflow-hidden bg-canvas py-20 md:py-24 dark:bg-[#060816]">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute inset-0 dark:hidden"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(10,22,40,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(10,22,40,0.03) 1px,transparent 1px)",
-            backgroundSize: "52px 52px",
-          }}
-        />
-        <div className="absolute inset-0 hidden bg-grid-fine bg-[length:44px_44px] opacity-60 dark:block" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-300/40 to-transparent dark:via-brand-400/25" />
-      </div>
-
-      <Container className="relative">
-        <SectionHeading
-          eyebrow={contactNextSteps.eyebrow}
-          title={contactNextSteps.heading}
-          sub={contactNextSteps.sub}
-          align="center"
-          maxWidth="max-w-3xl"
+    <section className="py-section">
+      <Container>
+        <SectionHeader
+          number="05"
+          label={contactNextSteps.eyebrow}
+          headline={contactNextSteps.heading}
+          lede={contactNextSteps.sub}
         />
 
-        <div className="mx-auto mt-10 grid max-w-6xl gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {contactNextSteps.steps.map((item, index) => (
-            <Reveal key={item.step} delay={0.12 + index * 0.04}>
-              <article className="relative h-full overflow-hidden rounded-[26px] border border-white/[0.08] bg-[#040810] p-5 text-white">
-                <div
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-px"
-                  style={{
-                    background:
-                      index === 0
-                        ? "linear-gradient(to right,transparent,rgba(79,107,255,0.72),rgba(124,92,255,0.38),transparent)"
-                        : index === 1
-                          ? "linear-gradient(to right,transparent,rgba(40,215,181,0.72),rgba(73,198,255,0.34),transparent)"
-                          : index === 2
-                            ? "linear-gradient(to right,transparent,rgba(73,198,255,0.72),rgba(79,107,255,0.36),transparent)"
-                            : "linear-gradient(to right,transparent,rgba(124,92,255,0.72),rgba(40,215,181,0.34),transparent)",
-                  }}
-                />
-                <div className="font-mono text-[0.66rem] font-bold uppercase tracking-[0.18em] text-white/32">
-                  {item.step}
-                </div>
-                <h3 className="mt-4 text-[1rem] font-semibold tracking-[-0.03em] text-frost">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-[0.82rem] leading-relaxed text-white/58">{item.body}</p>
-              </article>
-            </Reveal>
-          ))}
+        <div ref={railRef} className="relative mt-14">
+          {/* Spine — drawn top→bottom on entry */}
+          <motion.span
+            aria-hidden
+            className={`absolute inset-y-0 w-px origin-top bg-hairline ${SPINE_X}`}
+            initial={reduce ? false : { scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.9, ease: ruleEase }}
+          />
+
+          {/* Position cursor — the section's only magenta */}
+          {tops.length > 0 && (
+            <span aria-hidden className={`absolute top-0 -translate-x-1/2 ${SPINE_X}`}>
+              <motion.span
+                className="block h-1.5 w-1.5 rounded-full bg-accent"
+                initial={false}
+                animate={{ y: dotY }}
+                transition={reduce ? { duration: 0 } : spring}
+              />
+            </span>
+          )}
+
+          <ol className="space-y-14">
+            {contactNextSteps.steps.map((step, i) => (
+              <li
+                key={step.step}
+                ref={(el) => {
+                  stepRefs.current[i] = el;
+                }}
+                className="relative pl-12 lg:pl-[calc(20%+3.5rem)]"
+              >
+                <span
+                  className={`absolute top-0 grid h-8 w-8 -translate-x-1/2 place-items-center bg-paper font-display text-title-sm tnum text-ink-3 ${SPINE_X}`}
+                >
+                  {step.step}
+                </span>
+                <h3 className="font-display text-title-sm text-ink">{step.title}</h3>
+                <p className="mt-2 max-w-[52ch] font-body text-body text-pretty text-ink-2">{step.body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </Container>
     </section>

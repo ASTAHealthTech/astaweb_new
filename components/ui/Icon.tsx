@@ -5,13 +5,14 @@ type Props = {
   name: IconName;
   className?: string;
   strokeWidth?: number;
+  style?: React.CSSProperties;
 };
 
 /**
  * Lightweight inline icon set. Stroke-based, 1.5px, rounded joins.
  * Keeps bundle tiny and on-brand. Extend as needed.
  */
-export function Icon({ name, className, strokeWidth = 1.5 }: Props) {
+export function Icon({ name, className, strokeWidth = 1.5, style }: Props) {
   const common = {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -21,6 +22,7 @@ export function Icon({ name, className, strokeWidth = 1.5 }: Props) {
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     className: cn("h-5 w-5", className),
+    style,
     "aria-hidden": true,
   };
 
