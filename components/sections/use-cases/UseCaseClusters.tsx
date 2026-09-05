@@ -52,14 +52,6 @@ function UseCaseCard({ useCase, number }: { useCase: UseCase; number: string }) 
   );
 }
 
-function ClusterFooterBlock({ children }: { children: string }) {
-  return (
-    <div className="flex h-full items-center border-t border-hairline pt-4 font-body text-body text-ink-2 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-      <p>{children}</p>
-    </div>
-  );
-}
-
 export function UseCaseClusters() {
   const c = useCaseClusters;
 
@@ -76,7 +68,6 @@ export function UseCaseClusters() {
         <div className="mt-16 space-y-24">
           {c.clusters.map((cluster, ci) => {
             const clusterNumber = `2.${ci + 1}`;
-            const isWide = cluster.layout === "wide";
             const threeCards = cluster.cases.length === 3;
 
             return (
@@ -101,41 +92,25 @@ export function UseCaseClusters() {
                   </div>
                 </div>
 
-                {/* card row — layout follows the content's declared layout field */}
-                {isWide ? (
-                  <>
-                    <div className="mt-8 grid auto-rows-fr grid-cols-1 items-stretch gap-6 md:grid-cols-3">
-                      {cluster.cases.map((useCase, i) => (
-                        <UseCaseCard
-                          key={useCase.title}
-                          useCase={useCase}
-                          number={String(i + 1).padStart(2, "0")}
-                        />
-                      ))}
-                      {!threeCards && <ClusterFooterBlock>{cluster.footer}</ClusterFooterBlock>}
-                    </div>
-                    {threeCards && (
-                      <p className="mt-6 border-t border-hairline pt-4 font-body text-label text-ink-3">
-                        {cluster.footer}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <div className="mt-8 grid gap-6 md:grid-cols-12">
-                    <div className="grid auto-rows-fr grid-cols-1 items-stretch gap-6 sm:grid-cols-2 md:col-span-8">
-                      {cluster.cases.map((useCase, i) => (
-                        <UseCaseCard
-                          key={useCase.title}
-                          useCase={useCase}
-                          number={String(i + 1).padStart(2, "0")}
-                        />
-                      ))}
-                    </div>
-                    <div className="md:col-span-4">
-                      <ClusterFooterBlock>{cluster.footer}</ClusterFooterBlock>
-                    </div>
-                  </div>
-                )}
+                {/* card row — full-width cards, footer as a ruled strip below
+                    (no side column: a short note beside tall cards left a hole) */}
+                <div
+                  className={cn(
+                    "mt-8 grid auto-rows-fr grid-cols-1 items-stretch gap-6",
+                    threeCards ? "md:grid-cols-3" : "sm:grid-cols-2"
+                  )}
+                >
+                  {cluster.cases.map((useCase, i) => (
+                    <UseCaseCard
+                      key={useCase.title}
+                      useCase={useCase}
+                      number={String(i + 1).padStart(2, "0")}
+                    />
+                  ))}
+                </div>
+                <p className="mt-6 border-t border-hairline pt-4 font-body text-label text-ink-3">
+                  {cluster.footer}
+                </p>
               </Reveal>
             );
           })}

@@ -6,7 +6,7 @@ import { ruleEase, springSettle, viewportOnce } from "@/lib/motion";
 import { platformVisionLayer } from "@/content/platform";
 
 /**
- * Fig. 3 — the four-stage extraction pipeline plate. One horizontal spine
+ * Fig. 4 — the four-stage extraction pipeline plate. One horizontal spine
  * with tick-rules, four ruled boxes carrying single-weight ink micro-glyphs.
  * Spine draws left→right on entry (0.9s), boxes fade in 80ms apart, then
  * static — no capture sweep here. Mobile: the SVG rail is replaced by a
@@ -24,7 +24,7 @@ export function PipelinePlate({ className }: { className?: string }) {
   });
 
   return (
-    <Plate caption="Fig. 3 — Four-stage extraction pipeline." className={className}>
+    <Plate caption="Fig. 4 — Four-stage extraction pipeline." className={className}>
       {/* Desktop: engineering-drawing rail */}
       <div className="hidden md:block">
         <svg

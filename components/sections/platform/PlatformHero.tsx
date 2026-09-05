@@ -12,7 +12,7 @@ import { HeroEyebrow } from "./HeroEyebrow";
 export function PlatformHero() {
   const c = platformHero;
   return (
-    <section className="relative pb-section-sm pt-28 md:pt-36">
+    <section className="relative overflow-x-clip pb-section-sm pt-28 md:pt-36">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-brand-gradient-soft" />
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-6">

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { Bezel } from "@/components/ui/Bezel";
 import { Container } from "@/components/layout/Container";
 import { Card, CardBody, CardFooter, CardMeta, CardTitle } from "@/components/ui/Card";
@@ -14,8 +15,63 @@ import { FooterLine } from "./FooterLine";
 /**
  * §2 — "— 02 Clinical intelligence stack". The animated living stack
  * (isometric glass planes + flowing beams) as the showpiece, with the three
- * layer cards stacked in a column beside it.
+ * layer cards stacked in a column beside it. Fig. 1 — the narrated
+ * deep-dive film of the clinical intelligence (muted autoplay ≥60% in view,
+ * click toggles sound); Fig. 2 — the real council-brain screen.
  */
+
+function DeepDiveFilm() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+  const [interacted, setInteracted] = useState(false);
+
+  // Muted autoplay at ≥60% in view; pause off-screen.
+  useEffect(() => {
+    const el = wrapRef.current;
+    const video = videoRef.current;
+    if (!el || !video) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.6) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.6] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <video
+        ref={videoRef}
+        src="/film-deep-dive.mp4"
+        poster="/film-deep-dive-poster.jpg"
+        muted={muted}
+        loop
+        playsInline
+        preload="none"
+        width={1280}
+        height={720}
+        onClick={() => {
+          setMuted((m) => !m);
+          setInteracted(true);
+        }}
+        className="h-auto w-full cursor-pointer"
+      />
+      {!interacted && (
+        <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 font-body text-label text-panel-ink-2">
+          Click for sound
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function PlatformIntelligenceStack() {
   const c = platformStack;
   return (
@@ -64,12 +120,23 @@ export function PlatformIntelligenceStack() {
           </Reveal>
         </div>
 
-        {/* Fig. 1 — real council-brain screen: independent model review */}
+        {/* Fig. 1 — the narrated deep-dive film */}
+        <Reveal className="mt-16">
+          <Bezel
+            label="asta — clinical intelligence deep dive"
+            timestamp="sound on click"
+            caption="Fig. 1 — Clinical intelligence deep dive: a narrated walkthrough of how monitor reading, physiological reasoning, and clinical output operate as one system"
+          >
+            <DeepDiveFilm />
+          </Bezel>
+        </Reveal>
+
+        {/* Fig. 2 — real council-brain screen: independent model review */}
         <Reveal className="mt-16">
           <Bezel
             label="asta workspace — council brain"
-            timestamp="independent model reviews"
-            caption="Fig. 1 — Independent model review: five specialist models sit around the ASTA council; the active node returns its finding, confidence, and suggested check before a result is surfaced · recorded from the ASTA clinical workspace"
+            timestamp="model reviews"
+            caption="Fig. 2 — Independent model review: five specialist models sit around the ASTA council; the active node returns its finding, confidence, and suggested check before a result is surfaced · recorded from the ASTA clinical workspace"
           >
             <Image
               src="/product/plat-council.webp"

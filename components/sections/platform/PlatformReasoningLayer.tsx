@@ -52,7 +52,7 @@ export function PlatformReasoningLayer() {
           <Bezel
             label="asta workspace — command"
             timestamp="risk: moderate · demo ward"
-            caption="Fig. 4 — Generated assessment: 74% assessment confidence with its checkable support (data, specialists, council), the recommended investigation with model reasoning, and observed movement in the recorded window · recorded from the ASTA clinical workspace"
+            caption="Fig. 5 — Generated assessment: 74% assessment confidence with its checkable support (data, specialists, council), the recommended investigation with model reasoning, and observed movement in the recorded window · recorded from the ASTA clinical workspace"
             className="mx-auto max-w-3xl"
           >
             <Image

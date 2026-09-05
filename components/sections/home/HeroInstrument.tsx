@@ -308,7 +308,7 @@ export function HeroInstrument() {
             {/* readout overlay — aligned to the inset rect (7%/8.7%) */}
             <div className="absolute left-[7%] right-[7%] top-[8.7%] bottom-[20.7%] overflow-hidden">
               <div className="flex h-full flex-col justify-between p-4 max-md:p-2.5">
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-[1fr_1fr_auto_1fr] gap-2">
                   {monitorValues.map((v) => (
                     <div key={v.key} className="min-w-0">
                       <div className="font-body text-label text-ink-3">{v.label}</div>

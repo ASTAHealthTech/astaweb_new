@@ -146,9 +146,9 @@ export function TeachingHospitalValue() {
             "research-grade AI" claim, recorded from the live workspace */}
         <Reveal className="mt-16">
           <Bezel
-            label="asta workspace — council brain"
-            timestamp="demo ward · 5 model nodes"
-            caption="Fig. 2 — Independent model council on one monitored patient: five specialist nodes review the case and return a consolidated risk with per-node confidence · recorded from the ASTA clinical workspace"
+            label="asta — council brain"
+            timestamp="5 model nodes"
+            caption="Fig. 1 — Independent model council on one monitored patient: five specialist nodes review the case and return a consolidated risk with per-node confidence · recorded from the ASTA clinical workspace"
           >
             <Image
               src="/product/uc-council-brain.webp"

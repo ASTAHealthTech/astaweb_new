@@ -77,13 +77,13 @@ export function SecurityBand() {
                 return (
                   <motion.div
                     key={row.label}
-                    className="flex items-center gap-3 border-b border-panel-hairline py-4"
+                    className="flex items-center gap-3 border-b border-panel-hairline py-4 max-md:flex-wrap max-md:gap-y-2"
                     variants={{
                       hidden: { opacity: 0 },
                       show: { opacity: 1, transition: { duration: 0.3 } },
                     }}
                   >
-                    <span className="shrink-0 font-body text-body text-panel-ink">
+                    <span className="shrink-0 font-body text-body text-panel-ink max-md:w-full">
                       {row.label}
                     </span>
                     <span
@@ -149,7 +149,7 @@ export function SecurityBand() {
               </motion.div>
             </Bezel>
             <p className="pt-3 font-body text-label text-panel-ink-3">
-              Fig. 3 — Governance event log (simulated)
+              Fig. 4 — Governance event log (simulated)
             </p>
           </div>
         </div>

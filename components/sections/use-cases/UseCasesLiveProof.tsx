@@ -77,7 +77,7 @@ export function UseCasesLiveProof() {
 
         {/* hospital ledger */}
         <Reveal className="mt-12">
-          <Bezel label="asta deployments — public register" timestamp="2025 — present">
+          <Bezel label="asta — public register" timestamp="2025 — present">
             {/* tick rule — instrument detail, 4px ticks at 80px pitch */}
             <svg aria-hidden className="block w-full text-panel-hairline" height={4}>
               <defs>

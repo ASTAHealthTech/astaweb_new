@@ -22,7 +22,7 @@ export function ContactDetails() {
         <div className="mt-6">
           <a
             href={`mailto:${contactDetails.primaryEmail}`}
-            className="break-words font-display text-display-2 text-ink decoration-accent decoration-2 underline-offset-8 hover:underline"
+            className="break-words font-display text-display-2 text-ink decoration-accent decoration-2 underline-offset-8 hover:underline max-md:text-title"
           >
             {contactDetails.primaryEmail}
           </a>

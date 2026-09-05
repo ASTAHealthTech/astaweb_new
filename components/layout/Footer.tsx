@@ -16,15 +16,23 @@ export function Footer() {
       <Container className="py-20 md:py-24">
         <div className="grid grid-cols-12 gap-x-6 gap-y-12">
           <div className="col-span-12 md:col-span-4">
-            <Link href={ROUTES.home} aria-label="ASTA Health Tech home" className="inline-block">
+            <Link href={ROUTES.home} aria-label="ASTA Health Tech home" className="inline-flex items-center gap-2.5">
               <Image
-                src="/logo/logo-asta.png"
-                alt="ASTA Health Tech"
-                width={1280}
-                height={723}
-                sizes="120px"
-                className="h-auto w-[120px] brightness-0 invert"
+                src="/logo/cross.png"
+                alt=""
+                width={172}
+                height={212}
+                sizes="26px"
+                className="h-7 w-auto"
               />
+              <span className="flex flex-col justify-center leading-none">
+                <span className="font-display text-[17px] font-medium tracking-[-0.01em] text-ink">
+                  ASTA
+                </span>
+                <span className="mt-0.5 font-body text-[7.5px] font-medium tracking-[0.3em] text-ink-2">
+                  HEALTH TECH
+                </span>
+              </span>
             </Link>
             <EcgBlip />
             <p className="mt-4 font-body text-label text-ink-3">
@@ -64,7 +72,16 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-hairline pt-6 md:flex-row md:items-center md:justify-between">
           <p className="font-body text-label text-ink-3">
-            info@astahealthtech.com · +91 87794 04951 · Koramangala, Bengaluru
+            info@astahealthtech.com ·{" "}
+            <a
+              href="https://www.linkedin.com/company/astahealthtech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline"
+            >
+              linkedin.com/company/astahealthtech
+            </a>{" "}
+            · Koramangala, Bengaluru
           </p>
           <p className="font-display text-label tnum text-ink-3">— End of document</p>
         </div>

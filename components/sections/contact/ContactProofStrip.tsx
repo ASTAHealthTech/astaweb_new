@@ -27,11 +27,11 @@ export function ContactProofStrip() {
             <Reveal stagger className="divide-y divide-panel-hairline">
               {contactProofStrip.items.map((item, i) => (
                 <RevealItem key={item.label} className="py-4 first:pt-0 last:pb-0">
-                  <div className="flex items-baseline gap-3">
+                  <div className="flex items-baseline gap-3 max-md:flex-wrap max-md:gap-y-1">
                     {i === 0 ? (
-                      <LiveDot dark label={item.label} className="shrink-0" />
+                      <LiveDot dark label={item.label} className="shrink-0 max-md:w-full" />
                     ) : (
-                      <span className="shrink-0 font-body text-body text-panel-ink-2">{item.label}</span>
+                      <span className="shrink-0 font-body text-body text-panel-ink-2 max-md:w-full">{item.label}</span>
                     )}
                     <span
                       aria-hidden

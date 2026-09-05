@@ -54,7 +54,7 @@ export function WalkthroughLink() {
         onClick={() => setOpen(true)}
         className="group inline-flex items-center gap-1.5 font-body text-body text-ink decoration-accent decoration-2 underline-offset-4 hover:underline"
       >
-        <span>Watch the 2:37 walkthrough</span>
+        <span>Watch the product walkthrough</span>
         <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
           →
         </span>
@@ -84,7 +84,7 @@ export function WalkthroughLink() {
               </button>
             </div>
             <Bezel
-              label="walkthrough.mp4 · 2:37"
+              label="asta — product walkthrough"
               timestamp="848×636"
               caption="Fig. 1 — Live ward walkthrough"
             >

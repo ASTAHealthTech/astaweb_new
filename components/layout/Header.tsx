@@ -75,14 +75,22 @@ export function Header() {
               className="flex items-center gap-2.5"
             >
               <Image
-                src="/logo/logo-asta.png"
-                alt="ASTA Health Tech"
-                width={1280}
-                height={723}
+                src="/logo/cross.png"
+                alt=""
+                width={172}
+                height={212}
                 priority
-                sizes="132px"
-                className="h-auto w-[118px] brightness-0 invert md:w-[132px]"
+                sizes="28px"
+                className="h-8 w-auto"
               />
+              <span className="flex flex-col justify-center leading-none">
+                <span className="font-display text-[19px] font-medium tracking-[-0.01em] text-ink">
+                  ASTA
+                </span>
+                <span className="mt-0.5 font-body text-[8px] font-medium tracking-[0.3em] text-ink-2">
+                  HEALTH TECH
+                </span>
+              </span>
             </Link>
 
             {/* Desktop nav — consumes primaryNav verbatim */}

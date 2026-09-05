@@ -13,9 +13,9 @@ import { FooterLine } from "./FooterLine";
 import { PipelinePlate } from "./PipelinePlate";
 
 /**
- * §4 — "— 04 Computer vision layer". Fig. 2 — the flagship real screenshot
+ * §4 — "— 04 Computer vision layer". Fig. 3 — the flagship real screenshot
  * (ECG waveform workbench: bedside camera photo of a Mindray monitor with
- * ASTA's detection box) → points grid → metrics ledger panel → Fig. 3
+ * ASTA's detection box) → points grid → metrics ledger panel → Fig. 4
  * pipeline plate. All ink — every content `color` field ignored.
  */
 export function PlatformComputerVision() {
@@ -30,12 +30,12 @@ export function PlatformComputerVision() {
           lede={c.sub}
         />
 
-        {/* 4a — Fig. 2: the flagship — camera reads the monitor */}
+        {/* 4a — Fig. 3: the flagship — camera reads the monitor */}
         <Reveal className="mt-14">
           <Bezel
             label="asta workspace — ecg waveform workbench"
             timestamp="live pi frame · confidence 65%"
-            caption="Fig. 2 — The camera reads the monitor: a bedside frame of a Mindray display with ASTA's detection box around the ECG strip and six likely R-peaks marked for clinician confirmation · recorded from the ASTA clinical workspace"
+            caption="Fig. 3 — The camera reads the monitor: a bedside frame of a Mindray display with ASTA's detection box around the ECG strip and six likely R-peaks marked for clinician confirmation · recorded from the ASTA clinical workspace"
           >
             <Image
               src="/product/plat-ecg-workbench.webp"

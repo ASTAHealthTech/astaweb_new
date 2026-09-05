@@ -33,9 +33,9 @@ export function DashboardWalkthrough() {
           <Bezel
             live
             label="asta ai — assessment"
-            timestamp="risk: moderate · demo ward"
-            caption="Fig. 2 — Generated assessment: 74% assessment confidence with its checkable support (data, specialists, council), the recommended investigation with model reasoning, and observed movement in the recorded window · recorded from the ASTA clinical workspace"
-            className="mx-auto md:max-w-3xl"
+            timestamp="risk: moderate"
+            caption="Fig. 1 — Generated assessment: 74% assessment confidence with its checkable support (data, specialists, council), the recommended investigation with model reasoning, and observed movement in the recorded window · recorded from the ASTA clinical workspace"
+            className="mx-auto md:max-w-4xl"
           >
             <Image
               src="/product/plat-command.webp"
@@ -43,7 +43,7 @@ export function DashboardWalkthrough() {
               width={1920}
               height={2180}
               className="w-full h-auto"
-              sizes="(min-width: 768px) 768px, 100vw"
+              sizes="(min-width: 896px) 896px, 100vw"
             />
           </Bezel>
         </Reveal>
@@ -51,8 +51,8 @@ export function DashboardWalkthrough() {
         <Reveal className="mt-10">
           <Bezel
             label="asta workspace — bed cards"
-            timestamp="beds 4–6 · recording on"
-            caption="Fig. 3 — Bed cards: live vitals, admission context, per-bed ASTA AI, and one-tap quick actions from report to discharge · recorded from the ASTA clinical workspace"
+            timestamp="beds 4–6"
+            caption="Fig. 2 — Bed cards: live vitals, admission context, per-bed ASTA AI, and one-tap quick actions from report to discharge · recorded from the ASTA clinical workspace"
             className="mx-auto md:max-w-4xl"
           >
             <Image

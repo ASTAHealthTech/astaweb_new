@@ -12,7 +12,7 @@ export function SolutionsHero() {
   const c = solutionsHero;
 
   return (
-    <section className="relative pt-28 md:pt-36">
+    <section className="relative overflow-x-clip pt-28 md:pt-36">
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-brand-gradient-soft" />
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-12">
