@@ -1,3 +1,4 @@
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { Container } from "@/components/layout/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Pill } from "@/components/ui/Pill";
@@ -10,12 +11,15 @@ export function AboutAdvisoryBoard() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="04"
-          label={aboutAdvisoryBoard.eyebrow}
-          headline={aboutAdvisoryBoard.heading}
-          lede={aboutAdvisoryBoard.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="04"
+            label={aboutAdvisoryBoard.eyebrow}
+            headline={aboutAdvisoryBoard.heading}
+            lede={aboutAdvisoryBoard.sub}
+          />
+          <GroundObject kind="node" className="order-first w-40 shrink-0 lg:order-none lg:w-48" />
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           {aboutAdvisoryBoard.lenses.map((lens) => (

@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { motion } from "framer-motion";
 import { finalCta } from "@/content/home";
 import { ruleEase, sentenceCase, viewportOnce } from "@/lib/motion";
@@ -21,6 +22,7 @@ export function FinalCTA() {
       />
       <Container className="relative">
         <div className="mx-auto max-w-[52rem] text-center">
+          <GroundObject kind="unit" className="mx-auto mb-8 w-44" />
           <SectionHeader
             number="10"
             label={sentenceCase(finalCta.eyebrow)}

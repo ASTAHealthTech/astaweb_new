@@ -35,3 +35,13 @@ lib/                   types, constants, cn helper
 
 Each section component takes its content as a typed prop shape.
 Phase-2 pages (`/solutions`, `/platform`, etc.) reuse the same primitives with new content files — e.g. `content/solutions.ts`.
+
+## If the site looks wrong after a pull
+
+Next caches compiled CSS in `.next`. After a theme or Tailwind config change it can keep serving the old colours until that cache is cleared:
+
+```
+npm run dev:clean
+```
+
+It deletes `.next` and starts `next dev`.

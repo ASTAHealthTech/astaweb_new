@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -76,12 +77,15 @@ export function ClinicalAiInAction() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="02"
-          label={sentenceCase(c.eyebrow)}
-          headline={c.heading}
-          lede={c.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="02"
+            label={sentenceCase(c.eyebrow)}
+            headline={c.heading}
+            lede={c.sub}
+          />
+          <GroundObject kind="eye" className="order-first w-40 shrink-0 lg:order-none lg:w-52" />
+        </div>
 
         <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-12">
           {/* LEFT — the film + the real assessment beneath it */}

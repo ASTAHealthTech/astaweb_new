@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { capabilities } from "@/content/home";
 import { sentenceCase } from "@/lib/motion";
 import { Container } from "@/components/layout/Container";
@@ -17,12 +18,15 @@ export function Capabilities() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="06"
-          label={sentenceCase(c.eyebrow)}
-          headline={c.heading}
-          lede={c.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="06"
+            label={sentenceCase(c.eyebrow)}
+            headline={c.heading}
+            lede={c.sub}
+          />
+          <GroundObject kind="ribbon" className="order-first w-40 shrink-0 lg:order-none lg:w-52" />
+        </div>
 
         <Reveal
           stagger

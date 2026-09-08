@@ -1,3 +1,4 @@
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { Container } from "@/components/layout/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Pill } from "@/components/ui/Pill";
@@ -10,13 +11,16 @@ export function AboutLeadership() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="03"
-          label={aboutLeadership.eyebrow}
-          headline={aboutLeadership.heading}
-          lede={aboutLeadership.sub}
-          headlineMax="max-w-[26ch]"
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="03"
+            label={aboutLeadership.eyebrow}
+            headline={aboutLeadership.heading}
+            lede={aboutLeadership.sub}
+            headlineMax="max-w-[26ch]"
+          />
+          <GroundObject kind="graph" className="order-first w-40 shrink-0 lg:order-none lg:w-48" />
+        </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           {aboutLeadership.pillars.map((pillar) => (

@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import Image from "next/image";
 import { Bezel } from "@/components/ui/Bezel";
 import { Container } from "@/components/layout/Container";
@@ -23,12 +24,15 @@ export function PlatformReasoningLayer() {
   return (
     <section className="py-section-sm">
       <Container>
-        <SectionHeader
-          number="05"
-          label={sentenceCase(c.eyebrow)}
-          headline={c.heading}
-          lede={c.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="05"
+            label={sentenceCase(c.eyebrow)}
+            headline={c.heading}
+            lede={c.sub}
+          />
+          <GroundObject kind="attention" className="order-first w-40 shrink-0 lg:order-none lg:w-64" />
+        </div>
 
         {/* 5a — pillars */}
         <Reveal

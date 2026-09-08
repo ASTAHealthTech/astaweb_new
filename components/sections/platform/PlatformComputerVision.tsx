@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import Image from "next/image";
 import { Bezel } from "@/components/ui/Bezel";
 import { Container } from "@/components/layout/Container";
@@ -23,12 +24,15 @@ export function PlatformComputerVision() {
   return (
     <section className="py-section-sm">
       <Container>
-        <SectionHeader
-          number="04"
-          label={sentenceCase(c.eyebrow)}
-          headline={c.heading}
-          lede={c.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="04"
+            label={sentenceCase(c.eyebrow)}
+            headline={c.heading}
+            lede={c.sub}
+          />
+          <GroundObject kind="balance" className="order-first w-40 shrink-0 lg:order-none lg:w-56" />
+        </div>
 
         {/* 4a — Fig. 3: the flagship — camera reads the monitor */}
         <Reveal className="mt-14">

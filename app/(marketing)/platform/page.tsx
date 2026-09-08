@@ -8,6 +8,7 @@ import { PlatformDeploymentArchitecture } from "@/components/sections/platform/P
 import { PlatformValidation } from "@/components/sections/platform/PlatformValidation";
 import { PlatformCTA } from "@/components/sections/platform/PlatformCTA";
 import { buildPageMetadata } from "@/lib/seo";
+import { Ground } from "@/components/visual/scene/Ground";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Platform",
@@ -24,7 +25,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function PlatformPage() {
   return (
-    <>
+    <Ground>
       <PlatformHero />
       <PlatformIntelligenceStack />
       <PlatformSignalFlow />
@@ -33,6 +34,6 @@ export default function PlatformPage() {
       <PlatformDeploymentArchitecture />
       <PlatformValidation />
       <PlatformCTA />
-    </>
+    </Ground>
   );
 }

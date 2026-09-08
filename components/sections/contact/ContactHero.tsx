@@ -1,3 +1,4 @@
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { contactHero } from "@/content/contact";
@@ -17,7 +18,7 @@ export function ContactHero() {
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-brand-gradient-soft" />
       <Container>
         <div className="grid grid-cols-12 gap-x-6">
-          <div className="col-span-12 lg:col-span-8">
+          <div className="col-span-12 lg:col-span-7">
             <div className="flex items-center gap-3">
               <span aria-hidden className="block h-px w-6 bg-hairline-strong" />
               <span className="font-display text-label tnum text-ink-3">01</span>
@@ -44,6 +45,9 @@ export function ContactHero() {
                 {contactHero.secondaryCta.label}
               </Button>
             </div>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <GroundObject kind="radar" className="mx-auto w-full max-w-[13rem] lg:max-w-[18rem]" label="we review your context" />
           </div>
         </div>
         <div aria-hidden className="mt-16 h-px w-full bg-hairline" />

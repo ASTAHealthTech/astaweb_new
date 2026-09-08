@@ -6,6 +6,7 @@ import { AboutAdvisoryBoard } from "@/components/sections/about/AboutAdvisoryBoa
 import { AboutInstitutionalPedigree } from "@/components/sections/about/AboutInstitutionalPedigree";
 import { AboutCTA } from "@/components/sections/about/AboutCTA";
 import { buildPageMetadata } from "@/lib/seo";
+import { Ground } from "@/components/visual/scene/Ground";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "About",
@@ -22,13 +23,13 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function AboutPage() {
   return (
-    <>
+    <Ground>
       <AboutHero />
       <AboutFoundingThesis />
       <AboutLeadership />
       <AboutAdvisoryBoard />
       <AboutInstitutionalPedigree />
       <AboutCTA />
-    </>
+    </Ground>
   );
 }

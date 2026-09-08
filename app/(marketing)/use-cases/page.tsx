@@ -6,6 +6,7 @@ import { UseCasesLiveProof } from "@/components/sections/use-cases/UseCasesLiveP
 import { UseCasesOutcomes } from "@/components/sections/use-cases/UseCasesOutcomes";
 import { UseCasesCTA } from "@/components/sections/use-cases/UseCasesCTA";
 import { buildPageMetadata } from "@/lib/seo";
+import { Ground } from "@/components/visual/scene/Ground";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Use Cases",
@@ -22,13 +23,13 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function UseCasesPage() {
   return (
-    <>
+    <Ground>
       <UseCasesHero />
       <UseCaseClusters />
       <TeachingHospitalValue />
       <UseCasesLiveProof />
       <UseCasesOutcomes />
       <UseCasesCTA />
-    </>
+    </Ground>
   );
 }

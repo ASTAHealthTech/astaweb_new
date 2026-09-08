@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { institutionalTrust } from "@/content/home";
 import { sentenceCase } from "@/lib/motion";
 import { Container } from "@/components/layout/Container";
@@ -25,12 +26,15 @@ export function InstitutionalTrust() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="03"
-          label={sentenceCase(t.eyebrow)}
-          headline={t.heading}
-          lede={t.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="03"
+            label={sentenceCase(t.eyebrow)}
+            headline={t.heading}
+            lede={t.sub}
+          />
+          <GroundObject kind="graph" className="order-first w-40 shrink-0 lg:order-none lg:w-52" />
+        </div>
 
         <Reveal
           stagger

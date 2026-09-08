@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { motion } from "framer-motion";
 import { security } from "@/content/home";
 import { ruleEase, sentenceCase, viewportOnce } from "@/lib/motion";
@@ -21,15 +22,18 @@ export function SecurityBand() {
   const s = security;
 
   return (
-    <section className="bg-panel py-section text-panel-ink">
+    <section className="bg-panel/75 py-section text-panel-ink">
       <Container>
-        <SectionHeader
-          number="09"
-          label={sentenceCase(s.eyebrow)}
-          headline={s.heading}
-          lede={s.sub}
-          dark
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="09"
+            label={sentenceCase(s.eyebrow)}
+            headline={s.heading}
+            lede={s.sub}
+            dark
+          />
+          <GroundObject kind="cage" className="order-first w-40 shrink-0 lg:order-none lg:w-52" />
+        </div>
 
         {/* TIER 1 — quick metrics */}
         <Reveal className="mt-16">

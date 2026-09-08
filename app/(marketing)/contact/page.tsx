@@ -1,3 +1,4 @@
+import { Ground } from "@/components/visual/scene/Ground";
 import type { Metadata } from "next";
 import { ContactHero } from "@/components/sections/contact/ContactHero";
 import { ContactSpread } from "@/components/sections/contact/ContactSpread";
@@ -29,12 +30,12 @@ export default async function ContactPage({
   const defaultInquiryType = resolveContactInquiryType(intent);
 
   return (
-    <>
+    <Ground>
       <ContactHero />
       <ContactSpread defaultInquiryType={defaultInquiryType} />
       <ContactProofStrip />
       <ContactNextSteps />
       <ContactDetails />
-    </>
+    </Ground>
   );
 }

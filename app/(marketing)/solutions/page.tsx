@@ -6,6 +6,7 @@ import { InteropGovernance } from "@/components/sections/solutions/InteropGovern
 import { MonitoringInPractice } from "@/components/sections/solutions/MonitoringInPractice";
 import { SolutionsCTA } from "@/components/sections/solutions/SolutionsCTA";
 import { buildPageMetadata } from "@/lib/seo";
+import { Ground } from "@/components/visual/scene/Ground";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Solutions",
@@ -22,13 +23,13 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function SolutionsPage() {
   return (
-    <>
+    <Ground>
       <SolutionsHero />
       <CapabilitySuite />
       <DashboardWalkthrough />
       <InteropGovernance />
       <MonitoringInPractice />
       <SolutionsCTA />
-    </>
+    </Ground>
   );
 }

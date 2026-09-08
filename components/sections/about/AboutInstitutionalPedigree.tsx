@@ -1,3 +1,4 @@
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import Image from "next/image";
 import { Container } from "@/components/layout/Container";
 import { SectionHeader, SectionEnd } from "@/components/ui/SectionHeader";
@@ -61,12 +62,15 @@ export function AboutInstitutionalPedigree() {
   return (
     <section id="institutional-pedigree" className="scroll-mt-28 py-section">
       <Container>
-        <SectionHeader
-          number="05"
-          label={aboutInstitutionalPedigree.eyebrow}
-          headline={aboutInstitutionalPedigree.heading}
-          lede={aboutInstitutionalPedigree.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="05"
+            label={aboutInstitutionalPedigree.eyebrow}
+            headline={aboutInstitutionalPedigree.heading}
+            lede={aboutInstitutionalPedigree.sub}
+          />
+          <GroundObject kind="unit" className="order-first w-40 shrink-0 lg:order-none lg:w-48" />
+        </div>
 
         <Reveal stagger className="mt-14 grid auto-rows-fr items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {aboutInstitutionalPedigree.partners.map((partner, i) => (

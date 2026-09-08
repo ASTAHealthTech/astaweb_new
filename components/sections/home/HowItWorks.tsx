@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { howItWorks } from "@/content/home";
@@ -76,6 +77,7 @@ export function HowItWorks() {
                 lede={h.sub}
                 headlineMax="max-w-[20ch]"
               />
+              <GroundObject kind="rail" className="mt-8 w-40 lg:mt-10 lg:w-64" />
             </div>
           </div>
 

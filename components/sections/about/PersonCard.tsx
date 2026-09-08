@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/Card";
+import { Tilt } from "@/components/ui/Tilt";
 
 type Person = {
   name: string;
@@ -37,9 +38,12 @@ function PersonLink({ href, children }: { href: string; children: string }) {
  */
 export function PersonCard({ person, number }: { person: Person; number: string }) {
   return (
-    <Card padded={false} className="group">
+    <Tilt className="group">
+    <Card padded={false} className="h-full">
       <div className="p-2 pb-0">
         <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] border border-hairline">
+          {/* the plinth: a lit ring under the portrait, as under every object on the site */}
+          <div aria-hidden className="pointer-events-none absolute inset-x-6 bottom-2 h-6 rounded-[50%] border border-violet/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: "0 0 24px rgba(138,79,224,0.35)" }} />
           <Image
             src={person.photo}
             alt={person.name}
@@ -57,6 +61,7 @@ export function PersonCard({ person, number }: { person: Person; number: string 
         </div>
 
         <h3 className="mt-3 font-display text-title-sm text-ink">{person.name}</h3>
+        <span aria-hidden className="mt-2 block h-px w-8 origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100" />
         <div className="mt-1 font-body text-label text-ink-3">{person.title}</div>
 
         <p className="mt-3 font-body text-body text-ink">{person.headline}</p>
@@ -71,5 +76,6 @@ export function PersonCard({ person, number }: { person: Person; number: string 
         </div>
       </div>
     </Card>
+    </Tilt>
   );
 }

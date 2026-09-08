@@ -130,7 +130,10 @@ export function Aurora({ className }: { className?: string }) {
     const uTime = gl.getUniformLocation(prog, "uTime");
     const uMouse = gl.getUniformLocation(prog, "uMouse");
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    // A third of the display resolution. The aurora is soft noise, so the
+    // upscale is invisible, and a full-screen 5-octave fbm at 1.5× DPR was a
+    // third of the page's GPU time.
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5) / 3;
     const resize = () => {
       const w = Math.max(1, Math.floor(canvas.clientWidth * dpr));
       const h = Math.max(1, Math.floor(canvas.clientHeight * dpr));
@@ -159,10 +162,15 @@ export function Aurora({ className }: { className?: string }) {
     io.observe(canvas);
 
     let raf = 0;
+    let last = 0;
     const start = performance.now();
     const frame = () => {
       raf = requestAnimationFrame(frame);
       if (!visible) return;
+      // 30 fps is plenty for light that moves over minutes
+      const now = performance.now();
+      if (now - last < 1000 / 30) return;
+      last = now;
       mouse.x += (mouse.tx - mouse.x) * 0.03;
       mouse.y += (mouse.ty - mouse.y) * 0.03;
       gl.uniform1f(uTime, (performance.now() - start) / 1000);

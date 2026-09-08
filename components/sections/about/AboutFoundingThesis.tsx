@@ -1,3 +1,4 @@
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { Container } from "@/components/layout/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Card, CardBody, CardMeta, CardTitle } from "@/components/ui/Card";
@@ -15,13 +16,15 @@ export function AboutFoundingThesis() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="02"
-          label={aboutFoundingThesis.eyebrow}
-          headline={aboutFoundingThesis.heading}
-          lede={aboutFoundingThesis.sub}
-          headlineMax="max-w-[26ch]"
-        />
+        <div className="flex items-end justify-between gap-10">
+          <SectionHeader
+            number="02"
+            label={aboutFoundingThesis.eyebrow}
+            headline={aboutFoundingThesis.heading}
+            lede={aboutFoundingThesis.sub}
+            headlineMax="max-w-[26ch]"
+          />
+        </div>
 
         {/* Band A — offset narrative */}
         <div className="mt-16 grid grid-cols-12 gap-x-6">
@@ -39,8 +42,16 @@ export function AboutFoundingThesis() {
           </Reveal>
         </div>
 
-        {/* Band B — founding pressures */}
-        <Reveal stagger className="mt-16 grid auto-rows-fr items-stretch gap-6 md:grid-cols-3">
+        {/* Band B — founding pressures. Each has its own object above its card:
+            sirens (alarm fatigue), five mismatched monitors (fragmented
+            estates), the comb over the curve (missed deterioration). They sit
+            over open ground, not inside the cards, so the canvas shows through. */}
+        <div className="mt-12 grid grid-cols-3 gap-3 md:mt-16 md:gap-6">
+          {(["sirens", "monitors5", "comb"] as const).map((k) => (
+            <GroundObject key={k} kind={k} className="mx-auto w-full max-w-[15rem]" />
+          ))}
+        </div>
+        <Reveal stagger className="mt-6 grid auto-rows-fr items-stretch gap-6 md:grid-cols-3">
           {aboutFoundingThesis.pressures.map((pressure, i) => (
             <RevealItem key={pressure.title} className="h-full">
               <Card>

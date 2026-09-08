@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { outcomes } from "@/content/home";
 import { sentenceCase } from "@/lib/motion";
 import { Container } from "@/components/layout/Container";
@@ -25,12 +26,15 @@ export function Outcomes() {
   return (
     <section className="py-section">
       <Container>
-        <SectionHeader
-          number="08"
-          label={sentenceCase(o.eyebrow)}
-          headline={o.heading}
-          lede={o.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="08"
+            label={sentenceCase(o.eyebrow)}
+            headline={o.heading}
+            lede={o.sub}
+          />
+          <GroundObject kind="alarms" className="order-first w-40 shrink-0 lg:order-none lg:w-52" />
+        </div>
 
         <Reveal
           stagger

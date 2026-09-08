@@ -14,6 +14,7 @@ const inter = Inter({
   display: "swap",
 });
 
+/** Space Grotesk — the original display face. */
 const display = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -36,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${display.variable}`}>
+    <html lang="en" className={`${inter.variable} ${display.variable} `}>
       <body>
         <script
           type="application/ld+json"

@@ -1,5 +1,6 @@
 "use client";
 
+import { GroundObject } from "@/components/visual/scene/GroundObject";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/layout/Container";
@@ -66,12 +67,15 @@ export function PlatformSignalFlow() {
   return (
     <section className="py-section-sm">
       <Container>
-        <SectionHeader
-          number="03"
-          label={sentenceCase(c.eyebrow)}
-          headline={c.heading}
-          lede={c.sub}
-        />
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHeader
+            number="03"
+            label={sentenceCase(c.eyebrow)}
+            headline={c.heading}
+            lede={c.sub}
+          />
+          <GroundObject kind="landscape" className="order-first w-40 shrink-0 lg:order-none lg:w-56" />
+        </div>
 
         <div ref={containerRef} className="relative mt-14">
           {/* The rail */}

@@ -10,6 +10,29 @@
     scroll-behavior: smooth;
   }
 
+  /* Lenis drives the scroll once it is running; native smooth scrolling fights
+     it and produces the classic double-easing stutter. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
   body {
     @apply bg-paper font-body text-body text-ink;
   }
@@ -118,5 +141,37 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  /* The machine layer. Every eyebrow, readout, bed ID and timestamp. */
+  .machine {
+    font-family: theme("fontFamily.machine");
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Motion primitive F — the vigil pulse. Marks the one element per screen
+     that never stops moving. Never more than one per viewport. */
+  .vigil {
+    animation: vigil-pulse 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* Content that sits on top of the 3D room needs its own floor of contrast,
+     or the moving light behind it eats the small type. */
+  .over-scene {
+    background: linear-gradient(
+      180deg,
+      rgba(12, 8, 18, 0) 0%,
+      rgba(12, 8, 18, 0.72) 18%,
+      rgba(12, 8, 18, 0.86) 50%,
+      rgba(12, 8, 18, 0.72) 82%,
+      rgba(12, 8, 18, 0) 100%
+    );
   }
 }
