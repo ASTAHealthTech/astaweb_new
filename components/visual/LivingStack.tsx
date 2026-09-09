@@ -80,10 +80,10 @@ export function LivingStack() {
             <stop offset="1" stopColor="#8A4FE0" />
           </linearGradient>
           <linearGradient id="lsb-fadegrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#000" />
+            <stop offset="0" stopColor="#0C0812" />
             <stop offset="0.09" stopColor="#fff" />
             <stop offset="0.86" stopColor="#fff" />
-            <stop offset="1" stopColor="#000" />
+            <stop offset="1" stopColor="#0C0812" />
           </linearGradient>
           <mask id="lsb-fade" maskUnits="userSpaceOnUse" x="0" y="-20" width={FRAME_W} height={FRAME_H + 40}>
             <rect x="0" y="-20" width={FRAME_W} height={FRAME_H + 40} fill="url(#lsb-fadegrad)" />
@@ -152,8 +152,8 @@ export function LivingStack() {
                 transform: "perspective(1300px) rotateX(52deg) rotateZ(-36deg)",
                 boxShadow:
                   i === 1
-                    ? "inset 0 1px 0 rgba(246,242,248,0.09), 0 24px 56px rgba(0,0,0,0.5), 0 0 44px rgba(222,37,136,0.14)"
-                    : "inset 0 1px 0 rgba(246,242,248,0.09), 0 24px 56px rgba(0,0,0,0.5)",
+                    ? "inset 0 1px 0 rgba(246,242,248,0.09), 0 24px 56px rgba(12,8,18,0.6), 0 0 44px rgba(222,37,136,0.14)"
+                    : "inset 0 1px 0 rgba(246,242,248,0.09), 0 24px 56px rgba(12,8,18,0.6)",
               }}
             >
               {/* gradient lip on the plane's top edge + glass sheen */}

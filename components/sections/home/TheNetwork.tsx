@@ -94,7 +94,7 @@ export function TheNetwork() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(10,7,16,0.7) 0%, rgba(10,7,16,0.97) 12%, rgba(10,7,16,0.97) 88%, rgba(10,7,16,0.6) 100%)",
+            "linear-gradient(180deg, rgba(12,8,18,0.7) 0%, rgba(12,8,18,0.97) 12%, rgba(12,8,18,0.97) 88%, rgba(12,8,18,0.6) 100%)",
         }}
       />
 

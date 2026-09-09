@@ -34,7 +34,7 @@ export default function SceneCanvas({ tier }: { tier: Tier }) {
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 1.0;
-        gl.setClearColor(0x000000, 0);
+        gl.setClearColor(0x0c0812, 0);
       }}
     >
       <CameraRig />

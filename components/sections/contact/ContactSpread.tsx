@@ -3,7 +3,7 @@ import { Card, CardBody, CardMeta, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "./ContactForm";
-import { contactMain, type ContactInquiryType } from "@/content/contact";
+import { contactMain, offices, type ContactInquiryType } from "@/content/contact";
 
 /** Eyebrow row shared by the two columns of the working spread. */
 function Eyebrow({ number, label }: { number: string; label: string }) {
@@ -82,9 +82,21 @@ export function ContactSpread({ defaultInquiryType }: { defaultInquiryType: Cont
               </Card>
 
               <div className="mt-8 border-l border-hairline pl-5">
-                <div className="font-body text-label text-ink-2">{contactMain.address.eyebrow}</div>
+                <div className="font-body text-label text-ink-2">Offices</div>
                 <div className="mt-2 font-display text-title-sm text-ink">{contactMain.address.company}</div>
-                <p className="mt-1 max-w-[36ch] font-body text-body text-ink-2">{contactMain.address.body}</p>
+                <ul className="mt-3 grid gap-4">
+                  {offices.map((o) => (
+                    <li key={o.region}>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-body text-[14px] font-medium text-ink">{o.region}</span>
+                        {o.hq ? <span className="machine text-accent">HQ</span> : o.note ? <span className="machine text-ink-3">{o.note}</span> : null}
+                      </div>
+                      <p className="mt-0.5 max-w-[36ch] font-body text-[14px] leading-[1.5] text-ink-2">
+                        {o.lines.length ? o.lines.join(", ") : o.city}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           </div>

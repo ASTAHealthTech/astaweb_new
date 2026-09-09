@@ -112,7 +112,7 @@ export function drawScreen(canvas: HTMLCanvasElement, t: number, r: ScreenReadin
 
 function chrome(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, W: number, H: number) {
   ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
-  ctx.fillStyle = "#0A0710";
+  ctx.fillStyle = "#0C0812";
   ctx.fillRect(0, 0, W, H);
   ctx.strokeStyle = "rgba(246,242,248,0.055)";
   ctx.lineWidth = 1;
@@ -123,8 +123,8 @@ function chrome(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, W: num
 
 function vignette(ctx: CanvasRenderingContext2D, W: number, H: number) {
   const g = ctx.createRadialGradient(W * 0.5, H * 0.45, H * 0.3, W * 0.5, H * 0.5, W * 0.72);
-  g.addColorStop(0, "rgba(0,0,0,0)");
-  g.addColorStop(1, "rgba(0,0,0,0.35)");
+  g.addColorStop(0, "rgba(12,8,18,0)");
+  g.addColorStop(1, "rgba(12,8,18,0.45)");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 }
@@ -195,7 +195,7 @@ function drawDefault(canvas: HTMLCanvasElement, t: number, r: ScreenReadings, al
   const W = DESIGN_W, H = DESIGN_H;
   ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
 
-  ctx.fillStyle = "#0A0710";
+  ctx.fillStyle = "#0C0812";
   ctx.fillRect(0, 0, W, H);
 
   // graticule
@@ -300,8 +300,8 @@ function drawDefault(canvas: HTMLCanvasElement, t: number, r: ScreenReadings, al
 
   // a soft vignette so the glass reads as glass
   const g = ctx.createRadialGradient(W * 0.5, H * 0.45, H * 0.3, W * 0.5, H * 0.5, W * 0.72);
-  g.addColorStop(0, "rgba(0,0,0,0)");
-  g.addColorStop(1, "rgba(0,0,0,0.35)");
+  g.addColorStop(0, "rgba(12,8,18,0)");
+  g.addColorStop(1, "rgba(12,8,18,0.45)");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
   return marks;

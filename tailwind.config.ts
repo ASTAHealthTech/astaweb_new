@@ -35,7 +35,7 @@ const config: Config = {
 
 
         // deepest bands
-        panel: "#060409",
+        panel: "#0C0812",
         "panel-surface": "#100A17",
         "panel-surface-hover": "#170F21",
         "panel-ink": "#F2F1ED",
@@ -86,8 +86,8 @@ const config: Config = {
       },
 
       boxShadow: {
-        card: "0 16px 48px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(246,242,248,0.05)",
-        "card-hover": "0 16px 48px rgba(222,37,136,0.10), 0 6px 20px rgba(0,0,0,0.55)",
+        card: "0 16px 48px rgba(12,8,18,0.6), inset 0 0 0 1px rgba(246,242,248,0.05)",
+        "card-hover": "0 16px 48px rgba(222,37,136,0.10), 0 6px 20px rgba(12,8,18,0.65)",
         "glow-brand": "0 0 44px rgba(222,37,136,0.35), 0 0 110px rgba(138,79,224,0.18)",
       },
 

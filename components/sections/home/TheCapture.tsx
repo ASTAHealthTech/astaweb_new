@@ -212,7 +212,7 @@ export function TheCapture() {
             <div className="relative">
               <div
                 ref={frame}
-                className="relative mx-auto aspect-[744/448] w-full max-w-[40rem] rounded-card border border-hairline bg-[#0A0710] shadow-card will-change-transform"
+                className="relative mx-auto aspect-[744/448] w-full max-w-[40rem] rounded-card border border-hairline bg-paper shadow-card will-change-transform"
                 style={{ opacity: 0 }}
               >
                 <canvas ref={canvas} width={SCREEN_PX_W} height={SCREEN_PX_H} className="absolute inset-0 h-full w-full rounded-card" />

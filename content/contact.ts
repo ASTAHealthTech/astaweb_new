@@ -255,3 +255,41 @@ export const contactDetails: {
     },
   ],
 };
+
+/** Offices shown in the footer and on the contact page. HQ first. */
+export type Office = {
+  /** short label: "India", "USA", "Canada" */
+  region: string;
+  /** city or state line */
+  city: string;
+  /** full postal address, one line per entry; empty until confirmed */
+  lines: string[];
+  hq?: boolean;
+  /** shown when `lines` is empty */
+  note?: string;
+};
+
+export const offices: Office[] = [
+  {
+    region: "India",
+    city: "Bengaluru, Karnataka",
+    hq: true,
+    lines: [
+      "1st Floor, JK Nirmala Arcade, Plot no. 780",
+      "80 Feet Rd, 4th Block, Koramangala",
+      "Bengaluru, Karnataka 560034",
+    ],
+  },
+  {
+    region: "USA",
+    city: "Delaware",
+    lines: [],
+    note: "Registered branch",
+  },
+  {
+    region: "Canada",
+    city: "Canada",
+    lines: [],
+    note: "Registered branch",
+  },
+];
