@@ -94,6 +94,11 @@ export function ContactSpread({ defaultInquiryType }: { defaultInquiryType: Cont
                       <p className="mt-0.5 max-w-[36ch] font-body text-[14px] leading-[1.5] text-ink-2">
                         {o.lines.length ? o.lines.join(", ") : o.city}
                       </p>
+                      {o.phone && o.phoneHref ? (
+                        <a href={o.phoneHref} className="mt-1 inline-block font-machine text-[13px] tabular-nums text-ink-2 decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline">
+                          {o.phone}
+                        </a>
+                      ) : null}
                     </li>
                   ))}
                 </ul>

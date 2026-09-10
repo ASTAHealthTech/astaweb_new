@@ -260,12 +260,16 @@ export const contactDetails: {
 export type Office = {
   /** short label: "India", "USA", "Canada" */
   region: string;
-  /** city or state line */
+  /** city / state line, used as the heading under the region */
   city: string;
-  /** full postal address, one line per entry; empty until confirmed */
+  /** full postal address, one line per entry */
   lines: string[];
+  /** local number for that office, as displayed */
+  phone?: string;
+  /** tel: link for `phone` */
+  phoneHref?: string;
   hq?: boolean;
-  /** shown when `lines` is empty */
+  /** small label beside the region when it is not the HQ */
   note?: string;
 };
 
@@ -279,17 +283,23 @@ export const offices: Office[] = [
       "80 Feet Rd, 4th Block, Koramangala",
       "Bengaluru, Karnataka 560034",
     ],
-  },
-  {
-    region: "USA",
-    city: "Delaware",
-    lines: [],
-    note: "Registered branch",
+    phone: CONTACT_PHONE_DISPLAY,
+    phoneHref: CONTACT_PHONE_LINK,
   },
   {
     region: "Canada",
-    city: "Canada",
+    city: "Toronto, Ontario",
+    note: "Branch office",
+    lines: ["161 Bay St", "Toronto, ON M5J 2S1"],
+    phone: "+1 438 379 9101",
+    phoneHref: "tel:+14383799101",
+  },
+  {
+    region: "USA",
+    city: "Delaware, United States",
+    note: "Branch office",
     lines: [],
-    note: "Registered branch",
+    phone: "+1 (425) 463 6954",
+    phoneHref: "tel:+14254636954",
   },
 ];

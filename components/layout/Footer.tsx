@@ -3,12 +3,7 @@ import Link from "next/link";
 import { Container } from "./Container";
 import { EvidenceChip } from "@/components/ui/Pill";
 import { footerNav } from "@/content/nav";
-import {
-  CONTACT_EMAIL,
-  CONTACT_PHONE_DISPLAY,
-  CONTACT_PHONE_LINK,
-  offices,
-} from "@/content/contact";
+import { CONTACT_EMAIL, offices } from "@/content/contact";
 import { ROUTES } from "@/lib/constants";
 
 const LINKEDIN = "https://www.linkedin.com/company/astahealthtech";
@@ -71,14 +66,6 @@ export function Footer() {
                 </dd>
               </div>
               <div className="flex items-baseline gap-4">
-                <dt className="machine w-14 shrink-0 text-ink-3">Phone</dt>
-                <dd>
-                  <a href={CONTACT_PHONE_LINK} className="tnum text-ink-2 decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline">
-                    {CONTACT_PHONE_DISPLAY}
-                  </a>
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-4">
                 <dt className="machine w-14 shrink-0 text-ink-3">Social</dt>
                 <dd>
                   <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="text-ink-2 decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline">
@@ -121,8 +108,8 @@ export function Footer() {
 
         {/* ── 3 · offices ── */}
         <div className="mt-14 border-t border-hairline pt-8">
-          <div className="machine mb-5 text-ink-3">Offices</div>
-          <ul className="grid gap-x-6 gap-y-6 sm:grid-cols-3">
+          <div className="machine mb-6 text-ink-3">Offices</div>
+          <ul className="grid gap-x-6 gap-y-8 sm:grid-cols-3">
             {offices.map((o) => (
               <li key={o.region} className="relative pl-4">
                 <span
@@ -133,13 +120,32 @@ export function Footer() {
                     boxShadow: o.hq ? "0 0 8px rgba(222,37,136,0.7)" : "none",
                   }}
                 />
-                <div className="flex items-baseline gap-2">
+                <div className="flex flex-wrap items-baseline gap-x-2">
                   <span className="font-display text-[15px] font-medium text-ink">{o.region}</span>
-                  {o.hq ? <span className="machine text-accent">HQ</span> : o.note ? <span className="machine text-ink-3">{o.note}</span> : null}
+                  {o.hq ? (
+                    <span className="machine text-accent">HQ</span>
+                  ) : o.note ? (
+                    <span className="machine text-ink-3">{o.note}</span>
+                  ) : null}
                 </div>
-                <div className="mt-1 font-body text-[13.5px] leading-[1.5] text-ink-2">
-                  {o.lines.length ? o.lines.map((l) => <div key={l}>{l}</div>) : <div>{o.city}</div>}
-                </div>
+                <div className="machine mt-0.5 text-ink-3">{o.city}</div>
+
+                {o.lines.length ? (
+                  <address className="mt-2 font-body text-[13.5px] not-italic leading-[1.55] text-ink-2">
+                    {o.lines.map((l) => (
+                      <div key={l}>{l}</div>
+                    ))}
+                  </address>
+                ) : null}
+
+                {o.phone && o.phoneHref ? (
+                  <a
+                    href={o.phoneHref}
+                    className="mt-2 inline-block font-machine text-[13px] tabular-nums text-ink-2 decoration-accent decoration-2 underline-offset-4 hover:text-ink hover:underline"
+                  >
+                    {o.phone}
+                  </a>
+                ) : null}
               </li>
             ))}
           </ul>
