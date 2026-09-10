@@ -296,9 +296,9 @@ export const offices: Office[] = [
   },
   {
     region: "USA",
-    city: "Delaware, United States",
+    city: "Wilmington, Delaware",
     note: "Branch office",
-    lines: [],
+    lines: ["2810 N Church St", "Wilmington, DE 19802", "United States"],
     phone: "+1 (425) 463 6954",
     phoneHref: "tel:+14254636954",
   },
