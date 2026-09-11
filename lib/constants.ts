@@ -13,4 +13,6 @@ export const ROUTES = {
   about: "/about",
   contact: "/contact",
   demo: "/contact?intent=demo",
+  /** ASTA client/meeting tracker — external app, opens in a new tab */
+  crm: "https://asta-tracker-blush.vercel.app/",
 } as const;

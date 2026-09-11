@@ -112,7 +112,17 @@ export function Header() {
               ))}
             </nav>
 
-            <div className="hidden lg:block">
+            <div className="hidden items-center gap-3 lg:flex">
+              <Button
+                size="sm"
+                variant="secondary"
+                arrow={false}
+                href={ROUTES.crm}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CRM login
+              </Button>
               <Button size="sm" href={ROUTES.demo}>
                 Request a demo
               </Button>
@@ -166,9 +176,19 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            <div className="pt-6">
+            <div className="grid gap-3 pt-6">
               <Button href={ROUTES.demo} className="w-full">
                 Request a demo
+              </Button>
+              <Button
+                variant="secondary"
+                arrow={false}
+                href={ROUTES.crm}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                CRM login
               </Button>
             </div>
           </Container>
