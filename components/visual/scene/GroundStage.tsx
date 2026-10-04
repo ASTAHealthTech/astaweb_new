@@ -15,7 +15,7 @@ import { WardObject } from "./objects/WardObject";
 import { BedsideObject } from "./objects/BedsideObject";
 import { SwitchboardObject } from "./objects/SwitchboardObject";
 import { HubObject } from "./objects/HubObject";
-import { Alarms, Attention, Balance, Cage, Comb, Eye, Landscape, Monitors5, Radar, Rail, Ribbon, Sirens, Tape } from "./objects/fresh";
+import { Alarms, Attention, Balance, Cage, Comb, Eye, Landscape, Monitors5, Radar, Rail, Ribbon, Sirens, Tape, Wire } from "./objects/fresh";
 import { Monitor } from "./Monitor";
 import { Led, Plinth, Solid } from "./Solid";
 import { Unit } from "./Unit";
@@ -32,12 +32,12 @@ const DEPTH = 10;
 const FIT: Record<GroundKind, number> = {
   unit: 0.6, monitor: 0.42, heart: 0.5, lungs: 0.42, neuron: 0.5, bed: 0.8, graph: 0.7, node: 1.4,
   eye: 0.36, rail: 0.34, ribbon: 0.36, alarms: 0.3, cage: 0.42, attention: 0.24, landscape: 0.3, balance: 0.28,
-  sirens: 0.5, monitors5: 0.26, comb: 0.24, radar: 0.36, tape: 0.3,
+  sirens: 0.5, monitors5: 0.26, comb: 0.24, radar: 0.36, tape: 0.3, wire: 0.27,
   "pedestal-model": 0.15, "pedestal-ward": 0.12, "pedestal-bedside": 0.23, "pedestal-switchboard": 0.19, "pedestal-hub": 0.17,
 };
 const LIFT: Partial<Record<GroundKind, number>> = { unit: 0.1, monitor: 0.15, heart: 0.05, lungs: 0.1, neuron: 0.05, bed: 0.1 };
 /** the fresh objects keep their own framing: no tilt, no plinth, slow turn */
-const FRESH = new Set<GroundKind>(["eye", "rail", "ribbon", "alarms", "cage", "attention", "landscape", "balance", "sirens", "monitors5", "comb", "radar", "tape"]);
+const FRESH = new Set<GroundKind>(["eye", "rail", "ribbon", "alarms", "cage", "attention", "landscape", "balance", "sirens", "monitors5", "comb", "radar", "tape", "wire"]);
 const isPedestal = (k: GroundKind) => k.startsWith("pedestal-");
 
 function snapshot() {
@@ -177,7 +177,7 @@ function GroundItem({ anchor }: { anchor: GroundAnchor }) {
     );
   }
   if (FRESH.has(kind)) {
-    const F = { eye: Eye, rail: Rail, ribbon: Ribbon, alarms: Alarms, cage: Cage, attention: Attention, landscape: Landscape, balance: Balance, sirens: Sirens, monitors5: Monitors5, comb: Comb, radar: Radar, tape: Tape } as const;
+    const F = { eye: Eye, rail: Rail, ribbon: Ribbon, alarms: Alarms, cage: Cage, attention: Attention, landscape: Landscape, balance: Balance, sirens: Sirens, monitors5: Monitors5, comb: Comb, radar: Radar, tape: Tape, wire: Wire } as const;
     const Obj = F[kind as keyof typeof F];
     return (
       <group ref={holder}>

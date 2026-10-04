@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import { hero } from "@/content/home";
+import { pressStats, pressStripNames } from "@/content/press-summary";
 import { countTo, drawRule, liftOff, revealWords } from "@/lib/anim";
 import { CADENCE_MS, usePrefersReducedMotion } from "@/lib/motion";
 import { useSceneShot } from "@/lib/scene/useSceneShot";
@@ -100,7 +102,7 @@ export function SignalHero() {
         }}
       />
 
-      <div className="relative flex flex-1 items-end pb-10 pt-[44svh] lg:items-center lg:pb-14 lg:pt-32">
+      <div className="relative flex flex-1 items-end pb-10 pt-[44svh] lg:items-center lg:pb-9 lg:pt-28">
         <Container wide>
           <div className="max-w-[44rem]">
             <div className="flex items-center gap-3">
@@ -159,6 +161,23 @@ export function SignalHero() {
               </div>
             ))}
           </dl>
+
+          {/* ── in the news: a quiet row that hands off to /press ── */}
+          <Link
+            href="/press"
+            className="group flex flex-wrap items-baseline gap-x-5 gap-y-1.5 border-t border-hairline py-3.5"
+            aria-label={`Press coverage: published in ${pressStats.outlets} outlets. Open the press page.`}
+          >
+            <span className="machine text-ink-3">Published in</span>
+            {pressStripNames.map((name) => (
+              <span key={name} className="font-display text-[14.5px] text-ink-2 transition-colors group-hover:text-ink">
+                {name}
+              </span>
+            ))}
+            <span className="font-body text-[13.5px] text-ink-3 transition-colors group-hover:text-accent">
+              and {pressStats.outlets - pressStripNames.length} more <span aria-hidden className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </span>
+          </Link>
         </Container>
       </div>
     </section>

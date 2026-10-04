@@ -11,7 +11,7 @@ export type GroundKind =
   | "unit" | "monitor" | "heart" | "lungs" | "neuron" | "bed" | "graph" | "node"
   // the section objects — one distinct form each (objects/fresh.tsx)
   | "eye" | "rail" | "ribbon" | "alarms" | "cage" | "attention" | "landscape" | "balance"
-  | "sirens" | "monitors5" | "comb" | "radar" | "tape"
+  | "sirens" | "monitors5" | "comb" | "radar" | "tape" | "wire"
   // the operable pedestal objects, one per inner page
   | "pedestal-model" | "pedestal-ward" | "pedestal-bedside" | "pedestal-switchboard" | "pedestal-hub";
 

@@ -615,3 +615,74 @@ export function Tape({ drawn }: P) {
     </group>
   );
 }
+
+/* ── Press · The wire — one release, out to every outlet ─────────────────── */
+const WIRE_DOTS = 182;
+export function Wire({ drawn }: P) {
+  const geo = useMemo(() => ({
+    mast: merge([
+      at(new THREE.CylinderGeometry(0.05, 0.09, 0.9, 10), 0, 0.2, 0),
+      at(new THREE.IcosahedronGeometry(0.2, 0), 0, 0.78, 0),
+      at(new THREE.CylinderGeometry(0.3, 0.36, 0.14, 16), 0, -0.3, 0),
+    ]),
+    rim: new THREE.TorusGeometry(1.62, 0.015, 6, 72),
+  }), []);
+  // the outlets: a sunflower spread, so no two sit on the same spoke
+  const spots = useMemo(() => Array.from({ length: WIRE_DOTS }, (_, i) => {
+    const r = 0.5 + 1.08 * Math.sqrt((i + 0.5) / WIRE_DOTS);
+    const a = i * 2.39996323;
+    return { r, x: Math.cos(a) * r, z: Math.sin(a) * r };
+  }), []);
+  const dots = useRef<THREE.InstancedMesh>(null);
+  const dotMat = useMemo(() => { const m = new THREE.MeshBasicMaterial({ color: "#ffffff", toneMapped: false, transparent: true }); m.userData.baseOpacity = 0; return m; }, []);
+  const rings = useRef<(THREE.Mesh | null)[]>([]);
+  const ringMats = useMemo(() => [0, 1].map(() => { const m = new THREE.MeshBasicMaterial({ color: GLOW, toneMapped: false, transparent: true, depthWrite: false }); m.userData.baseOpacity = 0; return m; }), []);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  const c = useMemo(() => ({ dim: new THREE.Color(EDGE_SOFT), hot: new THREE.Color(GLOW_SOFT), far: new THREE.Color(SIGNAL), out: new THREE.Color() }), []);
+  useFrame((s) => {
+    const t = s.clock.elapsedTime, d = drawn.current ?? 1;
+    const shown = clamp01((d - 0.35) / 0.5);
+    // two pulses leave the mast, half a period apart, and cross the field
+    const fronts = [((t * 0.42) % 1), ((t * 0.42 + 0.5) % 1)].map((p) => 0.3 + p * 1.5);
+    rings.current.forEach((m, k) => {
+      if (!m) return;
+      const r = fronts[k];
+      m.scale.setScalar(r);
+      ringMats[k].userData.baseOpacity = shown * 0.5 * (1 - (r - 0.3) / 1.5);
+    });
+    if (dots.current) {
+      for (let i = 0; i < WIRE_DOTS; i += 1) {
+        const p = spots[i];
+        // lit as a front passes, then a slow cool-down behind it
+        let heat = 0;
+        for (const f of fronts) { const g = f - p.r; if (g > -0.04) heat = Math.max(heat, Math.exp(-g * 3.2)); }
+        const born = clamp01(shown * 1.6 - (p.r - 0.5) / 1.08 * 0.6);
+        dummy.position.set(p.x, -0.3 + heat * 0.05, p.z);
+        dummy.scale.setScalar((0.6 + heat * 0.9) * born);
+        dummy.updateMatrix();
+        dots.current.setMatrixAt(i, dummy.matrix);
+        c.out.copy(c.dim).lerp(i % 7 === 0 ? c.far : c.hot, heat);
+        dots.current.setColorAt(i, c.out);
+      }
+      dots.current.instanceMatrix.needsUpdate = true;
+      if (dots.current.instanceColor) dots.current.instanceColor.needsUpdate = true;
+      dotMat.userData.baseOpacity = shown;
+    }
+  });
+  return (
+    <group position={[0, 0.25, 0]} rotation={[0.62, 0, 0]}>
+      <Solid geometry={geo.mast} drawn={drawn} color="#2a1b3a" edge={GLOW} threshold={20}>
+        <Led color={GLOW_SOFT} size={0.07} intensity={2.4} position={[0, 0.78, 0]} />
+      </Solid>
+      <Solid geometry={geo.rim} drawn={drawn} color={BODY_LIGHT} edge={EDGE} threshold={1} rotation={[Math.PI / 2, 0, 0]} position={[0, -0.3, 0]} delay={0.2} span={0.6} />
+      {[0, 1].map((k) => (
+        <mesh key={k} ref={(m) => { rings.current[k] = m; }} material={ringMats[k]} rotation={[Math.PI / 2, 0, 0]} position={[0, -0.3, 0]}>
+          <torusGeometry args={[1, 0.012, 6, 64]} />
+        </mesh>
+      ))}
+      <instancedMesh ref={dots} args={[undefined, undefined, WIRE_DOTS]} material={dotMat} frustumCulled={false}>
+        <sphereGeometry args={[0.032, 8, 6]} />
+      </instancedMesh>
+    </group>
+  );
+}
